@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+"""Example import configuration."""
+
+# This is a clone of the config exemple from Martin Blais, with some
+# addaptation for my on usage.
+
+# Insert our custom importers path here.
+# (In practice you might just change your PYTHONPATH environment.)
+import sys
+from os import path
+sys.path.insert(0, path.join(path.dirname(__file__)))
+
+from importers import smals
+from beancount.ingest import extract
+
+# Setting this variable provides a list of importer instances.
+CONFIG = [
+    smals.Importer("EXTHR", "VACDAY", "7:36",
+                   "DaCorp",
+                   "Custom'Er",
+                   "Income:BE:Customer:HeureSup",
+                   "Assets:Employer",
+                   "Assets:Employer:HeureSup",
+                   "Assets:Employer:JourConge",
+                   "Expenses:Conge"),
+]
+
+# Override the header on extracted text (if desired).
+extract.HEADER = ';; -*- mode: org; mode: beancount; coding: utf-8; -*-\n'
