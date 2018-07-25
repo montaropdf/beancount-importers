@@ -4,10 +4,6 @@
 # This is a clone of the config exemple from Martin Blais, with some
 # adaptation for my own usage.
 
-# import sys
-# from os import path
-# sys.path.insert(0, path.join(path.dirname(__file__)))
-
 from importers import smals
 from beancount.ingest import extract
 
