@@ -9,13 +9,15 @@ from beancount.ingest import extract
 
 # Setting this variable provides a list of importer instances.
 CONFIG = [
-    smals.Importer("EXTHR", "VACDAY", "7:36",
+    smals.Importer("EXTHR", "VACDAY", "WKDT", "7:36",
                    "DaCorp",
                    "Custom'Er",
                    "Income:BE:Customer:HeureSup",
+                   "Income:BE:Customer:JourTravail",
                    "Assets:Employer",
                    "Assets:Employer:HeureSup",
                    "Assets:Employer:JourConge",
+                   "Assets:Employer:JourTravail",
                    "Expenses:Conge"),
 ]
 
