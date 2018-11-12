@@ -164,6 +164,8 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Header file: %s", str(file.head()))
 
         matching_result = re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned(_.+)*\.csv", path.basename(file.name))
+
+        self.logger.debug("Match long filename version: %s", str(matching_result))
         
         matching_result = ((re.match(r"smals-report-\d\d\d\d\d\d-cleaned\.csv", path.basename(file.name)
                             or re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned(_.+)*\.csv", path.basename(file.name))))
