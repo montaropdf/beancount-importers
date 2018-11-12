@@ -1,3 +1,4 @@
+# -*- eval: (git-auto-commit-mode 1) -*-
 """Importer for Timesheet Report from one of my customer in CSV format."""
 __copyright__ = "Copyright (C) 2018  Roland Everaert"
 __license__ = "GNU GPLv2"
@@ -59,7 +60,6 @@ class Importer(importer.ImporterProtocol):
         self.account_employer_worked_day = account_employer_worked_day
         self.account_vacation = account_vacation
 
-        
         self.logger.info("Logger Initialized")
         self.logger.debug("Input parameters:")
         self.logger.debug("Commodity name for overtime units: %s", self.commodity_overtime)
@@ -161,11 +161,13 @@ class Importer(importer.ImporterProtocol):
 
         self.logger.debug("Entering Function")
         self.logger.info("File to analyse: %s", str(file))
+        self.logger.debug("Header file: %s", str(file.head()))
+        
         self.logger.info("Identification result: %s", str(re.match(r"smals-report-\d\d\d\d\d\d-cleaned.csv", path.basename(file.name)) and
                                                           re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC", file.head())))
         self.logger.debug("Leaving Function")
         return (re.match(r"smals-report-\d\d\d\d\d\d-cleaned.csv", path.basename(file.name)) and
-                re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC", file.head()))
+                re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head()))
 
     def file_name(self, file):
         self.logger.debug("Entering Function")
@@ -242,6 +244,8 @@ class Importer(importer.ImporterProtocol):
             dtype = row['DAYTYPE']
             dtype2 = row['DAYTYPE2']
             dtype3 = row['DAYTYPE3']
+            dtype4 = row['DAYTYPE4']
+            
             self.logger.debug('Day of week type: %s', dtype)
             self.logger.debug('Work day type 1: %s', dtype2)
             self.logger.debug('Work day type 2: %s', dtype3)
@@ -283,7 +287,7 @@ class Importer(importer.ImporterProtocol):
                 self.logger.info('Cumulative overtime for the month: %g', units_overtime)
             else:
                 # If it is a work day, but I was sick or it was a legal holiday, skip it.
-                if dtype3 in ["JFR", "MAL", "COLFE"]:
+                if dtype3 in ["JFR", "MAL", "COLFE"] and dtype4 == '':
                     self.logger.info('Non-worked day detected, skip it.')
                     continue
 
@@ -296,9 +300,17 @@ class Importer(importer.ImporterProtocol):
                     self.logger.info('Vacation date: %s', date)
                     entries.append(txn)
                 else:
-                    self.logger.warning("Unknown day type detected, row ignored.")
-                    self.logger.warning('Data in row: %s', str(row))
-                    continue
+                    if  dtype4 == "CAO":
+                        wk_period = int(wk_period / 2)
+                        txn = self.__txn_vacation(meta, date, "Demi-jour de congé",
+                                                  amount.Amount(decimal.Decimal('0.5'), self.commodity_vacation_day),
+                                                  amount.Amount(decimal.Decimal(wk_period), self.commodity_overtime))
+                        self.logger.info('Vacation date: %s', date)
+                        entries.append(txn)
+                    else:
+                        self.logger.warning("Unknown day type detected, row ignored.")
+                        self.logger.warning('Data in row: %s', str(row))
+                        continue
 
         # When there is no more row to process, create a transaction with the remaining overtime
         self.logger.debug('End of file reached. Record remaining overtime and number of worked days.')
