@@ -163,9 +163,9 @@ class Importer(importer.ImporterProtocol):
         self.logger.info("File to analyse: %s", str(file))
         self.logger.debug("Header file: %s", str(file.head()))
 
-        matching_result = (re.match(r"smals-report-\d\d\d\d\d\d-cleaned.csv", path.basename(file.name)
-                        or re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned\(_.+\)*.csv", path.basename(file.name))))
-        and re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head())
+        matching_result = ((re.match(r"smals-report-\d\d\d\d\d\d-cleaned.csv", path.basename(file.name)
+                            or re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned\(_.+\)*.csv", path.basename(file.name))))
+                           and re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head()))
 
         self.logger.info("Identification result: %s", str(matching_result))
         self.logger.debug("Leaving Function")
