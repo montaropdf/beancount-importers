@@ -166,8 +166,8 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Match long filename: ", str(re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned(_.+)*.csv", path.basename(file.name))))
 
         
-        matching_result = ((re.match(r"smals-report-\d\d\d\d\d\d-cleaned.csv", path.basename(file.name)
-                            or re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned(_.+)*.csv", path.basename(file.name))))
+        matching_result = ((re.match(r"smals-report-\d\d\d\d\d\d-cleaned\.csv", path.basename(file.name)
+                            or re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned(_.+)*\.csv", path.basename(file.name))))
                            and re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head()))
 
         self.logger.info("Identification result: %s", str(matching_result))
