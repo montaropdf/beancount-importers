@@ -20,7 +20,7 @@ CONFIG = [
                    "Assets:Employer:JourConge",
                    "Assets:Employer:JourTravail",
                    "Expenses:Conge"),
-    hetzner.Importer("Expenses:Conge",
+    hetzner.Importer("Liabilities:Hetzner",
                      "Assets:Bank:Checking"),
 ]
 
