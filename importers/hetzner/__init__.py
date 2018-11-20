@@ -199,7 +199,7 @@ class Importer(importer.ImporterProtocol):
         csvDialect = csv.excel();
         csvDialect.delimiter = ';'
         
-        for index, row in enumerate(csv.DictReader(open(file.name), dialect=csvDialect)):
+        for index, row in enumerate(csv.DictReader(open(file.name), fieldnames=['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'pric_no_vat', 'srv_id'], dialect=csvDialect)):
             self.logger.debug('Data in row: %s', str(row))
             meta = data.new_metadata(file.name, index)
             meta_w_month = data.new_metadata(file.name, index)
