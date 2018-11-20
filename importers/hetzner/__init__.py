@@ -132,7 +132,7 @@ class Importer(importer.ImporterProtocol):
 
         self.logger.debug("Entering Function")
         self.logger.info("File to analyse: %s", str(file))
-        self.logger.debug("Header file: %s", str(file.head()))
+        self.logger.debug("Header file: %s", str(file.readline()))
 
         core_filename_regex = r"Hetzner-\d\d\d\d-\d\d-\d\d-R\d\d\d\d\d\d\d\d\d\d"
         extension_regex = r"\.csv"
