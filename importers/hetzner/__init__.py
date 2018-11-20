@@ -140,15 +140,23 @@ class Importer(importer.ImporterProtocol):
         tag_suffix_regex = r"(_.+)*"
         
         # matching_result = re.match(r"\d\d\d\d-\d\d-\d\d_Hetzner-\d\d\d\d-\d\d-\d\d-R\d\d\d\d\d\d\d\d\d\d(_.+)*\.csv", path.basename(file.name))
-        matching_result = re.match(r"%s_%s%s%s".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name))
+        # matching_result = re.match(r"%s_%s%s%s".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name))
 
-        self.logger.debug("Match long filename version: %s", str(matching_result))
-        
+        # self.logger.debug("Match long filename version: %s", str(matching_result))
         matching_result = ((re.match(r"%s%s".format(core_filename_regex, extension_regex), path.basename(file.name))
-                            or re.match(r"%s_%s%s%s".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name)))
-                           and re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head()))
+                            or re.match(r"%s_%s%s%s".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name))))
 
         self.logger.info("Identification result: %s", str(matching_result))
+
+        if matching_result:
+            csvDialect = csv.excel();
+            csvDialect.delimiter = ','
+
+            for index, row in enumerate(csv.DictReader(open(file.name), dialect=csvDialect)):
+                if len(row) != 8:
+                    matching_result = False
+                    break
+
         self.logger.debug("Leaving Function")
         return (matching_result)
 
