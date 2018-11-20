@@ -29,13 +29,7 @@ class Importer(importer.ImporterProtocol):
 
     def __init__(self,
                  account_expenses,
-                 account_assets
-                 # account_employer_root,
-                 # account_employer_overtime,
-                 # account_employer_vacation,
-                 # account_employer_worked_day,
-                 # account_vacation
-    ):
+                 account_assets):
 
         self.logger = logging.Logger("hetzner", logging.DEBUG)
 
@@ -45,35 +39,13 @@ class Importer(importer.ImporterProtocol):
         fh.setFormatter(fmtr)
         self.logger.addHandler(fh)
 
-        self.commodity_overtime = commodity_overtime
-        self.commodity_vacation_day = commodity_vacation_day
-        self.commodity_workday = commodity_workday
-        self.standard_work_period = self.__str_time_to_minutes(standard_work_period)
-        self.employer = employer
-        self.customer = customer
-        self.account_customer_overtime = account_customer_overtime
-        self.account_customer_worked_day = account_customer_worked_day
-        self.account_employer_root = account_employer_root
-        self.account_employer_overtime = account_employer_overtime
-        self.account_employer_vacation = account_employer_vacation
-        self.account_employer_worked_day = account_employer_worked_day
-        self.account_vacation = account_vacation
+        self.account_expenses = account_expenses
+        self.account_assets = account_assets
 
         self.logger.info("Logger Initialized")
         self.logger.debug("Input parameters:")
-        self.logger.debug("Commodity name for overtime units: %s", self.commodity_overtime)
-        self.logger.debug("Commodity name for vacation day units: %s", self.commodity_vacation_day)
-        self.logger.debug("Commodity name for worked day units: %s", self.commodity_workday)
-        self.logger.debug("Standard work time period: %s", str(self.standard_work_period))
-        self.logger.debug("Employer: %s", self.employer)
-        self.logger.debug("Customer: %s", self.customer)
-        self.logger.debug("Account to use to get overtime from: %s", self.account_customer_overtime)
-        self.logger.debug("Account to use to get worked day from: %s", self.account_customer_worked_day)
-        self.logger.debug("Root account of the employer: %s", self.account_employer_root)
-        self.logger.debug("Account to use to store overtime: %s", self.account_employer_overtime)
-        self.logger.debug("Account containing vacation days: %s", self.account_employer_vacation)
-        self.logger.debug("Account to use to store number of worked days: %s", self.account_employer_worked_day)
-        self.logger.debug("Account to use to record spent vacation days: %s", self.account_vacation)
+        self.logger.debug("Expenses account: %s", self.account_expenses)
+        self.logger.debug("Assets account: %s", self.account_assets)
         
         self.logger.info("Object initialisation done.")
         
