@@ -49,52 +49,52 @@ class Importer(importer.ImporterProtocol):
         
         self.logger.info("Object initialisation done.")
         
-    def __txn_vacation(self, meta, date, desc, units_vac, units_ovt):
-        """Return a holiday transaction object."""
-        self.logger.debug("Entering Function")
+    # def __txn_vacation(self, meta, date, desc, units_vac, units_ovt):
+    #     """Return a holiday transaction object."""
+    #     self.logger.debug("Entering Function")
 
-        txn =  data.Transaction(
-            meta, date, "!", self.employer, desc, data.EMPTY_SET, data.EMPTY_SET, [
-                data.Posting(self.account_vacation, units_vac, None, None, None, None),
-                data.Posting(self.account_employer_vacation, -units_vac, None, None, None, None),
-                data.Posting(self.account_vacation, units_vac, None, units_ovt, "!", None),
-                data.Posting(self.account_employer_overtime, -units_ovt, None, None, "!", None)
-                ])
+    #     txn =  data.Transaction(
+    #         meta, date, "!", self.employer, desc, data.EMPTY_SET, data.EMPTY_SET, [
+    #             data.Posting(self.account_vacation, units_vac, None, None, None, None),
+    #             data.Posting(self.account_employer_vacation, -units_vac, None, None, None, None),
+    #             data.Posting(self.account_vacation, units_vac, None, units_ovt, "!", None),
+    #             data.Posting(self.account_employer_overtime, -units_ovt, None, None, "!", None)
+    #             ])
 
-        self.logger.debug('Transaction to be recorded: %s', str(txn))
-        self.logger.debug("Leaving Function")
+    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
+    #     self.logger.debug("Leaving Function")
         
-        return txn
+    #     return txn
         
-    def __txn_overtime(self, meta, date, units_ovt):
-        """Return an overtime transaction object."""
-        self.logger.debug("Entering Function")
+    # def __txn_overtime(self, meta, date, units_ovt):
+    #     """Return an overtime transaction object."""
+    #     self.logger.debug("Entering Function")
 
-        txn =  data.Transaction(
-            meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-                data.Posting(self.account_employer_overtime, units_ovt, None, None, None, None),
-                data.Posting(self.account_customer_overtime, -units_ovt, None, None, None, None)
-                ])
+    #     txn =  data.Transaction(
+    #         meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
+    #             data.Posting(self.account_employer_overtime, units_ovt, None, None, None, None),
+    #             data.Posting(self.account_customer_overtime, -units_ovt, None, None, None, None)
+    #             ])
 
-        self.logger.debug('Transaction to be recorded: %s', str(txn))
-        self.logger.debug("Leaving Function")
+    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
+    #     self.logger.debug("Leaving Function")
         
-        return txn
+    #     return txn
 
-    def __txn_worked_day_in_month(self, meta, date, units_wk_dt):
-        """Return an overtime transaction object."""
-        self.logger.debug("Entering Function")
+    # def __txn_worked_day_in_month(self, meta, date, units_wk_dt):
+    #     """Return an overtime transaction object."""
+    #     self.logger.debug("Entering Function")
 
-        txn =  data.Transaction(
-            meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-                data.Posting(self.account_employer_worked_day, units_wk_dt, None, None, None, None),
-                data.Posting(self.account_customer_worked_day, -units_wk_dt, None, None, None, None)
-                ])
+    #     txn =  data.Transaction(
+    #         meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
+    #             data.Posting(self.account_employer_worked_day, units_wk_dt, None, None, None, None),
+    #             data.Posting(self.account_customer_worked_day, -units_wk_dt, None, None, None, None)
+    #             ])
 
-        self.logger.debug('Transaction to be recorded: %s', str(txn))
-        self.logger.debug("Leaving Function")
+    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
+    #     self.logger.debug("Leaving Function")
         
-        return txn
+    #     return txn
 
     def __int_to_Amount(self, value, commodity):
         """Convert a value as a int to an Amount object."""
@@ -106,25 +106,25 @@ class Importer(importer.ImporterProtocol):
 
         return atr
 
-    def __str_time_to_minutes(self, time_as_str_or_tuple):
-        """Convert a time period expressed as a string into a number of minutes as an int."""
-        self.logger.debug("Entering Function")
+    # def __str_time_to_minutes(self, time_as_str_or_tuple):
+    #     """Convert a time period expressed as a string into a number of minutes as an int."""
+    #     self.logger.debug("Entering Function")
 
-        self.logger.debug("Parameter to transform: '%s'", time_as_str_or_tuple)
-        self.logger.debug("Parameter type: %s", type(time_as_str_or_tuple))
+    #     self.logger.debug("Parameter to transform: '%s'", time_as_str_or_tuple)
+    #     self.logger.debug("Parameter type: %s", type(time_as_str_or_tuple))
 
-        if type(time_as_str_or_tuple) == str:
-            self.logger.debug("Is it in [H]H:MM format: %s", re.fullmatch("^[0-9]{1,2}:[0-5][0-9]$", time_as_str_or_tuple))
-            if re.fullmatch("^[0-9]{1,2}:[0-5][0-9]$", time_as_str_or_tuple) != None:
-                time_as_tuple = (int(time_as_str_or_tuple.split(':')[0]), int(time_as_str_or_tuple.split(':')[1]))
-            else:
-                raise ValueError("Parameter was not a string  of the form [H]H:MM: {}".format(time_as_str_or_tuple))
-        elif type(time_as_str_or_tuple) == tuple and len(time_as_str_or_tuple) == 2 and type(time_as_str_or_tuple[0]) == int and type(time_as_str_or_tuple[1]):
-            time_as_tuple = time_as_str_or_tuple
-        else:
-            raise ValueError("Parameter was not a string or a tuple of 2 elements")
+    #     if type(time_as_str_or_tuple) == str:
+    #         self.logger.debug("Is it in [H]H:MM format: %s", re.fullmatch("^[0-9]{1,2}:[0-5][0-9]$", time_as_str_or_tuple))
+    #         if re.fullmatch("^[0-9]{1,2}:[0-5][0-9]$", time_as_str_or_tuple) != None:
+    #             time_as_tuple = (int(time_as_str_or_tuple.split(':')[0]), int(time_as_str_or_tuple.split(':')[1]))
+    #         else:
+    #             raise ValueError("Parameter was not a string  of the form [H]H:MM: {}".format(time_as_str_or_tuple))
+    #     elif type(time_as_str_or_tuple) == tuple and len(time_as_str_or_tuple) == 2 and type(time_as_str_or_tuple[0]) == int and type(time_as_str_or_tuple[1]):
+    #         time_as_tuple = time_as_str_or_tuple
+    #     else:
+    #         raise ValueError("Parameter was not a string or a tuple of 2 elements")
 
-        return (time_as_tuple[0] * 60) + time_as_tuple[1]
+    #     return (time_as_tuple[0] * 60) + time_as_tuple[1]
     
     def identify(self, file):
         # Match if the filename is as downloaded and the header has the unique
