@@ -195,12 +195,6 @@ class Importer(importer.ImporterProtocol):
 
         entries = []
         index = 0
-        units_overtime = 0
-        cur_month = 0
-        cur_year = 0
-        workday_counter = 0
-
-        self.logger.debug('Standard working time period in minutes: %d', self.standard_work_period)
 
         csvDialect = csv.excel();
         csvDialect.delimiter = ';'
