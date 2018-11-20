@@ -1,12 +1,22 @@
+# -*- eval: (git-auto-commit-mode 1) -*-
 #+TITLE: Personal importers for the Beancount accounting software
 
 * Introduction
+  :PROPERTIES:
+  :ID:       872ebd37-febb-4048-820e-896032791585
+  :END:
   This repository contains the importers and example configurations I have designed to parse various files and intergrate them in my accounting files for Beancount.
 * Repository struture
-  =exemple.import=, the beancount configuration files used to show how to configure the importers in the repository.
-  =importers/smals=, contains all the code related to the processing of data from one of my customer
-  =input=, contains all the files to use to test the importers
+  :PROPERTIES:
+  :ID:       4e39f2bd-22b8-4dde-ab4f-0134e3743630
+  :END:
+  -  =exemple.import=, the beancount configuration files used to show how to configure the importers in the repository.
+  -  =importers/smals=, contains all the code related to the processing of data from one of my customer
+  -  =input=, contains all the files to use to test the importers
 * Usage
+  :PROPERTIES:
+  :ID:       b8d2a7cf-a59f-4859-a5af-b831f05695e2
+  :END:
   Beancount must be install with all its dependencies.
 
   1. Open a terminal on the directory where the code is stored on the disk.
