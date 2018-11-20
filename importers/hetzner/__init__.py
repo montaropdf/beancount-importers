@@ -206,9 +206,7 @@ class Importer(importer.ImporterProtocol):
             date = datetime.datetime.strptime(row['date_start'], '%Y-%m-%d').date()
             year, month, day = row['DATE'].split('-')
             self.logger.debug("Year: %s", year)
-            self.logger.debug("Current Year: %s", cur_year)
             self.logger.debug("Month: %s", month)
-            self.logger.debug("Current Month: %s", cur_month)
 
             if cur_month == 0:
                 cur_month = month
