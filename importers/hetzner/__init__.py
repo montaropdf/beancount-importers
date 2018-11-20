@@ -28,7 +28,7 @@ class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
 
     def __init__(self,
-                 account_expenses,
+                 account_liability,
                  account_assets):
 
         self.logger = logging.Logger("hetzner", logging.DEBUG)
@@ -39,12 +39,12 @@ class Importer(importer.ImporterProtocol):
         fh.setFormatter(fmtr)
         self.logger.addHandler(fh)
 
-        self.account_expenses = account_expenses
+        self.account_liability = account_liability
         self.account_assets = account_assets
 
         self.logger.info("Logger Initialized")
         self.logger.debug("Input parameters:")
-        self.logger.debug("Expenses account: %s", self.account_expenses)
+        self.logger.debug("Liability account: %s", self.account_liability)
         self.logger.debug("Assets account: %s", self.account_assets)
         
         self.logger.info("Object initialisation done.")
@@ -346,5 +346,5 @@ def test():
                         "Assets:BE:Employer",
                         "Assets:BE:Employer:HeureSup",
                         "Assets:BE:Employer:JourConge",
-                        "Expenses:Conge")
+                        "Liability:Conge")
     # yield from regression.compare_sample_files(importer, __file__)
