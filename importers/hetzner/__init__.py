@@ -145,8 +145,8 @@ class Importer(importer.ImporterProtocol):
         # matching_result = re.match(r"%s_%s%s%s".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name))
 
         # self.logger.debug("Match long filename version: %s", str(matching_result))
-        matching_result = ((re.match(r"%s%s".format(core_filename_regex, extension_regex), path.basename(file.name))
-                            or re.match(r"%s_%s%s%s".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name))))
+        matching_result = ((re.match(r"{}{}".format(core_filename_regex, extension_regex), path.basename(file.name))
+                            or re.match(r"{}_{}{}{}".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name))))
 
         self.logger.info("Identification result: %s", str(matching_result))
 
