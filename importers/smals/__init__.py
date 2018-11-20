@@ -236,12 +236,17 @@ class Importer(importer.ImporterProtocol):
                 cur_month = month
                 cur_year = year
 
-                txn = self.__txn_overtime(meta_w_month, date, self.__int_to_Amount(units_overtime, self.commodity_overtime))
+                txn = self.__txn_overtime(meta_w_month,
+                                          date,
+                                          self.__int_to_Amount(units_overtime,
+                                                               self.commodity_overtime))
                 self.logger.info('Overtime recorded at date: %s', date)
 
                 entries.append(txn)
                 units_overtime = 0
-                txn = self.__txn_worked_day_in_month(meta_w_month, date, self.__int_to_Amount(workday_counter, self.commodity_workday))
+                txn = self.__txn_worked_day_in_month(meta_w_month, date,
+                                                     self.__int_to_Amount(workday_counter,
+                                                                          self.commodity_workday))
                 self.logger.info('Number of worked day recorded at date: %s', workday_counter)
 
                 entries.append(txn)
