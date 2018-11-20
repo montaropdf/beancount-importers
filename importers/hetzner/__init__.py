@@ -144,8 +144,8 @@ class Importer(importer.ImporterProtocol):
 
         self.logger.debug("Match long filename version: %s", str(matching_result))
         
-        matching_result = ((re.match(r"smals-report-\d\d\d\d\d\d-cleaned\.csv", path.basename(file.name))
-                            or re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned(_.+)*\.csv", path.basename(file.name)))
+        matching_result = ((re.match(r"%s%s".format(core_filename_regex, extension_regex), path.basename(file.name))
+                            or re.match(r"%s_%s%s%s".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name)))
                            and re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head()))
 
         self.logger.info("Identification result: %s", str(matching_result))
