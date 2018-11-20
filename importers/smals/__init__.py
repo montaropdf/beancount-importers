@@ -123,29 +123,6 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug('Transaction to be recorded: %s', str(txn))
         self.logger.debug("Leaving Function")
         
-<<<<<<< HEAD
-        # print('{} {}'.format(self.commodity_overtime, self.commodity_vacation_day))
-
-    def tnx_holiday(self, meta, date, desc, unit_vac, unit_ovt):
-        """Return a holiday transaction object."""
-
-        return  data.Transaction(
-            meta, date, "!", self.employer, desc, data.EMPTY_SET, data.EMPTY_SET, [
-                data.Posting(self.account_vacation, units_vac, None, None, None, None),
-                data.Posting(self.account_employer_holiday, -units_vac, None, None, None, None),
-                data.Posting(self.account_vacation, units_vac, None, unit_ovt, "!", None),
-                data.Posting(self.account_employer_overtime, -unit_ovt, None, None, "!", None)
-                ])
-
-    def tnx_overtime(self, meta, date, unit_ovt):
-        """Return an overtime transaction object."""
-
-        return data.Transaction(
-            meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-                data.Posting(self.account_employer_overtime, units_ovt, None, None, None, None),
-                data.Posting(self.account_customer_overtime, -units_ovt, None, None, None, None)
-                ])
-=======
         return txn
 
     def __int_to_Amount(self, value, commodity):
@@ -164,8 +141,7 @@ class Importer(importer.ImporterProtocol):
 
         self.logger.debug("Parameter to transform: '%s'", time_as_str_or_tuple)
         self.logger.debug("Parameter type: %s", type(time_as_str_or_tuple))
->>>>>>> improvments
-        
+
         if type(time_as_str_or_tuple) == str:
             self.logger.debug("Is it in [H]H:MM format: %s", re.fullmatch("^[0-9]{1,2}:[0-5][0-9]$", time_as_str_or_tuple))
             if re.fullmatch("^[0-9]{1,2}:[0-5][0-9]$", time_as_str_or_tuple) != None:
@@ -182,12 +158,6 @@ class Importer(importer.ImporterProtocol):
     def identify(self, file):
         # Match if the filename is as downloaded and the header has the unique
         # fields combination we're looking for.
-<<<<<<< HEAD
-        print(file)
-        print("identify")
-        return (re.match(r"smals-report-\d\d\d\d\d\d-cleaned.csv", path.basename(file.name)) and
-                re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC", file.head()))
-=======
 
         self.logger.debug("Entering Function")
         self.logger.info("File to analyse: %s", str(file))
@@ -204,7 +174,6 @@ class Importer(importer.ImporterProtocol):
         self.logger.info("Identification result: %s", str(matching_result))
         self.logger.debug("Leaving Function")
         return (matching_result)
->>>>>>> improvments
 
     def file_name(self, file):
         self.logger.debug("Entering Function")
@@ -235,15 +204,11 @@ class Importer(importer.ImporterProtocol):
         entries = []
         index = 0
         units_overtime = 0
-<<<<<<< HEAD
-        swp_minutes = int((self.standard_work_period - datetime.datetime(1970, 1, 1)).total_seconds() / 60)
-=======
         cur_month = 0
         cur_year = 0
         workday_counter = 0
 
         self.logger.debug('Standard working time period in minutes: %d', self.standard_work_period)
->>>>>>> improvments
 
         csvDialect = csv.excel();
         csvDialect.delimiter = ';'
@@ -253,29 +218,6 @@ class Importer(importer.ImporterProtocol):
             meta = data.new_metadata(file.name, index)
             meta_w_month = data.new_metadata(file.name, index)
             date = datetime.datetime.strptime(row['DATE'], '%d/%m/%Y').date()
-<<<<<<< HEAD
-            month = row['DATE'][3:2]
-            print("Month: {}".format(month))
-            print("Current Month: {}".format(cur_month))
-
-            if cur_month == 0:
-                cur_month = month
-
-            # If the month change, create the transaction for the overtime of the previous month
-            if cur_month != month:
-                cur_month = month
-
-                tnx = tnx_overtime(meta, date, units_overtime)
-                # txn = data.Transaction(
-                #     meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-                #         data.Posting(self.account_employer_overtime, units_overtime, None, None, None, None),
-                #         data.Posting(self.account_customer_overtime, -units_overtime, None, None, None, None)
-                #     ])
-
-                entries.append(txn)
-                units_overtime = 0
-            
-=======
             day, month, year = row['DATE'].split('/')
             self.logger.debug("Year: %s", year)
             self.logger.debug("Current Year: %s", cur_year)
@@ -305,7 +247,6 @@ class Importer(importer.ImporterProtocol):
                 entries.append(txn)
                 workday_counter = 0
                 
->>>>>>> improvments
             dtype = row['DAYTYPE']
             dtype2 = row['DAYTYPE2']
             dtype3 = row['DAYTYPE3']
@@ -322,31 +263,6 @@ class Importer(importer.ImporterProtocol):
 
             # If it is a work day, check if some overtime can be added to the overtime account.
             if dtype2 == "PRE":
-<<<<<<< HEAD
-                wk_time = datetime.datetime(1970, 1, 1, int(row['TIMESPENT'].split(':')[0]), int(row['TIMESPENT'].split(':')[1]))
-                wk_period = self.standard_work_period
-
-                # Check if a part of the day was a vacation
-                if dtype3 == "CAO":
-                    txn = txn_vacation(amount.Amount(decimal.Decimal('0.5'), self.commodity_vacation_day),
-                                       amount.Amount(decimal.Decimal(swp_minutes), self.commodity_overtime))
-                    entries.append(txn)
-                    wk_period = wk_period / 2
-
-                overtime = decimal.Decimal((wk_time - wk_period).total_seconds() / 60)
-
-                # if overtime <= 0:
-                    # continue
-
-                # desc = "Heure Supplémentaire"
-                units_overtime += amount.Amount(overtime, self.commodity_overtime)
-                # txn = data.Transaction(
-                #     meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-                #         data.Posting(self.account_employer_overtime, units_overtime, None, None, None, None),
-                #         data.Posting(self.account_customer_overtime, -units_overtime, None, None, None, None)
-                #     ])
-
-=======
                 self.logger.info('Work day detected.')
 
                 wk_time = self.__str_time_to_minutes(row['TIMESPENT'])
@@ -375,7 +291,6 @@ class Importer(importer.ImporterProtocol):
 
                 units_overtime += overtime
                 self.logger.info('Cumulative overtime for the month: %g', units_overtime)
->>>>>>> improvments
             else:
                 # If it is a work day, but I was sick or it was a legal holiday, skip it.
                 if dtype3 in ["JFR", "MAL", "COLFE"] and dtype4 == '':
@@ -384,27 +299,12 @@ class Importer(importer.ImporterProtocol):
 
                 # If it is a work day, but I was on vacation, add an entry for a vacation day.
                 if dtype3 == "CAO":
-<<<<<<< HEAD
-                    txn = txn_vacation(meta, date, "Congé",
-                                       amount.Amount(decimal.Decimal('1'), self.commodity_vacation_day),
-                                           amount.Amount(decimal.Decimal(swp_minutes), self.commodity_overtime))
-                    entries.append(txn)
-                    
-                    # txn = data.Transaction(
-                    #     meta, date, "!", self.employer, desc, data.EMPTY_SET, data.EMPTY_SET, [
-                    #         data.Posting(self.account_vacation, units_vacation, None, None, None, None),
-                    #         data.Posting(self.account_employer_holiday, -units_vacation, None, None, None, None),
-                    #         data.Posting(self.account_vacation, units_vacation, None, units_overtime, "!", None),
-                    #         data.Posting(self.account_employer_overtime, -units_overtime, None, None, "!", None)
-                    #     ])
-=======
                     self.logger.info('Vacation day detected, record it.')
                     txn = self.__txn_vacation(meta, date, "Congé",
                                               amount.Amount(decimal.Decimal('1'), self.commodity_vacation_day),
                                               amount.Amount(decimal.Decimal(self.standard_work_period), self.commodity_overtime))
                     self.logger.info('Vacation date: %s', date)
                     entries.append(txn)
->>>>>>> improvments
                 else:
                     if  dtype4 == "CAO":
                         wk_period = int(wk_period / 2)
@@ -418,29 +318,21 @@ class Importer(importer.ImporterProtocol):
                         self.logger.warning('Data in row: %s', str(row))
                         continue
 
-<<<<<<< HEAD
-            # entries.append(txn)
-
-        # When there is no more row to process, create a transaction with the remaining overtime
-        tnx = tnx_overtime(meta, date, units_overtime)
-        # txn = data.Transaction(
-        #     meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-        #         data.Posting(self.account_employer_overtime, units_overtime, None, None, None, None),
-        #         data.Posting(self.account_customer_overtime, -units_overtime, None, None, None, None)
-        #         ])
-        entries.append(txn)
-=======
         # When there is no more row to process, create a transaction with the remaining overtime
         self.logger.debug('End of file reached. Record remaining overtime and number of worked days.')
         meta_w_month['worked_period'] = "{}-{}".format(cur_year, cur_month)
-        txn = self.__txn_overtime(meta_w_month, date, self.__int_to_Amount(units_overtime, self.commodity_overtime))
+        txn = self.__txn_overtime(meta_w_month,
+                                  date,
+                                  self.__int_to_Amount(units_overtime,
+                                                       self.commodity_overtime))
         self.logger.info('Overtime recorded at date: %s', date)
         entries.append(txn)
 
-        txn = self.__txn_worked_day_in_month(meta_w_month, date, self.__int_to_Amount(workday_counter, self.commodity_workday))
+        txn = self.__txn_worked_day_in_month(meta_w_month,
+                                             date,
+                                             self.__int_to_Amount(workday_counter,
+                                                                  self.commodity_workday))
         self.logger.info('Number of worked days recorded at date: %s', workday_counter)
->>>>>>> improvments
-
         entries.append(txn)
 
         self.logger.debug("Leaving Function")
