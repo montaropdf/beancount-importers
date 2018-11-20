@@ -134,7 +134,7 @@ class Importer(importer.ImporterProtocol):
         self.logger.info("File to analyse: %s", str(file))
         self.logger.debug("Header file: %s", str(file.head()))
 
-        core_filename_regex = r"Hetzner-\d\d\d\d-\d\d-\d\d-R\d\d\d\d\d\d\d\d\d\d"
+        core_filename_regex = "Hetzner-\d\d\d\d-\d\d-\d\d-R\d\d\d\d\d\d\d\d\d\d"
         extension_regex = r"\.csv"
         date_prefix_regex = r"\d\d\d\d-\d\d-\d\d"
         tag_suffix_regex = r"(_.+)*"
