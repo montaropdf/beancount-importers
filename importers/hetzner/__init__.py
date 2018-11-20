@@ -134,10 +134,13 @@ class Importer(importer.ImporterProtocol):
         self.logger.info("File to analyse: %s", str(file))
         self.logger.debug("Header file: %s", str(file.head()))
 
-        core_filename_regex = "Hetzner-\d\d\d\d-\d\d-\d\d-R\d\d\d\d\d\d\d\d\d\d"
-        extension_regex = "\.csv"
+        core_filename_regex = r"Hetzner-\d\d\d\d-\d\d-\d\d-R\d\d\d\d\d\d\d\d\d\d"
+        extension_regex = r"\.csv"
+        date_prefix_regex = r"\d\d\d\d-\d\d-\d\d"
+        tag_suffix_regex = r"(_.+)*"
         
-        matching_result = re.match(r"\d\d\d\d-\d\d-\d\d_Hetzner-\d\d\d\d-\d\d-\d\d-R\d\d\d\d\d\d\d\d\d\d(_.+)*\.csv", path.basename(file.name))
+        # matching_result = re.match(r"\d\d\d\d-\d\d-\d\d_Hetzner-\d\d\d\d-\d\d-\d\d-R\d\d\d\d\d\d\d\d\d\d(_.+)*\.csv", path.basename(file.name))
+        matching_result = re.match(r"%s_%s%s%s".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name))
 
         self.logger.debug("Match long filename version: %s", str(matching_result))
         
