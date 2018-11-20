@@ -5,6 +5,7 @@
 # This is a clone of the config exemple from Martin Blais, with some
 # adaptation for my own usage.
 from importers import smals
+from importer import hetzner
 from beancount.ingest import extract
 
 # Setting this variable provides a list of importer instances.
@@ -19,6 +20,8 @@ CONFIG = [
                    "Assets:Employer:JourConge",
                    "Assets:Employer:JourTravail",
                    "Expenses:Conge"),
+    hetzner.Importer("Expenses:Conge",
+                     "Assets:Bank:Checking"),
 ]
 
 # Override the header on extracted text (if desired).
