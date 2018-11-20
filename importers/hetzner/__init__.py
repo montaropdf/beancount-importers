@@ -139,7 +139,7 @@ class Importer(importer.ImporterProtocol):
         date_prefix_regex = "\d\d\d\d-\d\d-\d\d"
         tag_suffix_regex = "(_.+)*"
 
-        print(core_filename_regex)
+        print("%s".format(core_filename_regex))
         
         # matching_result = re.match(r"\d\d\d\d-\d\d-\d\d_Hetzner-\d\d\d\d-\d\d-\d\d-R\d\d\d\d\d\d\d\d\d\d(_.+)*\.csv", path.basename(file.name))
         # matching_result = re.match(r"%s_%s%s%s".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name))
