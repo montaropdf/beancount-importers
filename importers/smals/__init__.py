@@ -301,8 +301,10 @@ class Importer(importer.ImporterProtocol):
                 if dtype3 == "CAO":
                     self.logger.info('Vacation day detected, record it.')
                     txn = self.__txn_vacation(meta, date, "Congé",
-                                              amount.Amount(decimal.Decimal('1'), self.commodity_vacation_day),
-                                              amount.Amount(decimal.Decimal(self.standard_work_period), self.commodity_overtime))
+                                              amount.Amount(decimal.Decimal('1'),
+                                                            self.commodity_vacation_day),
+                                              amount.Amount(decimal.Decimal(self.standard_work_period),
+                                                            self.commodity_overtime))
                     self.logger.info('Vacation date: %s', date)
                     entries.append(txn)
                 else:
