@@ -160,7 +160,7 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Entering Function")
         self.logger.info("File name to be used: %s", '{}'.format(path.basename(file.name)))
         self.logger.debug("Leaving Function")
-        return 'smals-ts-report.{}'.format(path.basename(file.name))
+        return '{}'.format(path.basename(file.name))
 
     def file_account(self, _):
         self.logger.debug("Entering Function")
