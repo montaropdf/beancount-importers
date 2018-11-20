@@ -5,7 +5,7 @@
   :PROPERTIES:
   :ID:       872ebd37-febb-4048-820e-896032791585
   :END:
-  This repository contains the importers and example configurations I have designed to parse various files and intergrate them in my accounting files for Beancount.
+  This repository contains the importers and example configurations I have designed to parse various files and intergrate them in my accounting files for [[http://furius.ca/beancount/][Beancount]].
 * Repository struture
   :PROPERTIES:
   :ID:       4e39f2bd-22b8-4dde-ab4f-0134e3743630
