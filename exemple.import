@@ -5,7 +5,7 @@
 # This is a clone of the config exemple from Martin Blais, with some
 # adaptation for my own usage.
 from importers import smals
-from importer import hetzner
+from importers import hetzner
 from beancount.ingest import extract
 
 # Setting this variable provides a list of importer instances.
