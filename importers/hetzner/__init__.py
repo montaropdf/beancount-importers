@@ -171,6 +171,20 @@ class Importer(importer.ImporterProtocol):
     def file_date(self, file):
         # Extract the statement date from the filename.
         self.logger.debug("Entering Function")
+
+        core_filename_regex = "Hetzner-\d\d\d\d-\d\d-\d\d-R\d{10}"
+        extension_regex = "\.csv"
+        date_prefix_regex = "\d\d\d\d-\d\d-\d\d"
+        tag_suffix_regex = "(_.+)*"
+
+        if re.match(r"{}{}".format(core_filename_regex, extension_regex), path.basename(file.name)):
+            filedate = datetime.datetime.strptime(path.basename(file.name),
+                                          'Hetzner-%Y-%m-%d-R[0-9]{10}.csv').date()
+
+        
+        matching_result = ((
+                            or re.match(r"{}_{}{}{}".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name))))
+
         filedate = datetime.datetime.strptime(path.basename(file.name),
                                           'smals-report-%Y%m-cleaned.csv').date()
         self.logger.info("File date used: %s", str(filedate))
