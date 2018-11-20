@@ -28,7 +28,7 @@ class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
 
     def __init__(self,
-                 account_liability,
+                 account_expenses,
                  account_assets):
 
         self.logger = logging.Logger("hetzner", logging.DEBUG)
@@ -39,12 +39,12 @@ class Importer(importer.ImporterProtocol):
         fh.setFormatter(fmtr)
         self.logger.addHandler(fh)
 
-        self.account_liability = account_liability
+        self.account_expenses = account_expenses
         self.account_assets = account_assets
 
         self.logger.info("Logger Initialized")
         self.logger.debug("Input parameters:")
-        self.logger.debug("Liabilities account: %s", self.account_liability)
+        self.logger.debug("Expenses account: %s", self.account_expenses)
         self.logger.debug("Assets account: %s", self.account_assets)
         
         self.logger.info("Object initialisation done.")
@@ -183,6 +183,34 @@ class Importer(importer.ImporterProtocol):
         elif re.match(r"{}_{}{}{}".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name)):
             filedate = datetime.datetime.strptime(path.basename(file.name),
                                           'Hetzner-%Y-%m-%d-R[0-9]{10}.csv').date()
+        
+        self.logger.info("File date used: %s", str(filedate))
+        self.logger.debug("Leaving Function")
+        return filedate
+
+    def extract(self, file):
+        # Open the CSV file and create directives.
+        self.logger.debug("Entering Function")
+        self.logger.info("Extracting transactions from file: %s", str(file))
+
+        entries = []
+        index = 0
+        units_overtime = 0
+        cur_month = 0
+        cur_year = 0
+        workday_counter = 0
+
+        self.logger.debug('Standard working time period in minutes: %d', self.standard_work_period)
+
+        csvDialect = csv.excel();
+        csvDialect.delimiter = ';'
+        
+        for index, row in enumerate(csv.DictReader(open(file.name), dialect=csvDialect)):
+            self.logger.debug('Data in row: %s', str(row))
+            meta = data.new_metadata(file.name, index)
+            meta_w_month = data.new_metadata(file.name, index)
+            date = datetime.datetime.strptime(row['DATE'], '%d/%m/%Y').date()
+            day, month, year = row['DATE'].split('/')
             self.logger.debug("Year: %s", year)
             self.logger.debug("Current Year: %s", cur_year)
             self.logger.debug("Month: %s", month)
