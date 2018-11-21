@@ -392,8 +392,8 @@ class Importer(importer.ImporterProtocol):
         meta_w_month['worked_period'] = "{}-{}".format(cur_year, cur_month)
         txn = self.__txn_common(meta_w_month,
                                 date,
-                                self.account_sickness,
-                                self.account_working_day,
+                                self.account_employer_overtime,
+                                self.account_customer_overtime,
                                 self.__iof2Amount(units_overtime,
                                                   self.commodity_overtime),
                                 self.customer
