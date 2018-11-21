@@ -333,8 +333,8 @@ def __int_to_Amount(self, value, commodity):
                                             date,
                                             self.account_sickness,
                                             self.account_working_day,
-                                            self.__int_to_Amount(units_overtime,
-                                                                 self.commodity_overtime))
+                                            self.__int_to_Amount(0.5,
+                                                                 self.commodity_workday))
                     
                 self.logger.info('Worked period for the day (in Minutes): %s', str(wk_period))
 
