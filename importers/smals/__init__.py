@@ -369,8 +369,7 @@ class Importer(importer.ImporterProtocol):
                                               self.__iof2Amount(1,
                                                                 self.commodity_vacation_day),
                                               self.__iof2Amount(self.standard_work_period,
-                                                                self.commodity_overtime),
-                    )
+                                                                self.commodity_overtime))
                     self.logger.info('Vacation date: %s', date)
                     entries.append(txn)
                 else:
