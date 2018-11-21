@@ -347,7 +347,7 @@ class Importer(importer.ImporterProtocol):
                                             self.account_sickness,
                                             self.account_working_day,
                                             self.__int_or_float_to_Amount(u,
-                                                                 self.commodity_workday))
+                                                                          self.commodity_workday))
 
                 
                 # If it is a work day, but I was on vacation, add an entry for a vacation day.
