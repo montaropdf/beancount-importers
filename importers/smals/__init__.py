@@ -352,11 +352,16 @@ def __int_to_Amount(self, value, commodity):
                     continue
 
                 if dtype3 == "MAL":
+                    if dtype4 == '':
+                        u = 1
+                    else:
+                        u = 0.5
+                        
                     txn = self.__txn_common(meta_w_month,
                                             date,
                                             self.account_sickness,
                                             self.account_working_day,
-                                            self.__int_to_Amount(1,
+                                            self.__int_to_Amount(u,
                                                                  self.commodity_workday))
 
                 
