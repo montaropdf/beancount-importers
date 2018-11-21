@@ -131,7 +131,22 @@ class Importer(importer.ImporterProtocol):
         
         return txn
 
-    def __txn_sickness(self, meta, date, units_sickness):
+    # def __txn_sickness(self, meta, date, units_sickness):
+    #     """Return an overtime transaction object."""
+    #     self.logger.debug("Entering Function")
+
+    #     txn =  data.Transaction(
+    #         meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
+    #             data.Posting(self.account_sickness, units_sickness, None, None, None, None),
+    #             data.Posting(self.account_working_day, -units_sickness, None, None, None, None)
+    #             ])
+
+    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
+    #     self.logger.debug("Leaving Function")
+        
+    #     return txn
+
+    def __txn_common(self, meta, date, acc_in, acc_out, units_common):
         """Return an overtime transaction object."""
         self.logger.debug("Entering Function")
 
@@ -146,6 +161,7 @@ class Importer(importer.ImporterProtocol):
         
         return txn
 
+    
     def __int_to_Amount(self, value, commodity):
         """Convert a value as a int to an Amount object."""
         self.logger.debug("Entering Function")
