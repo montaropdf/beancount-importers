@@ -400,9 +400,7 @@ class Importer(importer.ImporterProtocol):
         txn = self.__txn_worked_day_in_month(meta_w_month,
                                              date,
                                              self.__iof2Amount(workday_counter,
-                                                               self.commodity_workday),
-                                             self.employer,
-                                             "Congé")
+                                                               self.commodity_workday))
         self.logger.info('Number of worked days recorded at date: %s', workday_counter)
         entries.append(txn)
 
