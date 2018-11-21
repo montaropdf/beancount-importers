@@ -12,12 +12,14 @@ CONFIG = [
     smals.Importer("EXTHR", "VACDAY", "WKDT", "7:36",
                    "DaCorp",
                    "Custom'Er",
+                   "Income:BE:WorkingDay",
                    "Income:BE:Customer:HeureSup",
                    "Income:BE:Customer:JourTravail",
                    "Assets:Employer",
                    "Assets:Employer:HeureSup",
                    "Assets:Employer:JourConge",
                    "Assets:Employer:JourTravail",
+                   "Assets:Employer:Sickness",
                    "Expenses:Conge"),
 ]
 
