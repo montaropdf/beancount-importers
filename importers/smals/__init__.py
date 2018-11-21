@@ -131,21 +131,6 @@ class Importer(importer.ImporterProtocol):
         
         return txn
 
-    # def __txn_sickness(self, meta, date, units_sickness):
-    #     """Return an overtime transaction object."""
-    #     self.logger.debug("Entering Function")
-
-    #     txn =  data.Transaction(
-    #         meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-    #             data.Posting(self.account_sickness, units_sickness, None, None, None, None),
-    #             data.Posting(self.account_working_day, -units_sickness, None, None, None, None)
-    #             ])
-
-    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
-    #     self.logger.debug("Leaving Function")
-        
-    #     return txn
-
     def __txn_common(self, meta, date, acc_in, acc_out, units_common):
         """Return a transaction object for simple transactions."""
         self.logger.debug("Entering Function")
@@ -164,7 +149,7 @@ class Importer(importer.ImporterProtocol):
         
         return txn
 
-def __int_to_Amount(self, value, commodity):
+    def __int_or_float_to_Amount(self, value, commodity):
         """Convert a value as a int to an Amount object."""
         self.logger.debug("Entering Function")
         atr = decimal.Decimal(value)
@@ -277,14 +262,14 @@ def __int_to_Amount(self, value, commodity):
 
                 txn = self.__txn_overtime(meta_w_month,
                                           date,
-                                          self.__int_to_Amount(units_overtime,
+                                          self.__int_or_float_to_Amount(units_overtime,
                                                                self.commodity_overtime))
                 self.logger.info('Overtime recorded at date: %s', date)
 
                 entries.append(txn)
                 units_overtime = 0
                 txn = self.__txn_worked_day_in_month(meta_w_month, date,
-                                                     self.__int_to_Amount(workday_counter,
+                                                     self.__int_or_float_to_Amount(workday_counter,
                                                                           self.commodity_workday))
                 self.logger.info('Number of worked day recorded at date: %s', workday_counter)
 
@@ -333,7 +318,7 @@ def __int_to_Amount(self, value, commodity):
                                             date,
                                             self.account_sickness,
                                             self.account_working_day,
-                                            self.__int_to_Amount(0.5,
+                                            self.__int_or_float_to_Amount(0.5,
                                                                  self.commodity_workday))
                     
                 self.logger.info('Worked period for the day (in Minutes): %s', str(wk_period))
@@ -361,7 +346,7 @@ def __int_to_Amount(self, value, commodity):
                                             date,
                                             self.account_sickness,
                                             self.account_working_day,
-                                            self.__int_to_Amount(u,
+                                            self.__int_or_float_to_Amount(u,
                                                                  self.commodity_workday))
 
                 
@@ -393,15 +378,15 @@ def __int_to_Amount(self, value, commodity):
         meta_w_month['worked_period'] = "{}-{}".format(cur_year, cur_month)
         txn = self.__txn_overtime(meta_w_month,
                                   date,
-                                  self.__int_to_Amount(units_overtime,
-                                                       self.commodity_overtime))
+                                  self.__int_or_float_to_Amount(units_overtime,
+                                                                self.commodity_overtime))
         self.logger.info('Overtime recorded at date: %s', date)
         entries.append(txn)
 
         txn = self.__txn_worked_day_in_month(meta_w_month,
                                              date,
-                                             self.__int_to_Amount(workday_counter,
-                                                                  self.commodity_workday))
+                                             self.__int_or_float_to_Amount(workday_counter,
+                                                                           self.commodity_workday))
         self.logger.info('Number of worked days recorded at date: %s', workday_counter)
         entries.append(txn)
 
