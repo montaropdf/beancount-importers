@@ -328,6 +328,14 @@ def __int_to_Amount(self, value, commodity):
                     self.logger.info('Vacation date: %s', date)
                     entries.append(txn)
 
+                if dtype3 == "MAL":
+                    txn = self.__txn_common(meta_w_month,
+                                            date,
+                                            self.account_sickness,
+                                            self.account_working_day,
+                                            self.__int_to_Amount(units_overtime,
+                                                                 self.commodity_overtime))
+                    
                 self.logger.info('Worked period for the day (in Minutes): %s', str(wk_period))
 
                 overtime = wk_time - wk_period
