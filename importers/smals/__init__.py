@@ -347,10 +347,19 @@ def __int_to_Amount(self, value, commodity):
                 self.logger.info('Cumulative overtime for the month: %g', units_overtime)
             else:
                 # If it is a work day, but I was sick or it was a legal holiday, skip it.
-                if dtype3 in ["JFR", "MAL", "COLFE"] and dtype4 == '':
+                if dtype3 in ["JFR", "COLFE"] and dtype4 == '':
                     self.logger.info('Non-worked day detected, skip it.')
                     continue
 
+                if dtype3 == "MAL":
+                    txn = self.__txn_common(meta_w_month,
+                                            date,
+                                            self.account_sickness,
+                                            self.account_working_day,
+                                            self.__int_to_Amount(1,
+                                                                 self.commodity_workday))
+
+                
                 # If it is a work day, but I was on vacation, add an entry for a vacation day.
                 if dtype3 == "CAO":
                     self.logger.info('Vacation day detected, record it.')
