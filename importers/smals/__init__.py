@@ -349,7 +349,6 @@ class Importer(importer.ImporterProtocol):
                                             self.__int_or_float_to_Amount(u,
                                                                           self.commodity_workday))
 
-                
                 # If it is a work day, but I was on vacation, add an entry for a vacation day.
                 if dtype3 == "CAO":
                     self.logger.info('Vacation day detected, record it.')
