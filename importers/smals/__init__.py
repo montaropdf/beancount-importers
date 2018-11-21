@@ -150,6 +150,10 @@ class Importer(importer.ImporterProtocol):
         """Return a transaction object for simple transactions."""
         self.logger.debug("Entering Function")
 
+        self.logger.debug("Receiving account: %s", acc_in)
+        self.logger.debug("Sending account: %s", acc_out)
+        
+        
         txn =  data.Transaction(
             meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
                 data.Posting(acc_in, units_sickness, None, None, None, None),
