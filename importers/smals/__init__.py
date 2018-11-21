@@ -147,7 +147,7 @@ class Importer(importer.ImporterProtocol):
     #     return txn
 
     def __txn_common(self, meta, date, acc_in, acc_out, units_common):
-        """Return an overtime transaction object."""
+        """Return a transaction object for simple transactions."""
         self.logger.debug("Entering Function")
 
         txn =  data.Transaction(
