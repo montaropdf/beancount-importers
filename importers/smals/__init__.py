@@ -308,12 +308,8 @@ class Importer(importer.ImporterProtocol):
                     txn = self.__txn_vacation(meta, date, "Demi-jour de congé",
                                               self.__iof2Amount(0.5,
                                                                 self.commodity_vacation_day),
-                                              # amount.Amount(decimal.Decimal('0.5'),
-                                              #               self.commodity_vacation_day),
                                               self.__iof2Amount(wk_period,
                                                                 self.commodity_overtime),
-                                              # amount.Amount(decimal.Decimal(wk_period),
-                                              #               self.commodity_overtime)
                     )
                     self.logger.info('Vacation date: %s', date)
                     entries.append(txn)
@@ -405,10 +401,18 @@ class Importer(importer.ImporterProtocol):
         self.logger.info('Overtime recorded at date: %s', date)
         entries.append(txn)
 
-        txn = self.__txn_worked_day_in_month(meta_w_month,
-                                             date,
-                                             self.__iof2Amount(workday_counter,
-                                                               self.commodity_workday))
+        txn = self.__txn_common(meta_w_month,
+                                date,
+                                self.account_employer_worked_day,
+                                self.account_customer_worked_day,
+                                self.__iof2Amount(workday_counter,
+                                                  self.commodity_workday),
+                                self.customer
+)
+        # txn = self.__txn_worked_day_in_month(meta_w_month,
+        #                                      date,
+        #                                      self.__iof2Amount(workday_counter,
+        #                                                        self.commodity_workday))
         self.logger.info('Number of worked days recorded at date: %s', workday_counter)
         entries.append(txn)
 
