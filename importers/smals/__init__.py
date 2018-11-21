@@ -307,11 +307,11 @@ class Importer(importer.ImporterProtocol):
                     self.logger.info('Half a day was a vacation, record it.')
                     txn = self.__txn_vacation(meta, date, "Demi-jour de congé",
                                               self.__iof2Amount(0.5,
-                                                                            self.commodity_vacation_day),
+                                                                self.commodity_vacation_day),
                                               # amount.Amount(decimal.Decimal('0.5'),
                                               #               self.commodity_vacation_day),
                                               self.__iof2Amount(wk_period,
-                                                                            self.commodity_overtime),
+                                                                self.commodity_overtime),
                                               # amount.Amount(decimal.Decimal(wk_period),
                                               #               self.commodity_overtime)
                     )
@@ -324,7 +324,7 @@ class Importer(importer.ImporterProtocol):
                                             self.account_sickness,
                                             self.account_working_day,
                                             self.__iof2Amount(0.5,
-                                                                 self.commodity_workday))
+                                                              self.commodity_workday))
                     
                 self.logger.info('Worked period for the day (in Minutes): %s', str(wk_period))
 
@@ -352,26 +352,36 @@ class Importer(importer.ImporterProtocol):
                                             self.account_sickness,
                                             self.account_working_day,
                                             self.__iof2Amount(u,
-                                                                          self.commodity_workday))
+                                                              self.commodity_workday))
 
                 # If it is a work day, but I was on vacation, add an entry for a vacation day.
                 if dtype3 == "CAO":
                     self.logger.info('Vacation day detected, record it.')
                     txn = self.__txn_vacation(meta, date, "Congé",
-                                              amount.Amount(decimal.Decimal('1'),
-                                                            self.commodity_vacation_day),
-                                              amount.Amount(decimal.Decimal(self.standard_work_period),
-                                                            self.commodity_overtime))
+                                              self.__iof2Amount(1,
+                                                                self.commodity_vacation_day),
+                                              # amount.Amount(decimal.Decimal('1'),
+                                              #               self.commodity_vacation_day),
+                                              self.__iof2Amount(self.standard_work_period,
+                                                                self.commodity_overtime),
+                                              # amount.Amount(decimal.Decimal(self.standard_work_period),
+                                              #               self.commodity_overtime)
+                    )
                     self.logger.info('Vacation date: %s', date)
                     entries.append(txn)
                 else:
                     if  dtype4 == "CAO":
                         wk_period = int(wk_period / 2)
                         txn = self.__txn_vacation(meta, date, "Demi-jour de congé",
-                                                  amount.Amount(decimal.Decimal('0.5'),
-                                                                self.commodity_vacation_day),
-                                                  amount.Amount(decimal.Decimal(wk_period),
-                                                                self.commodity_overtime))
+                                                  self.__iof2Amount(0.5,
+                                                                    self.commodity_vacation_day),
+                                              # amount.Amount(decimal.Decimal('0.5'),
+                                              #               self.commodity_vacation_day),
+                                                  self.__iof2Amount(wk_period,
+                                                                    self.commodity_overtime),
+                                              # amount.Amount(decimal.Decimal(wk_period),
+                                              #               self.commodity_overtime)
+                    )
                         self.logger.info('Vacation date: %s', date)
                         entries.append(txn)
                     else:
@@ -385,14 +395,14 @@ class Importer(importer.ImporterProtocol):
         txn = self.__txn_overtime(meta_w_month,
                                   date,
                                   self.__iof2Amount(units_overtime,
-                                                                self.commodity_overtime))
+                                                    self.commodity_overtime))
         self.logger.info('Overtime recorded at date: %s', date)
         entries.append(txn)
 
         txn = self.__txn_worked_day_in_month(meta_w_month,
                                              date,
                                              self.__iof2Amount(workday_counter,
-                                                                           self.commodity_workday))
+                                                               self.commodity_workday))
         self.logger.info('Number of worked days recorded at date: %s', workday_counter)
         entries.append(txn)
 
