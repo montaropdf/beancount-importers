@@ -325,6 +325,7 @@ class Importer(importer.ImporterProtocol):
                                             self.account_working_day,
                                             self.__iof2Amount(0.5,
                                                               self.commodity_workday))
+                    entries.append(txn)
                     
                 self.logger.info('Worked period for the day (in Minutes): %s', str(wk_period))
 
@@ -353,6 +354,7 @@ class Importer(importer.ImporterProtocol):
                                             self.account_working_day,
                                             self.__iof2Amount(u,
                                                               self.commodity_workday))
+                    entries.append(txn)
 
                 # If it is a work day, but I was on vacation, add an entry for a vacation day.
                 if dtype3 == "CAO":
