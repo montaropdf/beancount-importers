@@ -364,8 +364,10 @@ class Importer(importer.ImporterProtocol):
                     if  dtype4 == "CAO":
                         wk_period = int(wk_period / 2)
                         txn = self.__txn_vacation(meta, date, "Demi-jour de congé",
-                                                  amount.Amount(decimal.Decimal('0.5'), self.commodity_vacation_day),
-                                                  amount.Amount(decimal.Decimal(wk_period), self.commodity_overtime))
+                                                  amount.Amount(decimal.Decimal('0.5'),
+                                                                self.commodity_vacation_day),
+                                                  amount.Amount(decimal.Decimal(wk_period),
+                                                                self.commodity_overtime))
                         self.logger.info('Vacation date: %s', date)
                         entries.append(txn)
                     else:
