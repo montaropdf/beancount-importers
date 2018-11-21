@@ -161,8 +161,7 @@ class Importer(importer.ImporterProtocol):
         
         return txn
 
-    
-    def __int_to_Amount(self, value, commodity):
+def __int_to_Amount(self, value, commodity):
         """Convert a value as a int to an Amount object."""
         self.logger.debug("Entering Function")
         atr = decimal.Decimal(value)
