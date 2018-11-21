@@ -324,7 +324,10 @@ class Importer(importer.ImporterProtocol):
                                             self.account_sickness,
                                             self.account_working_day,
                                             self.__iof2Amount(0.5,
-                                                              self.commodity_workday))
+                                                              self.commodity_workday),
+                                            self.employer,
+                                            "Incapacité de travail"
+                    )
                     entries.append(txn)
                     
                 self.logger.info('Worked period for the day (in Minutes): %s', str(wk_period))
@@ -348,12 +351,15 @@ class Importer(importer.ImporterProtocol):
                     else:
                         u = 0.5
                         
-                    txn = self.__txn_common(meta_w_month,
+                    txn = self.__txn_common(meta,
                                             date,
                                             self.account_sickness,
                                             self.account_working_day,
                                             self.__iof2Amount(u,
-                                                              self.commodity_workday))
+                                                              self.commodity_workday),
+                                            self.employer,
+                                            "Incapacité de travail"
+)
                     entries.append(txn)
 
                 # If it is a work day, but I was on vacation, add an entry for a vacation day.
