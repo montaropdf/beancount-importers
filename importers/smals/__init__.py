@@ -152,8 +152,8 @@ class Importer(importer.ImporterProtocol):
 
         txn =  data.Transaction(
             meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-                data.Posting(self.account_sickness, units_sickness, None, None, None, None),
-                data.Posting(self.account_working_day, -units_sickness, None, None, None, None)
+                data.Posting(acc_in, units_sickness, None, None, None, None),
+                data.Posting(acc_out, -units_sickness, None, None, None, None)
                 ])
 
         self.logger.debug('Transaction to be recorded: %s', str(txn))
