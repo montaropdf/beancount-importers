@@ -314,7 +314,7 @@ class Importer(importer.ImporterProtocol):
                     entries.append(txn)
 
                 if dtype3 == "MAL":
-                    txn = self.__txn_common(meta_w_month,
+                    txn = self.__txn_common(meta,
                                             date,
                                             self.account_sickness,
                                             self.account_working_day,
