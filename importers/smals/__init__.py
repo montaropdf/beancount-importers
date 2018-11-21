@@ -30,12 +30,14 @@ class Importer(importer.ImporterProtocol):
     def __init__(self, commodity_overtime, commodity_vacation_day, commodity_workday, standard_work_period,
                  employer,
                  customer,
+                 account_working_day,
                  account_customer_overtime,
                  account_customer_worked_day,
                  account_employer_root,
                  account_employer_overtime,
                  account_employer_vacation,
                  account_employer_worked_day,
+                 account_sickness,
                  account_vacation):
 
         self.logger = logging.Logger("smals", logging.DEBUG)
@@ -52,12 +54,14 @@ class Importer(importer.ImporterProtocol):
         self.standard_work_period = self.__str_time_to_minutes(standard_work_period)
         self.employer = employer
         self.customer = customer
+        self.account_working_day = account_working_day
         self.account_customer_overtime = account_customer_overtime
         self.account_customer_worked_day = account_customer_worked_day
         self.account_employer_root = account_employer_root
         self.account_employer_overtime = account_employer_overtime
         self.account_employer_vacation = account_employer_vacation
         self.account_employer_worked_day = account_employer_worked_day
+        self.account_sickness = account_sickness
         self.account_vacation = account_vacation
 
         self.logger.info("Logger Initialized")
