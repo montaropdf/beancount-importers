@@ -390,10 +390,18 @@ class Importer(importer.ImporterProtocol):
         # When there is no more row to process, create a transaction with the remaining overtime
         self.logger.debug('End of file reached. Record remaining overtime and number of worked days.')
         meta_w_month['worked_period'] = "{}-{}".format(cur_year, cur_month)
-        txn = self.__txn_overtime(meta_w_month,
-                                  date,
-                                  self.__iof2Amount(units_overtime,
-                                                    self.commodity_overtime))
+        txn = self.__txn_common(meta_w_month,
+                                date,
+                                self.account_sickness,
+                                self.account_working_day,
+                                self.__iof2Amount(units_overtime,
+                                                  self.commodity_overtime),
+                                self.customer
+)
+        # txn = self.__txn_overtime(meta_w_month,
+        #                           date,
+        #                           self.__iof2Amount(units_overtime,
+        #                                             self.commodity_overtime))
         self.logger.info('Overtime recorded at date: %s', date)
         entries.append(txn)
 
