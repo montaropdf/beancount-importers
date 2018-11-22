@@ -101,20 +101,20 @@ class Importer(importer.ImporterProtocol):
         
         return txn
         
-    def __txn_overtime(self, meta, date, units_ovt):
-        """Return an overtime transaction object."""
-        self.logger.debug("Entering Function")
+    # def __txn_overtime(self, meta, date, units_ovt):
+    #     """Return an overtime transaction object."""
+    #     self.logger.debug("Entering Function")
 
-        txn =  data.Transaction(
-            meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-                data.Posting(self.account_employer_overtime, units_ovt, None, None, None, None),
-                data.Posting(self.account_customer_overtime, -units_ovt, None, None, None, None)
-                ])
+    #     txn =  data.Transaction(
+    #         meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
+    #             data.Posting(self.account_employer_overtime, units_ovt, None, None, None, None),
+    #             data.Posting(self.account_customer_overtime, -units_ovt, None, None, None, None)
+    #             ])
 
-        self.logger.debug('Transaction to be recorded: %s', str(txn))
-        self.logger.debug("Leaving Function")
+    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
+    #     self.logger.debug("Leaving Function")
         
-        return txn
+    #     return txn
 
     # def __txn_worked_day_in_month(self, meta, date, units_wk_dt):
     #     """Return an overtime transaction object."""
