@@ -101,37 +101,7 @@ class Importer(importer.ImporterProtocol):
         
         return txn
         
-    # def __txn_overtime(self, meta, date, units_ovt):
-    #     """Return an overtime transaction object."""
-    #     self.logger.debug("Entering Function")
-
-    #     txn =  data.Transaction(
-    #         meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-    #             data.Posting(self.account_employer_overtime, units_ovt, None, None, None, None),
-    #             data.Posting(self.account_customer_overtime, -units_ovt, None, None, None, None)
-    #             ])
-
-    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
-    #     self.logger.debug("Leaving Function")
-        
-    #     return txn
-
-    # def __txn_worked_day_in_month(self, meta, date, units_wk_dt):
-    #     """Return an overtime transaction object."""
-    #     self.logger.debug("Entering Function")
-
-    #     txn =  data.Transaction(
-    #         meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-    #             data.Posting(self.account_employer_worked_day, units_wk_dt, None, None, None, None),
-    #             data.Posting(self.account_customer_worked_day, -units_wk_dt, None, None, None, None)
-    #             ])
-
-    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
-    #     self.logger.debug("Leaving Function")
-        
-    #     return txn
-
-    def __txn_common(self, meta, date, acc_in, acc_out, units_common, payee="", desc=""):
+def __txn_common(self, meta, date, acc_in, acc_out, units_common, payee="", desc=""):
         """Return a transaction object for simple transactions."""
         self.logger.debug("Entering Function")
 
@@ -402,12 +372,7 @@ class Importer(importer.ImporterProtocol):
                                 self.account_customer_overtime,
                                 self.__iof2Amount(units_overtime,
                                                   self.commodity_overtime),
-                                self.customer
-)
-        # txn = self.__txn_overtime(meta_w_month,
-        #                           date,
-        #                           self.__iof2Amount(units_overtime,
-        #                                             self.commodity_overtime))
+                                self.customer)
         self.logger.info('Overtime recorded at date: %s', date)
         entries.append(txn)
 
@@ -417,12 +382,7 @@ class Importer(importer.ImporterProtocol):
                                 self.account_customer_worked_day,
                                 self.__iof2Amount(workday_counter,
                                                   self.commodity_workday),
-                                self.customer
-)
-        # txn = self.__txn_worked_day_in_month(meta_w_month,
-        #                                      date,
-        #                                      self.__iof2Amount(workday_counter,
-        #                                                        self.commodity_workday))
+                                self.customer)
         self.logger.info('Number of worked days recorded at date: %s', workday_counter)
         entries.append(txn)
 
