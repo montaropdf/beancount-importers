@@ -295,13 +295,15 @@ class Importer(importer.ImporterProtocol):
                 self.logger.info('Work day detected.')
 
                 wk_time = self.__str_time_to_minutes(row['TIMESPENT'])
-                wk_period = self.standard_work_period
+                wk_period_full = self.standard_work_period
 
                 self.logger.debug('Worked time: %s', str(wk_time))
 
                 if dtype3 in ["CAO", "MAL"]:
                     wk_period = int(wk_period / 2)
-                
+                else:
+                    wk_period = wk_period_full
+                    
                 # Check if a part of the day was a vacation
                 if dtype3 == "CAO":
                     self.logger.info('Half a day was a vacation, record it.')
@@ -310,6 +312,8 @@ class Importer(importer.ImporterProtocol):
                                                                 self.commodity_vacation_day),
                                               self.__iof2Amount(wk_period,
                                                                 self.commodity_overtime),
+                                              self.__iof2Amount(wk_period_full,
+                                                                self.commodity_overtime)
                     )
                     self.logger.info('Vacation date: %s', date)
                     entries.append(txn)
@@ -365,7 +369,10 @@ class Importer(importer.ImporterProtocol):
                                               self.__iof2Amount(1,
                                                                 self.commodity_vacation_day),
                                               self.__iof2Amount(self.standard_work_period,
-                                                                self.commodity_overtime))
+                                                                self.commodity_overtime),
+                                              self.__iof2Amount(self.standard_work_period,
+                                                                self.commodity_overtime)
+                    )
                     self.logger.info('Vacation date: %s', date)
                     entries.append(txn)
                 else:
@@ -375,7 +382,10 @@ class Importer(importer.ImporterProtocol):
                                                   self.__iof2Amount(0.5,
                                                                     self.commodity_vacation_day),
                                                   self.__iof2Amount(wk_period,
-                                                                    self.commodity_overtime))
+                                                                    self.commodity_overtime),
+                                                  self.__iof2Amount(wk_period_full,
+                                                                self.commodity_overtime)
+)
                         self.logger.info('Vacation date: %s', date)
                         entries.append(txn)
                     else:
