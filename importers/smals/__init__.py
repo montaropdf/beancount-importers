@@ -241,9 +241,13 @@ class Importer(importer.ImporterProtocol):
 
                 entries.append(txn)
                 units_overtime = 0
-                txn = self.__txn_worked_day_in_month(meta_w_month, date,
-                                                     self.__iof2Amount(workday_counter,
-                                                                                   self.commodity_workday))
+                txn = self.__txn_common(meta_w_month,
+                                        date,
+                                        self.account_employer_worked_day,
+                                        self.account_customer_worked_day,
+                                        self.__iof2Amount(workday_counter,
+                                                          self.commodity_workday),
+                                        self.customer)
                 self.logger.info('Number of worked day recorded at date: %s', workday_counter)
 
                 entries.append(txn)
