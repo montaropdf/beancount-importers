@@ -230,10 +230,13 @@ class Importer(importer.ImporterProtocol):
                 cur_month = month
                 cur_year = year
 
-                txn = self.__txn_overtime(meta_w_month,
-                                          date,
-                                          self.__iof2Amount(units_overtime,
-                                                                        self.commodity_overtime))
+                txn = self.__txn_common(meta_w_month,
+                                        date,
+                                        self.account_employer_overtime,
+                                        self.account_customer_overtime,
+                                        self.__iof2Amount(units_overtime,
+                                                          self.commodity_overtime),
+                                        self.customer)
                 self.logger.info('Overtime recorded at date: %s', date)
 
                 entries.append(txn)
