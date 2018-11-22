@@ -101,7 +101,7 @@ class Importer(importer.ImporterProtocol):
         
         return txn
         
-def __txn_common(self, meta, date, acc_in, acc_out, units_common, payee="", desc=""):
+    def __txn_common(self, meta, date, acc_in, acc_out, units_common, payee="", desc=""):
         """Return a transaction object for simple transactions."""
         self.logger.debug("Entering Function")
 
