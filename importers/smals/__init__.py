@@ -84,7 +84,7 @@ class Importer(importer.ImporterProtocol):
         
         self.logger.info("Object initialisation done.")
         
-    def __txn_vacation(self, meta, date, desc, units_vac, units_ovt):
+    def __txn_vacation(self, meta, date, desc, units_vac, units_ovt, price):
         """Return a holiday transaction object."""
         self.logger.debug("Entering Function")
 
@@ -92,7 +92,7 @@ class Importer(importer.ImporterProtocol):
             meta, date, "!", self.employer, desc, data.EMPTY_SET, data.EMPTY_SET, [
                 data.Posting(self.account_vacation, units_vac, None, None, None, None),
                 data.Posting(self.account_employer_vacation, -units_vac, None, None, None, None),
-                data.Posting(self.account_vacation, units_vac, None, units_ovt, "!", None),
+                data.Posting(self.account_vacation, units_vac, None, price, "!", None),
                 data.Posting(self.account_employer_overtime, -units_ovt, None, None, "!", None)
                 ])
 
