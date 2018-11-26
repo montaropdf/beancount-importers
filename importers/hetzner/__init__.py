@@ -162,7 +162,7 @@ class Importer(importer.ImporterProtocol):
         # iso_date_regex = "\d{4}-(0\d|1[0-2])-([0-2]\d|3[01])"
         iso_date_regex = "\d{4}-\d\d-\d\d"
         
-        core_filename_regex = "Hetzner-" + iso_date_regex + "-R\d{8}"
+        core_filename_regex = "Hetzner-" + iso_date_regex + "-R\d{10}"
         extension_regex = "\.csv"
         date_prefix_regex = iso_date_regex
         tag_suffix_regex = "(_.+)*"
