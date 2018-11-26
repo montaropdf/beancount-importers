@@ -24,7 +24,7 @@ from beancount.core import position
 from beancount.ingest import importer
 # from beancount.ingest import regression
 
-from utils import ifs_toAmount
+from utils import toAmount
 
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
