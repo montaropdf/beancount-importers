@@ -63,8 +63,16 @@ class Importer(importer.ImporterProtocol):
 
         return post
 
-    def __add_posting(self, txn, posting):
-        """Return the transaction with the posting added."""
+    # def __add_posting(self, txn, posting):
+    #     """Return the transaction with the posting added."""
+    #     self.logger.debug("Entering Function")
+
+
+
+    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
+    #     self.logger.debug("Leaving Function")
+        
+    #     return txn
     
     # def __txn_vacation(self, meta, date, desc, units_vac, units_ovt):
     #     """Return a holiday transaction object."""
@@ -230,11 +238,11 @@ class Importer(importer.ImporterProtocol):
             srv_id = row['srv_id']
             
             if srv_id != None:
-                servers_txn[srv_id] = {'total': 0, 'txn': None}
+                servers_txn[srv_id] = {'total': 0, 'txn': []}
                 servers_txn[srv_id]['total'] += row['price_no_vat']
 
                 amt = utils.ifs_to_Amount(row['price_no_vat'], 'EUR')
-                servers_txn[srv_id]['txn'] = self.__add_posting(servers_txn[srv_id]['txn'], self.__get_posting(self.account_assets, amt, None))
+                servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
 
 
             if cur_month == 0:
