@@ -333,12 +333,12 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Leaving Function")
         return entries
 
-def test():
-    # Create an importer instance for running the regression tests.
-    importer = Importer("EXTHR", "VACDAY", "7:36", "My Employer s.a.", "Customer s.a.",
-                        "Income:BE:Customer:HeureSup",
-                        "Assets:BE:Employer",
-                        "Assets:BE:Employer:HeureSup",
-                        "Assets:BE:Employer:JourConge",
-                        "Liability:Conge")
-    # yield from regression.compare_sample_files(importer, __file__)
+# def test():
+#     # Create an importer instance for running the regression tests.
+#     importer = Importer("EXTHR", "VACDAY", "7:36", "My Employer s.a.", "Customer s.a.",
+#                         "Income:BE:Customer:HeureSup",
+#                         "Assets:BE:Employer",
+#                         "Assets:BE:Employer:HeureSup",
+#                         "Assets:BE:Employer:JourConge",
+#                         "Liability:Conge")
+#     # yield from regression.compare_sample_files(importer, __file__)
