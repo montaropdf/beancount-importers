@@ -45,7 +45,7 @@ class Importer(importer.ImporterProtocol):
 
         self.account_liability = account_liability
         self.account_assets = account_assets
-        self.vat = 0.21
+        self.policy = policy
         
         self.logger.info("Logger Initialized")
         self.logger.debug("Input parameters:")
