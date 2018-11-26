@@ -248,7 +248,7 @@ class Importer(importer.ImporterProtocol):
             else:
                 if re.match('Server #(\d{6})', row['description']):
                     srv_id = row['description'].split(' ')[1][1:]
-                    srv_id = re.   row['description'].split(' ')[1][1:]
+                    srv_id = re.findall('Server #(\d{6})', row['description'])[0]
 
             if servers_txn.has_key(srv_id):
                 servers_txn[srv_id]['total'] += row['price_no_vat']
