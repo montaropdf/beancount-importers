@@ -160,7 +160,6 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Header file: %s", str(file.head()))
 
         iso_date_regex = "\d{4}-(0\d|1[0-2])-([0-2]\d|3[01])"
-        
         core_filename_regex = "Hetzner-" + iso_date_regex + "-R\d{10}"
         extension_regex = "\.csv"
         date_prefix_regex = iso_date_regex
