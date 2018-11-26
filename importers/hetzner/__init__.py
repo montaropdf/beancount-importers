@@ -26,7 +26,6 @@ from beancount.ingest import regression
 
 from beancount-utils.utils import ifs_toAmount
 
-
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
 
@@ -225,15 +224,15 @@ class Importer(importer.ImporterProtocol):
 
                 txn = self.__txn_overtime(meta_w_month,
                                           date,
-                                          self.__int_to_Amount(units_overtime,
-                                                               self.commodity_overtime))
+                                          ifs_to_Amount(units_overtime,
+                                                        self.commodity_overtime))
                 self.logger.info('Overtime recorded at date: %s', date)
 
                 entries.append(txn)
                 units_overtime = 0
                 txn = self.__txn_worked_day_in_month(meta_w_month, date,
-                                                     self.__int_to_Amount(workday_counter,
-                                                                          self.commodity_workday))
+                                                     ifs_to_Amount(workday_counter,
+                                                                   self.commodity_workday))
                 self.logger.info('Number of worked day recorded at date: %s', workday_counter)
 
                 entries.append(txn)
@@ -319,15 +318,15 @@ class Importer(importer.ImporterProtocol):
         meta_w_month['worked_period'] = "{}-{}".format(cur_year, cur_month)
         txn = self.__txn_overtime(meta_w_month,
                                   date,
-                                  self.__int_to_Amount(units_overtime,
-                                                       self.commodity_overtime))
+                                  ifs_to_Amount(units_overtime,
+                                                self.commodity_overtime))
         self.logger.info('Overtime recorded at date: %s', date)
         entries.append(txn)
 
         txn = self.__txn_worked_day_in_month(meta_w_month,
                                              date,
-                                             self.__int_to_Amount(workday_counter,
-                                                                  self.commodity_workday))
+                                             ifs_to_Amount(workday_counter,
+                                                           self.commodity_workday))
         self.logger.info('Number of worked days recorded at date: %s', workday_counter)
         entries.append(txn)
 
