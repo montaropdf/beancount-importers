@@ -20,9 +20,9 @@ from beancount.core import data
 from beancount.core import account
 from beancount.core import amount
 from beancount.core import position
-from beancount.core import inventory
+# from beancount.core import inventory
 from beancount.ingest import importer
-from beancount.ingest import regression
+# from beancount.ingest import regression
 
 from utils import ifs_toAmount
 
