@@ -24,6 +24,9 @@ from beancount.core import inventory
 from beancount.ingest import importer
 from beancount.ingest import regression
 
+from beancount-utils.utils import ifs_toAmount
+
+
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
 
@@ -96,15 +99,15 @@ class Importer(importer.ImporterProtocol):
         
     #     return txn
 
-    def __int_to_Amount(self, value, commodity):
-        """Convert a value as a int to an Amount object."""
-        self.logger.debug("Entering Function")
-        atr = decimal.Decimal(value)
-        atr = amount.Amount(atr, commodity)
-        self.logger.debug("Amount to return: %s", atr)
-        self.logger.debug("Leaving Function")
+    # def __int_to_Amount(self, value, commodity):
+    #     """Convert a value as a int to an Amount object."""
+    #     self.logger.debug("Entering Function")
+    #     atr = decimal.Decimal(value)
+    #     atr = amount.Amount(atr, commodity)
+    #     self.logger.debug("Amount to return: %s", atr)
+    #     self.logger.debug("Leaving Function")
 
-        return atr
+    #     return atr
 
     # def __str_time_to_minutes(self, time_as_str_or_tuple):
     #     """Convert a time period expressed as a string into a number of minutes as an int."""
