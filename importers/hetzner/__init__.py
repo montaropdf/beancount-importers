@@ -32,7 +32,8 @@ class Importer(importer.ImporterProtocol):
 
     def __init__(self,
                  account_liability,
-                 account_assets):
+                 account_assets,
+                 policy):
 
         self.logger = logging.Logger("hetzner", logging.DEBUG)
 
