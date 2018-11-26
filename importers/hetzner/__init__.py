@@ -260,7 +260,7 @@ class Importer(importer.ImporterProtocol):
 
 
 
-        for keys in enumerate(servers_txn):
+        for txn in enumerate(servers_txn):
             
 
             if cur_month == 0:
