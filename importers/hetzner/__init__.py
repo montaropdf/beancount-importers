@@ -247,7 +247,7 @@ class Importer(importer.ImporterProtocol):
                 # servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
             else:
                 if re.match('Server #(\d{6})', row['description']):
-                    srv_id = row['description'].split(' ')[1][1:]
+                    # srv_id = row['description'].split(' ')[1][1:]
                     srv_id = re.findall('Server #(\d{6})', row['description'])[0]
 
             if servers_txn.has_key(srv_id):
