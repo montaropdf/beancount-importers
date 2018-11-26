@@ -51,6 +51,7 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Input parameters:")
         self.logger.debug("Liability account: %s", self.account_liability)
         self.logger.debug("Assets account: %s", self.account_assets)
+        self.logger.debug("Policies: %s", str(self.policy))
         
         self.logger.info("Object initialisation done.")
 
