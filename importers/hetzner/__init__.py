@@ -51,6 +51,10 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Assets account: %s", self.account_assets)
         
         self.logger.info("Object initialisation done.")
+
+    def __get_posting(self, account, amount1, amount2=None):
+        """Return a posting object."""
+        return data.Posting(account, amount1, None, amount2, "!", None)
         
     # def __txn_vacation(self, meta, date, desc, units_vac, units_ovt):
     #     """Return a holiday transaction object."""
@@ -199,6 +203,8 @@ class Importer(importer.ImporterProtocol):
         entries = []
         index = 0
 
+        servers_txn = {}
+
         csvDialect = csv.excel();
         csvDialect.delimiter = ';'
         
@@ -211,7 +217,16 @@ class Importer(importer.ImporterProtocol):
             year, month, day = row['date_start'].split('-')
             self.logger.debug("Year: %s", year)
             self.logger.debug("Month: %s", month)
+            srv_id = row['srv_id']
+            
+            if srv_id != None:
+                servers_txn[srv_id] = {'total': 0, txn: None}
+                servers_txn[srv_id]['total'] += 
 
+
+
+
+            
             if cur_month == 0:
                 cur_month = month
             if cur_year == 0:
