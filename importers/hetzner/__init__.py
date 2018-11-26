@@ -239,15 +239,16 @@ class Importer(importer.ImporterProtocol):
             
             if srv_id != None:
                 servers_txn[srv_id] = {'total': 0, 'txn': []}
+                # servers_txn[srv_id]['total'] += row['price_no_vat']
+                # amt = utils.ifs_to_Amount(row['price_no_vat'], 'EUR')
+                # servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
+            else:
+                srv_id = row['description'].split(' ')[1]
+
+            if servers_txn.has_key(srv_id):
                 servers_txn[srv_id]['total'] += row['price_no_vat']
                 amt = utils.ifs_to_Amount(row['price_no_vat'], 'EUR')
                 servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
-            else:
-                srv_id = row['description'].split(' ')[1]
-                if servers_txn.has_key(srv_id):
-                    servers_txn[srv_id]['total'] += row['price_no_vat']
-                    amt = utils.ifs_to_Amount(row['price_no_vat'], 'EUR')
-                    servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
                     
 
             if cur_month == 0:
