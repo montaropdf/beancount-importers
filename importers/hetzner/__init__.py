@@ -229,7 +229,7 @@ class Importer(importer.ImporterProtocol):
             if srv_id != None:
                 servers_txn[srv_id] = {'total': 0, 'txn': None}
                 servers_txn[srv_id]['total'] += row['price_no_vat']
-                servers_txn[srv_id]['txn'] = self.__add_posting(servers_txn[srv_id]['txn'], self.__get_posting(self.account_assets))
+                servers_txn[srv_id]['txn'] = self.__add_posting(servers_txn[srv_id]['txn'], self.__get_posting(self.account_assets, row['price_no_vat'], None))
 
 
 
