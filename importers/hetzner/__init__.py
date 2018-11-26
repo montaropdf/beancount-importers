@@ -43,7 +43,8 @@ class Importer(importer.ImporterProtocol):
 
         self.account_liability = account_liability
         self.account_assets = account_assets
-
+        self.vat = 0.21
+        
         self.logger.info("Logger Initialized")
         self.logger.debug("Input parameters:")
         self.logger.debug("Liability account: %s", self.account_liability)
@@ -204,9 +205,10 @@ class Importer(importer.ImporterProtocol):
         for index, row in enumerate(csv.DictReader(open(file.name), fieldnames=['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id'], dialect=csvDialect)):
             self.logger.debug('Data in row: %s', str(row))
             meta = data.new_metadata(file.name, index)
-            meta_w_month = data.new_metadata(file.name, index)
-            date = datetime.datetime.strptime(row['date_start'], '%Y-%m-%d').date()
-            year, month, day = row['DATE'].split('-')
+            # meta_w_month = data.new_metadata(file.name, index)
+            date_start = datetime.datetime.strptime(row['date_start'], '%Y-%m-%d').date()
+            date_end = datetime.datetime.strptime(row['date_end'], '%Y-%m-%d').date()
+            year, month, day = row['date_start'].split('-')
             self.logger.debug("Year: %s", year)
             self.logger.debug("Month: %s", month)
 
