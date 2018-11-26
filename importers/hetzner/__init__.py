@@ -243,7 +243,7 @@ class Importer(importer.ImporterProtocol):
             if srv_id != None:
                 servers_txn[srv_id] = {'total': 0, 'txn': []}
                 # servers_txn[srv_id]['total'] += row['price_no_vat']
-                # amt = utils.ifs_to_Amount(row['price_no_vat'], 'EUR')
+                # amt = utils.toAmount(row['price_no_vat'], 'EUR')
                 # servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
             else:
                 if re.match('Server #\d{6}', row['description']):
@@ -252,7 +252,7 @@ class Importer(importer.ImporterProtocol):
 
             if servers_txn.has_key(srv_id):
                 servers_txn[srv_id]['total'] += row['price_no_vat']
-                amt = utils.ifs_to_Amount(row['price_no_vat'], 'EUR')
+                amt = utils.toAmount(row['price_no_vat'], 'EUR')
                 servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
 
 
@@ -274,14 +274,14 @@ class Importer(importer.ImporterProtocol):
 
                 txn = self.__txn_overtime(meta_w_month,
                                           date,
-                                          ifs_to_Amount(units_overtime,
+                                          toAmount(units_overtime,
                                                         self.commodity_overtime))
                 self.logger.info('Overtime recorded at date: %s', date)
 
                 entries.append(txn)
                 units_overtime = 0
                 txn = self.__txn_worked_day_in_month(meta_w_month, date,
-                                                     ifs_to_Amount(workday_counter,
+                                                     toAmount(workday_counter,
                                                                    self.commodity_workday))
                 self.logger.info('Number of worked day recorded at date: %s', workday_counter)
 
@@ -368,14 +368,14 @@ class Importer(importer.ImporterProtocol):
         meta_w_month['worked_period'] = "{}-{}".format(cur_year, cur_month)
         txn = self.__txn_overtime(meta_w_month,
                                   date,
-                                  ifs_to_Amount(units_overtime,
+                                  toAmount(units_overtime,
                                                 self.commodity_overtime))
         self.logger.info('Overtime recorded at date: %s', date)
         entries.append(txn)
 
         txn = self.__txn_worked_day_in_month(meta_w_month,
                                              date,
-                                             ifs_to_Amount(workday_counter,
+                                             toAmount(workday_counter,
                                                            self.commodity_workday))
         self.logger.info('Number of worked days recorded at date: %s', workday_counter)
         entries.append(txn)
