@@ -54,7 +54,13 @@ class Importer(importer.ImporterProtocol):
 
     def __get_posting(self, account, amount1, amount2=None):
         """Return a posting object."""
-        return data.Posting(account, amount1, None, amount2, "!", None)
+        self.logger.debug("Entering Function")
+
+        post = data.Posting(account, amount1, None, amount2, "!", None)
+        self.logger.debug('Posting to be returned: %s', str(post))
+        self.logger.debug("Leaving Function")
+
+        return post
         
     # def __txn_vacation(self, meta, date, desc, units_vac, units_ovt):
     #     """Return a holiday transaction object."""
