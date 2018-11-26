@@ -62,7 +62,9 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Leaving Function")
 
         return post
-        
+
+    def __add_posting
+    
     # def __txn_vacation(self, meta, date, desc, units_vac, units_ovt):
     #     """Return a holiday transaction object."""
     #     self.logger.debug("Entering Function")
