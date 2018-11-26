@@ -231,13 +231,9 @@ class Importer(importer.ImporterProtocol):
                 servers_txn[srv_id]['total'] += row['price_no_vat']
 
                 amt = utils.ifs_to_Amount(row['price_no_vat'], 'EUR')
-                
                 servers_txn[srv_id]['txn'] = self.__add_posting(servers_txn[srv_id]['txn'], self.__get_posting(self.account_assets, amt, None))
 
 
-
-
-            
             if cur_month == 0:
                 cur_month = month
             if cur_year == 0:
