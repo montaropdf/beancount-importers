@@ -24,7 +24,7 @@ from beancount.core import position
 from beancount.ingest import importer
 # from beancount.ingest import regression
 
-from utils import toAmount
+from utils import toAmount, VAT, EnumPosting
 from policy import HetznerPolicy
 
 class Importer(importer.ImporterProtocol):
