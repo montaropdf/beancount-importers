@@ -63,7 +63,8 @@ class Importer(importer.ImporterProtocol):
 
         return post
 
-    def __add_posting
+    def __add_posting(self, txn, posting):
+        """Return the transaction with the posting added."""
     
     # def __txn_vacation(self, meta, date, desc, units_vac, units_ovt):
     #     """Return a holiday transaction object."""
