@@ -167,6 +167,8 @@ class Importer(importer.ImporterProtocol):
         date_prefix_regex = iso_date_regex
         tag_suffix_regex = "(_.+)*"
 
+        self.logger.info("core_filename_regex: %s", core_filename_regex)
+
         matching_result = ((re.match(r"{}{}".format(core_filename_regex, extension_regex), path.basename(file.name))
                             or re.match(r"{}_{}{}{}".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name))))
 
