@@ -256,8 +256,15 @@ class Importer(importer.ImporterProtocol):
                     servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
 
         if self.policy.posting_policy in [utils.EnumPosting.MULTI, utils.EnumPosting.SINGLE]:
-            for srv_id, txn in servers_txn.items():
-                
+            for srv_id, postings in servers_txn.items():
+                if self.policy.posting_policy == utils.EnumPosting.SINGLE:
+                    txn = self.__get_transaction(postings['total'], srv_id)
+                else:
+                    txn = self.__get_transaction(postings['total'], srv_id, postings['txn'])
+                    
+
+
+                entries.append(txn)
             
 
             if cur_month == 0:
