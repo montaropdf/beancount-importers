@@ -19,6 +19,32 @@ from beancount.ingest import importer
 from utils import toAmount, VAT, EnumPosting
 from importers.hetzner.policy import HetznerPolicy
 
+
+class InvoiceFileDefinition():
+    """A class that define the input file and provides all the facilities to read it."""
+    def __init__(self, logger):
+        self.logger = logger
+        self.logger.debug("Entering Function")
+
+        iso_date_regex = "\d{4}-(0\d|1[0-2])-([0-2]\d|3[01])"
+        core_filename_regex = "Hetzner-" + iso_date_regex + "-R\d{10}"
+        extension_regex = "\.csv"
+        date_prefix_regex = iso_date_regex
+        tag_suffix_regex = "(_.+)*"
+
+        self.logger.debug("core_filename_regex: %s", core_filename_regex)
+
+        csvDialect = csv.excel()
+        csvDialect.delimiter = ','
+        fieldname_list = ['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id']
+
+    def get_Reader(self):
+        self.logger.debug("Entering Function")
+
+        csv.DictReader(open(file.name), fieldnames=self.fieldname_list, dialect=csvDialect)
+        
+        
+
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
 
@@ -77,7 +103,6 @@ class Importer(importer.ImporterProtocol):
         if self.policy.posting_policy in [utils.EnumPosting.MULTI, utils.EnumPosting.SINGLE]:
             postings.append(self.__get_posting(self.account_assets, -vat))
             
-        
         desc = "Renting of server {} for the period {} to {}".format(srv_id_tag, date_start, date_end)
         txn =  data.Transaction(
             meta, date, self.FLAG, "Hetzner", desc, data.EMPTY_SET, data.EMPTY_SET, posting_list)
@@ -87,96 +112,6 @@ class Importer(importer.ImporterProtocol):
         
         return txn
 
-
-    
-    # def __add_posting(self, txn, posting):
-    #     """Return the transaction with the posting added."""
-    #     self.logger.debug("Entering Function")
-
-
-
-    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
-    #     self.logger.debug("Leaving Function")
-        
-    #     return txn
-    
-    # def __txn_vacation(self, meta, date, desc, units_vac, units_ovt):
-    #     """Return a holiday transaction object."""
-    #     self.logger.debug("Entering Function")
-
-    #     txn =  data.Transaction(
-    #         meta, date, "!", self.employer, desc, data.EMPTY_SET, data.EMPTY_SET, [
-    #             data.Posting(self.account_vacation, units_vac, None, None, None, None),
-    #             data.Posting(self.account_employer_vacation, -units_vac, None, None, None, None),
-    #             data.Posting(self.account_vacation, units_vac, None, units_ovt, "!", None),
-    #             data.Posting(self.account_employer_overtime, -units_ovt, None, None, "!", None)
-    #             ])
-
-    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
-    #     self.logger.debug("Leaving Function")
-        
-    #     return txn
-        
-    # def __txn_overtime(self, meta, date, units_ovt):
-    #     """Return an overtime transaction object."""
-    #     self.logger.debug("Entering Function")
-
-    #     txn =  data.Transaction(
-    #         meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-    #             data.Posting(self.account_employer_overtime, units_ovt, None, None, None, None),
-    #             data.Posting(self.account_customer_overtime, -units_ovt, None, None, None, None)
-    #             ])
-
-    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
-    #     self.logger.debug("Leaving Function")
-        
-    #     return txn
-
-    # def __txn_worked_day_in_month(self, meta, date, units_wk_dt):
-    #     """Return an overtime transaction object."""
-    #     self.logger.debug("Entering Function")
-
-    #     txn =  data.Transaction(
-    #         meta, date, self.FLAG, self.customer, None, data.EMPTY_SET, data.EMPTY_SET, [
-    #             data.Posting(self.account_employer_worked_day, units_wk_dt, None, None, None, None),
-    #             data.Posting(self.account_customer_worked_day, -units_wk_dt, None, None, None, None)
-    #             ])
-
-    #     self.logger.debug('Transaction to be recorded: %s', str(txn))
-    #     self.logger.debug("Leaving Function")
-        
-    #     return txn
-
-    # def __int_to_Amount(self, value, commodity):
-    #     """Convert a value as a int to an Amount object."""
-    #     self.logger.debug("Entering Function")
-    #     atr = decimal.Decimal(value)
-    #     atr = amount.Amount(atr, commodity)
-    #     self.logger.debug("Amount to return: %s", atr)
-    #     self.logger.debug("Leaving Function")
-
-    #     return atr
-
-    # def __str_time_to_minutes(self, time_as_str_or_tuple):
-    #     """Convert a time period expressed as a string into a number of minutes as an int."""
-    #     self.logger.debug("Entering Function")
-
-    #     self.logger.debug("Parameter to transform: '%s'", time_as_str_or_tuple)
-    #     self.logger.debug("Parameter type: %s", type(time_as_str_or_tuple))
-
-    #     if type(time_as_str_or_tuple) == str:
-    #         self.logger.debug("Is it in [H]H:MM format: %s", re.fullmatch("^[0-9]{1,2}:[0-5][0-9]$", time_as_str_or_tuple))
-    #         if re.fullmatch("^[0-9]{1,2}:[0-5][0-9]$", time_as_str_or_tuple) != None:
-    #             time_as_tuple = (int(time_as_str_or_tuple.split(':')[0]), int(time_as_str_or_tuple.split(':')[1]))
-    #         else:
-    #             raise ValueError("Parameter was not a string  of the form [H]H:MM: {}".format(time_as_str_or_tuple))
-    #     elif type(time_as_str_or_tuple) == tuple and len(time_as_str_or_tuple) == 2 and type(time_as_str_or_tuple[0]) == int and type(time_as_str_or_tuple[1]):
-    #         time_as_tuple = time_as_str_or_tuple
-    #     else:
-    #         raise ValueError("Parameter was not a string or a tuple of 2 elements")
-
-    #     return (time_as_tuple[0] * 60) + time_as_tuple[1]
-    
     def identify(self, file):
         # Match if the filename is as downloaded and the header has the unique
         # fields combination we're looking for.
@@ -185,13 +120,13 @@ class Importer(importer.ImporterProtocol):
         self.logger.info("File to analyse: %s", str(file))
         self.logger.debug("Header file: %s", str(file.head()))
 
-        iso_date_regex = "\d{4}-(0\d|1[0-2])-([0-2]\d|3[01])"
-        core_filename_regex = "Hetzner-" + iso_date_regex + "-R\d{10}"
-        extension_regex = "\.csv"
-        date_prefix_regex = iso_date_regex
-        tag_suffix_regex = "(_.+)*"
+        # iso_date_regex = "\d{4}-(0\d|1[0-2])-([0-2]\d|3[01])"
+        # core_filename_regex = "Hetzner-" + iso_date_regex + "-R\d{10}"
+        # extension_regex = "\.csv"
+        # date_prefix_regex = iso_date_regex
+        # tag_suffix_regex = "(_.+)*"
 
-        self.logger.debug("core_filename_regex: %s", core_filename_regex)
+        # self.logger.debug("core_filename_regex: %s", core_filename_regex)
 
         matching_result = ((re.match(r"{}{}".format(core_filename_regex, extension_regex), path.basename(file.name))
                             or re.match(r"{}_{}{}{}".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name))))
