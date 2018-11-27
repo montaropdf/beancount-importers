@@ -66,6 +66,28 @@ class Importer(importer.ImporterProtocol):
 
         return post
 
+    def __get_transaction(self, meta, date, total, srv_id_tag, posting_list=None):
+        """Return a transaction object for a server."""
+        self.logger.debug("Entering Function")
+
+        postings = []
+        if posting_list == None:
+            postings.append(self.__get_posting(self.account_liability, total))
+            postings.append(self.__get_posting(self.account_assets, -total))
+        else:
+            postings.append(self.__get_posting(self.account_liability, total))
+            postings += posting_list
+        
+        txn =  data.Transaction(
+            meta, date, self.FLAG, "Hetzner", None, data.EMPTY_SET, data.EMPTY_SET, posting_list)
+
+        self.logger.debug('Transaction to be recorded: %s', str(txn))
+        self.logger.debug("Leaving Function")
+        
+        return txn
+
+
+    
     # def __add_posting(self, txn, posting):
     #     """Return the transaction with the posting added."""
     #     self.logger.debug("Entering Function")
