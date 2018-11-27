@@ -39,7 +39,7 @@ class InvoiceFileDefinition():
         csvDialect.delimiter = ','
         fieldname_list = ['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id']
 
-        self.logger.debug("Leaving Function")
+        self.logger.info("Object initialisation done.")
 
     def get_Reader(self):
         self.logger.debug("Entering Function")
