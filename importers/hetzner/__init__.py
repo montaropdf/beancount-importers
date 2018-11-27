@@ -17,7 +17,7 @@ from beancount.core import position
 from beancount.ingest import importer
 
 from utils import toAmount, VAT, EnumPosting
-from policy import HetznerPolicy
+from importers.hetzner.policy import HetznerPolicy
 
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
