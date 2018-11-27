@@ -83,7 +83,7 @@ class Importer(importer.ImporterProtocol):
             postings += posting_list
 
         if self.policy.posting_policy in [utils.EnumPosting.MULTI, utils.EnumPosting.SINGLE]:
-            postings.append(self.__get_posting(self.account_liability, vat))
+            postings.append(self.__get_posting(self.account_assets, -vat))
             
         
         desc = "Renting of server {} for the period {} to {}".format(srv_id_tag, date_start, date_end)
