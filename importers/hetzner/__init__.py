@@ -261,9 +261,7 @@ class Importer(importer.ImporterProtocol):
                     txn = self.__get_transaction(postings['total'], srv_id)
                 else:
                     txn = self.__get_transaction(postings['total'], srv_id, postings['txn'])
-                    
-
-
+            
                 entries.append(txn)
             
 
