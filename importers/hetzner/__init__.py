@@ -245,16 +245,13 @@ class Importer(importer.ImporterProtocol):
             
             if srv_id != None:
                 servers_txn[srv_id] = {'total': 0, 'txn': []}
-                # servers_txn[srv_id]['total'] += row['price_no_vat']
-                # amt = utils.toAmount(row['price_no_vat'], 'EUR')
-                # servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
             else:
                 if re.match('Server #\d{6}', row['description']):
                     # srv_id = row['description'].split(' ')[1][1:]
                     srv_id = re.findall('Server #(\d{6})', row['description'])[0]
 
             if servers_txn.has_key(srv_id):
-                servers_txn[srv_id]['total'] += row['price_no_vat']
+                servers_txn[srv_id]['total'] += (float(row['price_no_vat']) * float(row['qty']))
                 amt = utils.toAmount(row['price_no_vat'], 'EUR')
                 servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
 
