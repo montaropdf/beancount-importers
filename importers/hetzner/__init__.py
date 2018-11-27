@@ -203,6 +203,8 @@ class Importer(importer.ImporterProtocol):
             csvDialect.delimiter = ','
 
             for index, row in enumerate(csv.DictReader(open(file.name), dialect=csvDialect)):
+                self.logger.debug("Row content: %s", str(row))
+                self.logger.debug("Row length: %d", len(row))
                 if len(row) != 8:
                     matching_result = False
                     break
