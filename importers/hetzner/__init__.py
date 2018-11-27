@@ -247,18 +247,17 @@ class Importer(importer.ImporterProtocol):
                 servers_txn[srv_id] = {'total': 0, 'txn': []}
             else:
                 if re.match('Server #\d{6}', row['description']):
-                    # srv_id = row['description'].split(' ')[1][1:]
                     srv_id = re.findall('Server #(\d{6})', row['description'])[0]
 
             if servers_txn.has_key(srv_id):
                 servers_txn[srv_id]['total'] += (float(row['price_no_vat']) * float(row['qty']))
-                if self.policy.polsting_policy == utils.EnumPosting.MULTI:
+                if self.policy.posting_policy == utils.EnumPosting.MULTI:
                     amt = utils.toAmount(row['price_no_vat'], 'EUR')
                     servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
 
-
-
-        for txn in enumerate(servers_txn):
+        if self.policy.posting_policy in [utils.EnumPosting.MULTI, utils.EnumPosting.SINGLE]:
+            for srv_id, txn in servers_txn.items():
+                
             
 
             if cur_month == 0:
