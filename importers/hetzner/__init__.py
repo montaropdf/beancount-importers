@@ -283,7 +283,7 @@ class Importer(importer.ImporterProtocol):
             if servers_txn.has_key(srv_id):
                 servers_txn[srv_id]['total'] += (float(row['price_no_vat']) * float(row['qty']))
                 if self.policy.posting_policy == utils.EnumPosting.MULTI:
-                    amt = utils.toAmount(row['price_no_vat'], 'EUR')
+                    amt = utils.toAmount(-row['price_no_vat'], 'EUR')
                     servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
 
         if self.policy.posting_policy in [utils.EnumPosting.MULTI, utils.EnumPosting.SINGLE]:
