@@ -127,16 +127,16 @@ class Importer(importer.ImporterProtocol):
         self.logger.info("File to analyse: %s", str(file))
         self.logger.debug("Header file: %s", str(file.head()))
 
-        # iso_date_regex = "\d{4}-(0\d|1[0-2])-([0-2]\d|3[01])"
-        # core_filename_regex = "Hetzner-" + iso_date_regex + "-R\d{10}"
+        # iso_date_regex = self.inputFile.iso_date_regex
+        # core_filename_regex = self.inputFile.core_filename_regex
         # extension_regex = "\.csv"
         # date_prefix_regex = iso_date_regex
         # tag_suffix_regex = "(_.+)*"
 
         # self.logger.debug("core_filename_regex: %s", core_filename_regex)
 
-        matching_result = ((re.match(r"{}{}".format(core_filename_regex, extension_regex), path.basename(file.name))
-                            or re.match(r"{}_{}{}{}".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name))))
+        matching_result = ((re.match(r"{}{}".format(self.inputFile.core_filename_regex, self.inputFile.extension_regex), path.basename(file.name))
+                            or re.match(r"{}_{}{}{}".format(self.inputFile.date_prefix_regex, self.inputFile.core_filename_regex, self.inputFile.tag_suffix_regex, self.inputFile.extension_regex), path.basename(file.name))))
 
         self.logger.info("Identification result: %s", str(matching_result))
 
