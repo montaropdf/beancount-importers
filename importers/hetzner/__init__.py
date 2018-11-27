@@ -141,10 +141,11 @@ class Importer(importer.ImporterProtocol):
         self.logger.info("Identification result: %s", str(matching_result))
 
         if matching_result:
-            csvDialect = csv.excel();
-            csvDialect.delimiter = ','
+            # csvDialect = csv.excel();
+            # csvDialect.delimiter = ','
 
-            for index, row in enumerate(csv.DictReader(open(file.name), fieldnames=['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id'], dialect=csvDialect)):
+            # for index, row in enumerate(csv.DictReader(open(file.name), fieldnames=['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id'], dialect=csvDialect)):
+            for index, row in enumerate(self.inputFile.get_Reader()):
                 self.logger.debug("Row content: %s", str(row))
                 self.logger.debug("Row length: %d", len(row))
                 if len(row) != 8:
