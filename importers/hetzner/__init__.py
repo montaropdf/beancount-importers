@@ -66,7 +66,7 @@ class Importer(importer.ImporterProtocol):
 
         return post
 
-    def __get_transaction(self, meta, date, total, srv_id_tag, posting_list=None):
+    def __get_transaction(self, meta, date, date_start, date_end, total, srv_id_tag, posting_list=None):
         """Return a transaction object for a server."""
         self.logger.debug("Entering Function")
 
@@ -77,9 +77,11 @@ class Importer(importer.ImporterProtocol):
         else:
             postings.append(self.__get_posting(self.account_liability, total))
             postings += posting_list
-        
+
+        desc = "Renting of server {} for the period {} to {}".format(srv_id_tag, date_start, date_end)
+            
         txn =  data.Transaction(
-            meta, date, self.FLAG, "Hetzner", None, data.EMPTY_SET, data.EMPTY_SET, posting_list)
+            meta, date, self.FLAG, "Hetzner", desc, data.EMPTY_SET, data.EMPTY_SET, posting_list)
 
         self.logger.debug('Transaction to be recorded: %s', str(txn))
         self.logger.debug("Leaving Function")
