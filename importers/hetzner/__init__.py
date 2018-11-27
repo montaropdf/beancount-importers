@@ -70,16 +70,23 @@ class Importer(importer.ImporterProtocol):
         """Return a transaction object for a server."""
         self.logger.debug("Entering Function")
 
+        vat = ((total / 100) * self.policy.vat_value)
         postings = []
         if posting_list == None:
             postings.append(self.__get_posting(self.account_liability, total))
             postings.append(self.__get_posting(self.account_assets, -total))
         else:
-            postings.append(self.__get_posting(self.account_liability, total))
+            if self.policy.posting_policy == utils.EnumPosting.SINGLE_INCLUDE_VAT:
+                postings.append(self.__get_posting(self.account_liability, total + vat))
+            else:
+                postings.append(self.__get_posting(self.account_liability, total))
             postings += posting_list
 
-        desc = "Renting of server {} for the period {} to {}".format(srv_id_tag, date_start, date_end)
+        if self.policy.posting_policy in [utils.EnumPosting.MULTI, utils.EnumPosting.SINGLE]:
+            postings.append(self.__get_posting(self.account_liability, vat)
             
+        
+        desc = "Renting of server {} for the period {} to {}".format(srv_id_tag, date_start, date_end)
         txn =  data.Transaction(
             meta, date, self.FLAG, "Hetzner", desc, data.EMPTY_SET, data.EMPTY_SET, posting_list)
 
