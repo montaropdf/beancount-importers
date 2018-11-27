@@ -279,7 +279,6 @@ class Importer(importer.ImporterProtocol):
                     amt = utils.toAmount(row['price_no_vat'], 'EUR')
                     servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
 
-                    
         if self.policy.posting_policy in [utils.EnumPosting.MULTI, utils.EnumPosting.SINGLE]:
             for srv_id, postings in servers_txn.items():
                 if self.policy.posting_policy == utils.EnumPosting.SINGLE:
