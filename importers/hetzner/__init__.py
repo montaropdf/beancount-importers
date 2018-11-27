@@ -171,10 +171,12 @@ class Importer(importer.ImporterProtocol):
         # Extract the statement date from the filename.
         self.logger.debug("Entering Function")
 
-        core_filename_regex = "Hetzner-\d\d\d\d-\d\d-\d\d-R\d{10}"
-        extension_regex = "\.csv"
-        date_prefix_regex = "\d\d\d\d-\d\d-\d\d"
-        tag_suffix_regex = "(_.+)*"
+        # core_filename_regex = "Hetzner-\d\d\d\d-\d\d-\d\d-R\d{10}"
+        # extension_regex = "\.csv"
+        # date_prefix_regex = "\d\d\d\d-\d\d-\d\d"
+        # tag_suffix_regex = "(_.+)*"
+        matching_result = ((re.match(r"{}{}".format(self.inputFile.core_filename_regex, self.inputFile.extension_regex), path.basename(file.name))
+                            or re.match(r"{}_{}{}{}".format(self.inputFile.date_prefix_regex, self.inputFile.core_filename_regex, self.inputFile.tag_suffix_regex, self.inputFile.extension_regex), path.basename(file.name))))
 
         if re.match(r"{}{}".format(core_filename_regex, extension_regex), path.basename(file.name)):
             filedate = datetime.datetime.strptime(path.basename(file.name),
