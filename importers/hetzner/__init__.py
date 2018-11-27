@@ -70,6 +70,7 @@ class Importer(importer.ImporterProtocol):
         self.account_liability = account_liability
         self.account_assets = account_assets
         self.policy = policy
+        self.inputFile = InvoiceFileDefinition(self.logger)
         
         self.logger.info("Logger Initialized")
         self.logger.debug("Input parameters:")
