@@ -266,7 +266,6 @@ class Importer(importer.ImporterProtocol):
         for index, row in enumerate(csv.DictReader(open(file.name), fieldnames=['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id'], dialect=csvDialect)):
             self.logger.debug('Data in row: %s', str(row))
             meta = data.new_metadata(file.name, index)
-            # meta_w_month = data.new_metadata(file.name, index)
             meta['start_period'] = row['date_start']
             meta['end_period'] = row['date_end']
             srv_id = row['srv_id']
