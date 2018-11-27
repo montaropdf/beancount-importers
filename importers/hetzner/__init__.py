@@ -24,6 +24,7 @@ class InvoiceFileDefinition():
     """A class that define the input file and provides all the facilities to read it."""
     def __init__(self, logger):
         self.logger = logger
+
         self.logger.debug("Entering Function")
 
         iso_date_regex = "\d{4}-(0\d|1[0-2])-([0-2]\d|3[01])"
@@ -38,11 +39,16 @@ class InvoiceFileDefinition():
         csvDialect.delimiter = ','
         fieldname_list = ['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id']
 
+        self.logger.debug("Leaving Function")
+
     def get_Reader(self):
         self.logger.debug("Entering Function")
 
-        csv.DictReader(open(file.name), fieldnames=self.fieldname_list, dialect=csvDialect)
-        
+        reader = csv.DictReader(open(file.name), fieldnames=self.fieldname_list, dialect=csvDialect)
+
+        self.logger.debug("Leaving Function")
+
+        return reader
         
 
 class Importer(importer.ImporterProtocol):
