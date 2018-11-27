@@ -267,11 +267,8 @@ class Importer(importer.ImporterProtocol):
             self.logger.debug('Data in row: %s', str(row))
             meta = data.new_metadata(file.name, index)
             # meta_w_month = data.new_metadata(file.name, index)
-            date_start = datetime.datetime.strptime(row['date_start'], '%Y-%m-%d').date()
-            date_end = datetime.datetime.strptime(row['date_end'], '%Y-%m-%d').date()
-            year, month, day = row['date_start'].split('-')
-            self.logger.debug("Year: %s", year)
-            self.logger.debug("Month: %s", month)
+            meta_w_month['start_period'] = row['date_start']
+            meta_w_month['end_period'] = row['date_end']
             srv_id = row['srv_id']
             
             if srv_id != None:
