@@ -25,7 +25,7 @@ from beancount.ingest import importer
 # from beancount.ingest import regression
 
 from utils import toAmount, VAT, EnumPosting
-from importer import HetznerPolicy
+from hetzner import HetznerPolicy
 
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
