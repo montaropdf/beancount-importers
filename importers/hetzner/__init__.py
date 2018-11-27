@@ -255,7 +255,7 @@ class Importer(importer.ImporterProtocol):
         servers_txn = {}
 
         csvDialect = csv.excel();
-        csvDialect.delimiter = ';'
+        csvDialect.delimiter = ','
         
         for index, row in enumerate(csv.DictReader(open(file.name), fieldnames=['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id'], dialect=csvDialect)):
             self.logger.debug('Data in row: %s', str(row))
