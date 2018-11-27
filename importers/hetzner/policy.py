@@ -15,7 +15,7 @@ class HetznerPolicy(utils.Policy):
         self.vat_value = vat_value
         self.validate()
 
-    def validate():
+    def validate(self):
         if not isinstance(self.posting_policy, utils.EnumPosting):
             raise TypeError
 
