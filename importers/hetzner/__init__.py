@@ -20,7 +20,7 @@ from utils import toAmount, VatBelgiumEnum, PostingPolicyEnum
 from importers.hetzner.policy import HetznerPolicy
 
 
-class InvoiceFileDefinition():
+class InvoiceCsvFileDefinition():
     """A class that define the input file and provides all the facilities to read it."""
     def __init__(self, logger):
         self.logger = logger
@@ -70,7 +70,7 @@ class Importer(importer.ImporterProtocol):
         self.account_liability = account_liability
         self.account_assets = account_assets
         self.policy = policy
-        self.inputFile = InvoiceFileDefinition(self.logger)
+        self.inputFile = InvoiceCsvFileDefinition(self.logger)
         
         self.logger.info("Logger Initialized")
         self.logger.debug("Input parameters:")
