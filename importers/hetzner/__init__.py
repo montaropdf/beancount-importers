@@ -16,7 +16,7 @@ from beancount.core import amount
 from beancount.core import position
 from beancount.ingest import importer
 
-from utils import toAmount, VAT, EnumPosting
+from utils import toAmount, VatBelgiumEnum, PostingPolicyEnum
 from importers.hetzner.policy import HetznerPolicy
 
 
@@ -101,13 +101,13 @@ class Importer(importer.ImporterProtocol):
             postings.append(self.__get_posting(self.account_liability, total))
             postings.append(self.__get_posting(self.account_assets, -total))
         else:
-            if self.policy.posting_policy == utils.EnumPosting.SINGLE_INCLUDE_VAT:
+            if self.policy.posting_policy == utils.PostingPolicyEnum.SINGLE_INCLUDE_VAT:
                 postings.append(self.__get_posting(self.account_liability, total + vat))
             else:
                 postings.append(self.__get_posting(self.account_liability, total))
             postings += posting_list
 
-        if self.policy.posting_policy in [utils.EnumPosting.MULTI, utils.EnumPosting.SINGLE]:
+        if self.policy.posting_policy in [utils.PostingPolicyEnum.MULTI, utils.PostingPolicyEnum.SINGLE]:
             postings.append(self.__get_posting(self.account_assets, -vat))
             
         desc = "Renting of server {} for the period {} to {}".format(srv_id_tag, date_start, date_end)
@@ -218,12 +218,12 @@ class Importer(importer.ImporterProtocol):
 
             if servers_txn.has_key(srv_id):
                 servers_txn[srv_id]['total'] += (float(row['price_no_vat']) * float(row['qty']))
-                if self.policy.posting_policy == utils.EnumPosting.MULTI:
+                if self.policy.posting_policy == utils.PostingPolicyEnum.MULTI:
                     amt = utils.toAmount(-row['price_no_vat'], 'EUR')
                     servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
 
         for srv_id, postings in servers_txn.items():
-            if self.policy.posting_policy == utils.EnumPosting.SINGLE:
+            if self.policy.posting_policy == utils.PostingPolicyEnum.SINGLE:
                 txn = self.__get_transaction(meta, datetime.now(), row['date_start'], row['date_end'], postings['total'], srv_id)
             else:
                 txn = self.__get_transaction(meta, datetime.now(), row['date_start'], row['date_end'], postings['total'], srv_id, postings['txn'])
