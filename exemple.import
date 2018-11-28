@@ -12,7 +12,7 @@ from utils import PostingPolicyEnum
 
 policy = hetzner.policy.HetznerPolicy()
 
-policy.posting_policy = PostingPolicyEnum.SINGLE
+# policy.posting_policy = PostingPolicyEnum.SINGLE
 
 
 # Setting this variable provides a list of importer instances.
