@@ -11,6 +11,9 @@ from importers.hetzner.policy import HetznerPolicy
 
 policy = hetzner.policy.HetznerPolicy()
 
+policy.posting_policy = PostingPolicyEnum.SINGLE
+
+
 # Setting this variable provides a list of importer instances.
 CONFIG = [
     smals.Importer("EXTHR", "VACDAY", "WKDT", "7:36",
