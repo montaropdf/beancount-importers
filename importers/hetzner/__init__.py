@@ -28,9 +28,9 @@ class InvoiceCsvFileDefinition():
         self.logger.debug("Entering Function")
 
         self.iso_date_regex = "\d{4}-(0\d|1[0-2])-([0-2]\d|3[01])"
-        self.core_filename_regex = "Hetzner-" + iso_date_regex + "-R\d{10}"
+        self.core_filename_regex = "Hetzner-" + self.iso_date_regex + "-R\d{10}"
         self.extension_regex = "\.csv"
-        self.date_prefix_regex = iso_date_regex
+        self.date_prefix_regex = self.iso_date_regex
         self.tag_suffix_regex = "(_.+)*"
 
         self.logger.debug("core_filename_regex: %s", core_filename_regex)
