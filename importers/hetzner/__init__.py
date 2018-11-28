@@ -19,7 +19,6 @@ from beancount.ingest import importer
 from utils import toAmount, VatBelgiumEnum, PostingPolicyEnum
 from importers.hetzner.policy import HetznerPolicy
 
-
 class InvoiceCsvFileDefinition():
     """A class that define the input file and provides all the facilities to read it."""
     def __init__(self, logger):
@@ -104,7 +103,7 @@ class Importer(importer.ImporterProtocol):
             self.logger.debug("Posting list: %s", str(postings))
         else:
             if self.policy.posting_policy == PostingPolicyEnum.SINGLE_INCLUDE_VAT:
-                postings.append(self.__get_posting(self.account_liability, toAmount("{:.2}".format(total + vat), 'EUR')))
+                postings.append(self.__get_posting(self.account_liability, toAmount("{:.2}".formattotal + vat, 'EUR')))
             else:
                 postings.append(self.__get_posting(self.account_liability, toAmount(total, 'EUR')))
             self.logger.debug("Posting list: %s", str(postings))
