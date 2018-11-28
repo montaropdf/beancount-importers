@@ -183,7 +183,7 @@ class Importer(importer.ImporterProtocol):
         index = 0
         servers_txn = {}
 
-        for index, row in enumerate(self.inputFile.get_Reader()):
+        for index, row in enumerate(self.inputFile.get_Reader(file.name)):
             self.logger.debug('Data in row: %s', str(row))
             meta = data.new_metadata(file.name, index)
             meta['start_period'] = row['date_start']
