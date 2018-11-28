@@ -96,9 +96,11 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Entering Function")
 
         self.logger.debug("List of postings: %s", posting_list)
+
         vat = ((total / 100) * float(self.policy.vat_value))
         postings = []
         total_amount = 0
+
         if posting_list == None:
             if self.policy.posting_policy == PostingPolicyEnum.SINGLE_INCLUDE_VAT:
                 total_amount = total + vat
