@@ -115,7 +115,7 @@ class Importer(importer.ImporterProtocol):
 
         if self.policy.posting_policy in [PostingPolicyEnum.MULTI, PostingPolicyEnum.SINGLE]:
             minus_vat = toAmount("{:.2f}".format(-vat), 'EUR')
-            postings.append(self.__get_posting(self.account_assets, toAmount(minus_vat, 'EUR')))
+            postings.append(self.__get_posting(self.account_assets, minus_vat))
             
         desc = "Renting of server {} for the period {} to {}".format(srv_id_tag, date_start, date_end)
         txn =  data.Transaction(
