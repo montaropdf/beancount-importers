@@ -196,7 +196,7 @@ class Importer(importer.ImporterProtocol):
                 if re.match('Server #\d{6}', row['description']):
                     srv_id = re.findall('Server #(\d{6})', row['description'])[0]
 
-            if servers_txn.has_key(srv_id):
+            if srv_id in servers_txn:
                 servers_txn[srv_id]['total'] += (float(row['price_no_vat']) * float(row['qty']))
                 if self.policy.posting_policy == utils.PostingPolicyEnum.MULTI:
                     amt = utils.toAmount(-row['price_no_vat'], 'EUR')
