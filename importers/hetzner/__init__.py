@@ -190,7 +190,7 @@ class Importer(importer.ImporterProtocol):
             meta['end_period'] = row['date_end']
             srv_id = row['srv_id']
             
-            if srv_id != None:
+            if srv_id != None and srv_id != '':
                 servers_txn[srv_id] = {'total': 0, 'txn': []}
             else:
                 if re.match('Server #\d{6}', row['description']):
