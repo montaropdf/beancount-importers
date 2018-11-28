@@ -33,7 +33,7 @@ class InvoiceCsvFileDefinition():
         self.date_prefix_regex = self.iso_date_regex
         self.tag_suffix_regex = "(_.+)*"
 
-        self.logger.debug("core_filename_regex: %s", core_filename_regex)
+        self.logger.debug("core_filename_regex: %s", self.core_filename_regex)
 
         csvDialect = csv.excel()
         csvDialect.delimiter = ','
