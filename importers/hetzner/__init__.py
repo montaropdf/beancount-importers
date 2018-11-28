@@ -96,7 +96,7 @@ class Importer(importer.ImporterProtocol):
         """Return a transaction object for a server."""
         self.logger.debug("Entering Function")
 
-        vat = ((total / 100) * float(self.policy.vat_value))
+        vat = ((total / 100) * float(int(self.policy.vat_value)))
         postings = []
         if posting_list == None:
             postings.append(self.__get_posting(self.account_liability, total))
