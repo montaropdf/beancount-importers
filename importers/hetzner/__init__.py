@@ -128,24 +128,12 @@ class Importer(importer.ImporterProtocol):
         self.logger.info("File to analyse: %s", str(file))
         self.logger.debug("Header file: %s", str(file.head()))
 
-        # iso_date_regex = self.inputFile.iso_date_regex
-        # core_filename_regex = self.inputFile.core_filename_regex
-        # extension_regex = "\.csv"
-        # date_prefix_regex = iso_date_regex
-        # tag_suffix_regex = "(_.+)*"
-
-        # self.logger.debug("core_filename_regex: %s", core_filename_regex)
-
         matching_result = ((re.match(r"{}{}".format(self.inputFile.core_filename_regex, self.inputFile.extension_regex), path.basename(file.name))
                             or re.match(r"{}_{}{}{}".format(self.inputFile.date_prefix_regex, self.inputFile.core_filename_regex, self.inputFile.tag_suffix_regex, self.inputFile.extension_regex), path.basename(file.name))))
 
         self.logger.info("Identification result: %s", str(matching_result))
 
         if matching_result:
-            # csvDialect = csv.excel();
-            # csvDialect.delimiter = ','
-
-            # for index, row in enumerate(csv.DictReader(open(file.name), fieldnames=['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id'], dialect=csvDialect)):
             for index, row in enumerate(self.inputFile.get_Reader(file.name)):
                 self.logger.debug("Row content: %s", str(row))
                 self.logger.debug("Row length: %d", len(row))
@@ -172,10 +160,6 @@ class Importer(importer.ImporterProtocol):
         # Extract the statement date from the filename.
         self.logger.debug("Entering Function")
 
-        # core_filename_regex = "Hetzner-\d\d\d\d-\d\d-\d\d-R\d{10}"
-        # extension_regex = "\.csv"
-        # date_prefix_regex = "\d\d\d\d-\d\d-\d\d"
-        # tag_suffix_regex = "(_.+)*"
         matching_result = ((re.match(r"{}{}".format(self.inputFile.core_filename_regex, self.inputFile.extension_regex), path.basename(file.name))
                             or re.match(r"{}_{}{}{}".format(self.inputFile.date_prefix_regex, self.inputFile.core_filename_regex, self.inputFile.tag_suffix_regex, self.inputFile.extension_regex), path.basename(file.name))))
 
@@ -197,13 +181,8 @@ class Importer(importer.ImporterProtocol):
 
         entries = []
         index = 0
-
         servers_txn = {}
 
-        # csvDialect = csv.excel();
-        # csvDialect.delimiter = ','
-        
-        # for index, row in enumerate(csv.DictReader(open(file.name), fieldnames=['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id'], dialect=csvDialect)):
         for index, row in enumerate(self.inputFile.get_Reader()):
             self.logger.debug('Data in row: %s', str(row))
             meta = data.new_metadata(file.name, index)
