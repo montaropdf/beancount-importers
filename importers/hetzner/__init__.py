@@ -104,6 +104,7 @@ class Importer(importer.ImporterProtocol):
         if posting_list == None:
             if self.policy.posting_policy == PostingPolicyEnum.SINGLE_INCLUDE_VAT:
                 total_amount = total + vat
+                minus_total_amount = -total
             else:
                 total_amount = total
             total_amount = toAmount("{:.2f}".format(total_amount), 'EUR')
