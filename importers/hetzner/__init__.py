@@ -102,7 +102,10 @@ class Importer(importer.ImporterProtocol):
         total_amount = 0
 
         if posting_list == None:
-            total_amount = total + vat
+            if self.policy.posting_policy == PostingPolicyEnum.SINGLE_NO_VAT:
+                total_amount = total
+            else:
+                total_amount = total + vat
             if self.policy.posting_policy == PostingPolicyEnum.SINGLE_INCLUDE_VAT:
                 minus_total_amount = -total_amount
             else:
