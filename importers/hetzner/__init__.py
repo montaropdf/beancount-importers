@@ -98,6 +98,8 @@ class Importer(importer.ImporterProtocol):
         vat = ((total / 100) * float(self.policy.vat_value))
         postings = []
         if posting_list == None:
+            total_amount = toAmount("{:.2f}".format(total + vat), 'EUR')
+            minus_total_amount = toAmount("{:.2f}".format(-(total + vat)), 'EUR')
             postings.append(self.__get_posting(self.account_liability, total))
             postings.append(self.__get_posting(self.account_assets, -total))
             self.logger.debug("Posting list: %s", str(postings))
