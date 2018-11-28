@@ -113,7 +113,10 @@ class Importer(importer.ImporterProtocol):
             postings.append(self.__get_posting(self.account_assets, minus_total_amount))
             self.logger.debug("Posting list: %s", str(postings))
         else:
-            total_amount = toAmount("{:.2f}".format(total + vat), 'EUR')
+            if self.policy.posting_policy == PostingPolicyEnum.MULTI_NO_VAT:
+                total_amount = toAmount("{:.2f}".format(total), 'EUR')
+            else:
+                total_amount = toAmount("{:.2f}".format(total + vat), 'EUR')
             postings.append(self.__get_posting(self.account_liability, total_amount))
 
             postings += posting_list
