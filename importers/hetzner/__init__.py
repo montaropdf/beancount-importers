@@ -187,7 +187,8 @@ class Importer(importer.ImporterProtocol):
         elif re.match(r"{}_{}{}{}".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name)):
             filedate = datetime.datetime.strptime(path.basename(file.name),
                                           'Hetzner-%Y-%m-%d-R[0-9]{10}.csv').date()
-        
+
+
         self.logger.info("File date used: %s", str(filedate))
         self.logger.debug("Leaving Function")
         return filedate
