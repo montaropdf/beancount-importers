@@ -3,13 +3,13 @@ __copyright__ = "Copyright (C) 2018  Roland Everaert"
 __license__ = "GNU GPLv2"
 
 import utils
-from utils import VAT, EnumPosting
+from utils import VatBelgiumEnum, EnumPosting
 
 class HetznerPolicy(utils.Policy):
     """A Policy class to set the rules for producing a transaction from Hetzner Invoice."""
     def __init__(self,
                  posting_policy=EnumPosting.MULTI,
-                 vat_value=VAT.VAT21):
+                 vat_value=VatBelgiumEnum.VAT21):
 
         self.posting_policy = posting_policy
         self.vat_value = vat_value
