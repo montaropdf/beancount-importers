@@ -102,14 +102,15 @@ class Importer(importer.ImporterProtocol):
         total_amount = 0
 
         if posting_list == None:
+            total_amount = total + vat
             if self.policy.posting_policy == PostingPolicyEnum.SINGLE_INCLUDE_VAT:
-                total_amount = total + vat
-                minus_total_amount = -total
+                minus_total_amount = -total_amount
             else:
-                total_amount = total
+                minus_total_amount = -total
             total_amount = toAmount("{:.2f}".format(total_amount), 'EUR')
+            minus_total_amount = toAmount("{:.2f}".format(minus_total_amount), 'EUR')
             postings.append(self.__get_posting(self.account_liability, total_amount))
-            postings.append(self.__get_posting(self.account_assets, -total_amount))
+            postings.append(self.__get_posting(self.account_assets, minus_total_amount))
             self.logger.debug("Posting list: %s", str(postings))
         else:
             total_amount = toAmount("{:.2f}".format(total + vat), 'EUR')
