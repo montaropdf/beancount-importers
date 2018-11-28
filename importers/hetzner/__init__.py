@@ -202,6 +202,9 @@ class Importer(importer.ImporterProtocol):
                     amt = toAmount('-' + row['price_no_vat'], 'EUR')
                     servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
 
+
+        self.logger.debug('Data in servers_txn: %s', str(servers_txn))
+
         for srv_id, postings in servers_txn.items():
             if self.policy.posting_policy == PostingPolicyEnum.SINGLE:
                 txn = self.__get_transaction(meta, datetime.date.today(), row['date_start'], row['date_end'], postings['total'], srv_id)
