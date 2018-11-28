@@ -204,9 +204,9 @@ class Importer(importer.ImporterProtocol):
 
         for srv_id, postings in servers_txn.items():
             if self.policy.posting_policy == PostingPolicyEnum.SINGLE:
-                txn = self.__get_transaction(meta, datetime.today(), row['date_start'], row['date_end'], postings['total'], srv_id)
+                txn = self.__get_transaction(meta, datetime.date.today(), row['date_start'], row['date_end'], postings['total'], srv_id)
             else:
-                txn = self.__get_transaction(meta, datetime.today(), row['date_start'], row['date_end'], postings['total'], srv_id, postings['txn'])
+                txn = self.__get_transaction(meta, datetime.date.today(), row['date_start'], row['date_end'], postings['total'], srv_id, postings['txn'])
             
             entries.append(txn)
             
