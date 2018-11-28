@@ -41,10 +41,11 @@ class InvoiceCsvFileDefinition():
 
         self.logger.info("Object initialisation done.")
 
-    def get_Reader(self):
+    def get_Reader(self, input_filename):
+        """Return a csv.DictReader object"""
         self.logger.debug("Entering Function")
 
-        reader = csv.DictReader(open(file.name), fieldnames=self.fieldname_list, dialect=csvDialect)
+        reader = csv.DictReader(open(input_filename), fieldnames=self.fieldname_list, dialect=csvDialect)
 
         self.logger.debug("Leaving Function")
 
