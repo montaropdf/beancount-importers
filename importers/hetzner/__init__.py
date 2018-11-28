@@ -85,7 +85,7 @@ class Importer(importer.ImporterProtocol):
         """Return a posting object."""
         self.logger.debug("Entering Function")
 
-        post = data.Posting(account, amount1, None, amount2, "!", None)
+        post = data.Posting(account, amount1, None, amount2, None, None)
 
         self.logger.debug('Posting to be returned: %s', str(post))
         self.logger.debug("Leaving Function")
