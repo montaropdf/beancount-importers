@@ -116,7 +116,7 @@ class Importer(importer.ImporterProtocol):
             
         desc = "Renting of server {} for the period {} to {}".format(srv_id_tag, date_start, date_end)
         txn =  data.Transaction(
-            meta, date, self.FLAG, "Hetzner", desc, data.EMPTY_SET, data.EMPTY_SET, posting_list)
+            meta, date, self.FLAG, "Hetzner", desc, data.EMPTY_SET, data.EMPTY_SET, postings)
 
         self.logger.debug('Transaction to be recorded: %s', str(txn))
         self.logger.debug("Leaving Function")
