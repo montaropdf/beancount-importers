@@ -103,9 +103,9 @@ class Importer(importer.ImporterProtocol):
             postings.append(self.__get_posting(self.account_assets, -total))
         else:
             if self.policy.posting_policy == PostingPolicyEnum.SINGLE_INCLUDE_VAT:
-                postings.append(self.__get_posting(self.account_liability, total + vat))
+                postings.append(self.__get_posting(self.account_liability, toAmount(total + vat, 'EUR')))
             else:
-                postings.append(self.__get_posting(self.account_liability, total))
+                postings.append(self.__get_posting(self.account_liability, toAmount(total, 'EUR')))
             postings += posting_list
 
         if self.policy.posting_policy in [PostingPolicyEnum.MULTI, PostingPolicyEnum.SINGLE]:
