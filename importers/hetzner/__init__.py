@@ -222,7 +222,7 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug('Data in servers_txn: %s', str(servers_txn))
 
         for srv_id, postings in servers_txn.items():
-            if self.policy.posting_policy == PostingPolicyEnum.SINGLE:
+            if self.policy.posting_policy in [PostingPolicyEnum.SINGLE, PostingPolicyEnum.SINGLE_INCLUDE_VAT, PostingPolicyEnum.SINGLE_NO_VAT]:
                 txn = self.__get_transaction(meta, datetime.date.today(), row['date_start'], row['date_end'], postings['total'], srv_id)
             else:
                 txn = self.__get_transaction(meta, datetime.date.today(), row['date_start'], row['date_end'], postings['total'], srv_id, postings['txn'])
