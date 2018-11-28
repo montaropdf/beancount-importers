@@ -35,9 +35,9 @@ class InvoiceCsvFileDefinition():
 
         self.logger.debug("core_filename_regex: %s", self.core_filename_regex)
 
-        csvDialect = csv.excel()
-        csvDialect.delimiter = ','
-        fieldname_list = ['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id']
+        self.csvDialect = csv.excel()
+        self.csvDialect.delimiter = ','
+        self.fieldname_list = ['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id']
 
         self.logger.info("Object initialisation done.")
 
@@ -45,7 +45,7 @@ class InvoiceCsvFileDefinition():
         """Return a csv.DictReader object"""
         self.logger.debug("Entering Function")
 
-        reader = csv.DictReader(open(input_filename), fieldnames=self.fieldname_list, dialect=csvDialect)
+        reader = csv.DictReader(open(input_filename), fieldnames=self.fieldname_list, dialect=self.csvDialect)
 
         self.logger.debug("Leaving Function")
 
