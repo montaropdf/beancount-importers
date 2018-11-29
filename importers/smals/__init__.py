@@ -43,7 +43,7 @@ class TimesheetCsvFileDefinition():
         """Return a csv.DictReader object"""
         self.logger.debug("Entering Function")
 
-        reader = csv.DictReader(open(input_filename), fieldnames=self.fieldname_list, dialect=self.csvDialect)
+        reader = csv.DictReader(open(input_filename), dialect=self.csvDialect)
 
         self.logger.debug("Leaving Function")
 
