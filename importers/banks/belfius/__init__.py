@@ -89,9 +89,9 @@ class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
 
     def __init__(self, assets_account_map,
-                 incomes_account_map,
-                 expenses_account_map,
-                 liabilities_account_map):
+                 incomes_account_map=None,
+                 expenses_account_map=None,
+                 liabilities_account_map=None):
 
         self.logger = logging.Logger("belfius", logging.DEBUG)
 
