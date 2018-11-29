@@ -30,7 +30,8 @@ class InvoiceCsvFileDefinition():
         self.extension_regex = "\.csv"
         self.date_prefix_regex = self.iso_date_regex
         self.tag_suffix_regex = "(_.+)*"
-
+        self.srv_id_reference_regex = 'Server #(\d{6})'
+        
         self.logger.debug("core_filename_regex: %s", self.core_filename_regex)
 
         self.csvDialect = csv.excel()
