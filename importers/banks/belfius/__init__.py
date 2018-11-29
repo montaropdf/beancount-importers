@@ -84,3 +84,27 @@ class AccountTransactionCsvFileDefinition():
         self.logger.debug("Leaving Function")
 
         return cleanFileName
+
+class Importer(importer.ImporterProtocol):
+    """An importer for the Timesheet Report CSV files provided by one of my customer."""
+
+    def __init__(self, commodity_overtime, commodity_vacation_day, commodity_workday, standard_work_period,
+                 employer,
+                 customer,
+                 account_working_day,
+                 account_customer_overtime,
+                 account_customer_worked_day,
+                 account_employer_root,
+                 account_employer_overtime,
+                 account_employer_vacation,
+                 account_employer_worked_day,
+                 account_sickness,
+                 account_vacation):
+
+        self.logger = logging.Logger("smals", logging.DEBUG)
+
+        fh = logging.FileHandler('smals-importer.log')
+        fmtr = logging.Formatter('%(asctime)s - %(levelname)s - %(lineno)d - %(funcName)s | %(message)s')
+
+        fh.setFormatter(fmtr)
+        self.logger.addHandler(fh)
