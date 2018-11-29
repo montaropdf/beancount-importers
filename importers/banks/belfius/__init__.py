@@ -176,6 +176,7 @@ class Importer(importer.ImporterProtocol):
             balance_account = self.assets_account_map[self.inputFile.get_AccountInFileName(file.name)]
         except KeyError:
             return None
+
         entries = []
         index = 0
         header_reached = False
