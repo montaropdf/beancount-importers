@@ -163,7 +163,6 @@ class Importer(importer.ImporterProtocol):
         #  = ['compte','date_compta', 'no_extrait', 'no_transaction', 'compte_cible', 'nom_cible', 'rue', 'cp_loc', 'transaction', 'date_val', 'montant', 'currency', 'BIC', 'ctry_code', 'comm']
         # Compte;Date de comptabilisation;Numéro d'extrait;Numéro de transaction;Compte contrepartie;Nom contrepartie contient;Rue et numéro;Code postal et localité;Transaction;Date valeur;Montant;Devise;BIC;Code pays;Communications
 
-        
         for index, row in enumerate(self.inputFile.get_Reader(file.name)):
             self.logger.info("Fields: %s", str(row))
 
