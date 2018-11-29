@@ -169,6 +169,7 @@ class Importer(importer.ImporterProtocol):
 
         for index, row in enumerate(self.inputFile.get_Reader(file.name)):
             self.logger.info("Fields: %s", str(row))
+            meta = data.new_metadata(file.name, index)
 
             if row['compte'] == "Compte" and row['date_compta'] == "Date de comptabilisation":
                 header_reached = True
@@ -204,3 +205,6 @@ class Importer(importer.ImporterProtocol):
             else:
                 print "Compte récepteur inconnu: {}".format(row['compte'])
                 print "Transaction: {}".format(str(row))
+
+        meta = data.new_metadata(file.name, index)
+        entries.append(self.__get_Balance(meta, date))
