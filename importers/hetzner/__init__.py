@@ -62,10 +62,15 @@ class InvoiceCsvFileDefinition():
 
     def get_DateInFileName(self, filename):
         self.logger.debug("Entering Function")
+        self.logger.debug("Filename to analyse %s", filename)
 
-            dateinfile = re.findall(self.core_filename_regex, filename)
+        dateinfile = re.findall(self.core_filename_regex, filename)
+ 
+        self.logger.debug("Date in file %s", dateinfile)
+       
+        self.logger.debug("Leaving Function")
 
-            return dateinfile
+        return dateinfile
         
         # if re.match(r"{}{}".format(self.core_filename_regex, self.extension_regex), path.basename(filename)):
 
