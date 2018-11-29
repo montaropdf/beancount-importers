@@ -31,18 +31,6 @@ class TimesheetCsvFileDefinition():
         # self.date_prefix_regex = self.iso_date_regex
         self.tag_suffix_regex = "(_.+)*"
 
-
-        matching_result = re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned(_.+)*\.csv", path.basename(file.name))
-
-        self.logger.debug("Match long filename version: %s", str(matching_result))
-        
-        matching_result = ((re.match(r"smals-report-\d\d\d\d\d\d-cleaned\.csv", path.basename(file.name))
-                            or re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned(_.+)*\.csv", path.basename(file.name)))
-                           and )
-
-
-
-        
         self.logger.debug("core_filename_regex: %s", self.core_filename_regex)
 
         self.csvDialect = csv.excel()
