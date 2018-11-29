@@ -187,16 +187,16 @@ class Importer(importer.ImporterProtocol):
 
         filedate = None
         if self.inputFile.isInvoiceFileName(file.name):
-            filedate = self.inputFile.fileDate(file.name)
+            filedate = self.inputFile.get_DateInFileName(file.name)
 
 
         
-        if re.match(r"{}{}".format(core_filename_regex, extension_regex), path.basename(file.name)):
-            filedate = datetime.datetime.strptime(path.basename(file.name),
-                                          'Hetzner-%Y-%m-%d-R[0-9]{10}.csv').date()
-        elif re.match(r"{}_{}{}{}".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name)):
-            filedate = datetime.datetime.strptime(path.basename(file.name),
-                                          'Hetzner-%Y-%m-%d-R[0-9]{10}.csv').date()
+        # if re.match(r"{}{}".format(core_filename_regex, extension_regex), path.basename(file.name)):
+        #     filedate = datetime.datetime.strptime(path.basename(file.name),
+        #                                   'Hetzner-%Y-%m-%d-R[0-9]{10}.csv').date()
+        # elif re.match(r"{}_{}{}{}".format(date_prefix_regex, core_filename_regex, tag_suffix_regex, extension_regex), path.basename(file.name)):
+        #     filedate = datetime.datetime.strptime(path.basename(file.name),
+        #                                   'Hetzner-%Y-%m-%d-R[0-9]{10}.csv').date()
 
 
         self.logger.info("File date used: %s", str(filedate))
