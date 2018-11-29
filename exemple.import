@@ -54,7 +54,7 @@ CONFIG = [
                    "Assets:Employer:JourTravail",
                    "Assets:Employer:Sickness",
                    "Expenses:Conge"),
-    belfius.Importer()
+    belfius.Importer(belfius_assets)
 
 
 ]
