@@ -107,8 +107,6 @@ class Importer(importer.ImporterProtocol):
         self.liabilities_account_map = liabilities_account_map
 
     def __isFieldPresent(self, field):
-
-
         return field != None and len(field) != ''
 
         
