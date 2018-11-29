@@ -232,9 +232,12 @@ class Importer(importer.ImporterProtocol):
     def file_date(self, file):
         # Extract the statement date from the filename.
         self.logger.debug("Entering Function")
-        filedate = datetime.datetime.strptime(path.basename(file.name),
-                                          'smals-report-%Y%m-cleaned.csv').date()
-        self.logger.info("File date used: %s", str(filedate))
+
+        filedate = None
+        if self.inputFile.isTimesheetFileName(file.name):
+            filedate = self.inputFile.get_DateInFileName(file.name)
+
+            self.logger.info("File date used: %s", str(filedate))
         self.logger.debug("Leaving Function")
         return filedate
 
