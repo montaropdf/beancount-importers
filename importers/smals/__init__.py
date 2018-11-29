@@ -73,7 +73,6 @@ class TimesheetCsvFileDefinition():
 
         return dateinfile
 
-
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
 
@@ -113,7 +112,9 @@ class Importer(importer.ImporterProtocol):
         self.account_employer_worked_day = account_employer_worked_day
         self.account_sickness = account_sickness
         self.account_vacation = account_vacation
-
+        
+        self.inputFile = TimesheetCsvFileDefinition(self.logger)
+        
         self.logger.info("Logger Initialized")
         self.logger.debug("Input parameters:")
         self.logger.debug("Commodity name for overtime units: %s", self.commodity_overtime)
