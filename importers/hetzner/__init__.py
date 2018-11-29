@@ -49,7 +49,13 @@ class InvoiceCsvFileDefinition():
         self.logger.debug("Leaving Function")
 
         return reader
-        
+
+    def isInvoice(self, filename):
+        """Check if the filename have the format of an invoice from Hetzner."""
+
+        return ((re.match(r"{}{}".format(self.inputFile.core_filename_regex, self.inputFile.extension_regex), path.basename(file.name))
+                            or re.match(r"{}_{}{}{}".format(self.inputFile.date_prefix_regex, self.inputFile.core_filename_regex, self.inputFile.tag_suffix_regex, self.inputFile.extension_regex), path.basename(file.name))))
+
 
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
