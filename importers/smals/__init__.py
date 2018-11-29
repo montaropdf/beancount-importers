@@ -34,7 +34,7 @@ class TimesheetCsvFileDefinition():
         self.logger.debug("core_filename_regex: %s", self.core_filename_regex)
 
         self.csvDialect = csv.excel()
-        self.csvDialect.delimiter = ','
+        self.csvDialect.delimiter = ';'
 
         self.logger.info("Object initialisation done.")
 
@@ -254,9 +254,6 @@ class Importer(importer.ImporterProtocol):
         workday_counter = 0
 
         self.logger.debug('Standard working time period in minutes: %d', self.standard_work_period)
-
-        csvDialect = csv.excel();
-        csvDialect.delimiter = ';'
         
         for index, row in enumerate(self.inputFile.get_Reader(file.name)):
             self.logger.debug('Data in row: %s', str(row))
