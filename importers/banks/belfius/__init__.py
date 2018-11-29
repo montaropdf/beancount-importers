@@ -174,6 +174,13 @@ class Importer(importer.ImporterProtocol):
                 header_reached = True
                 continue
 
+            if row['compte'] == "Dernier solde":
+                balance = row['date_compta']
+                continue
+
+            if row['compte'] == "Date/heure du dernier solde":
+                date_balance = datetime.datetime.strptime(row['date_compta'], '%d/%m/%Y').date()
+
             if not header_reached:
                 continue
             
