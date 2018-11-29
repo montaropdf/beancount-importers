@@ -106,6 +106,12 @@ class Importer(importer.ImporterProtocol):
         self.expenses_account_map = expenses_account_map
         self.liabilities_account_map = liabilities_account_map
 
+    def __isFieldPresent(self, field):
+
+
+        return field != None and len(field) != ''
+
+        
     def identify(self, file):
         # Match if the filename is as downloaded and the header has the unique
         # fields combination we're looking for.
