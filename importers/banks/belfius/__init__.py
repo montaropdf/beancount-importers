@@ -200,8 +200,9 @@ class Importer(importer.ImporterProtocol):
 
             if not header_reached:
                 continue
-            
-            if row['compte'] in self.assets_account_map.keys():
+
+            try:
+                account = self.assets_account_map[row['compte']]
                 meta['no_extrait'] = row['no_extrait']
                 meta['no_transaction'] = row['no_transaction']
                 meta['date_valeur'] = row['date_valeur']
@@ -218,7 +219,7 @@ class Importer(importer.ImporterProtocol):
                 date = datetime.datetime.strptime(row['date_compta'], '%d/%m/%Y').date()
 
                 entries.append(self.__get_Transaction(meta, date, row['compte_cible'], row['nom_cible'], row['montant'], row['currency'], row['comm']))
-            else:
+            except KeyError:
                 print "Compte récepteur inconnu: {}".format(row['compte'])
                 print "Transaction: {}".format(str(row))
 
