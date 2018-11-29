@@ -6,12 +6,9 @@ __license__ = "GNU GPLv2"
 import csv
 import datetime
 import re
-import pprint
 import logging
 import decimal
 from os import path
-
-from dateutil.parser import parse
 
 from beancount.core.number import D
 from beancount.core.number import ZERO
