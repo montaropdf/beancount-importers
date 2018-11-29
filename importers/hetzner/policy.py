@@ -2,7 +2,7 @@
 __copyright__ = "Copyright (C) 2018  Roland Everaert"
 __license__ = "GNU GPLv2"
 
-from utils import VatBelgiumEnum, PostingPolicyEnum
+from utils.utils import VatBelgiumEnum, PostingPolicyEnum
 
 class HetznerPolicy(utils.Policy):
     """A Policy class to set the rules for producing a transaction from Hetzner Invoice."""
