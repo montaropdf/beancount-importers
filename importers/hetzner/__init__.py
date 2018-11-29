@@ -50,7 +50,7 @@ class InvoiceCsvFileDefinition():
 
         return reader
 
-    def isInvoice(self, filename):
+    def isInvoiceFileName(self, filename):
         """Check if the filename have the format of an invoice from Hetzner."""
 
         return ((re.match(r"{}{}".format(self.inputFile.core_filename_regex, self.inputFile.extension_regex), path.basename(file.name))
