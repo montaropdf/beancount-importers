@@ -227,7 +227,7 @@ class Importer(importer.ImporterProtocol):
 
         if balance_account != None:
             meta = data.new_metadata(file.name, index)
-            entries.append(self.__get_Balance(meta, date_balance, balance))
+            entries.append(self.__get_Balance(meta, date_balance, balance_account, balance))
 
         self.logger.debug("Leaving Function")
         return entries
