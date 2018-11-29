@@ -52,11 +52,16 @@ class InvoiceCsvFileDefinition():
 
     def isInvoiceFileName(self, filename):
         """Check if the filename have the format of an invoice from Hetzner."""
+        self.logger.debug("Entering Function")
 
-        return ((re.match(r"{}{}".format(self.core_filename_regex, self.extension_regex), path.basename(filename))
+        self.logger.debug("Filename to analyse")
+        
+        self.logger.debug("Leaving Function")
+        return ((re.match(r"{}{}{}".format(self.core_filename_regex, self.tag_suffix_regex, self.extension_regex), path.basename(filename))
                             or re.match(r"{}_{}{}{}".format(self.date_prefix_regex, self.core_filename_regex, self.tag_suffix_regex, self.extension_regex), path.basename(filename))))
 
     def get_DateInFileName(self, filename):
+        self.logger.debug("Entering Function")
 
             dateinfile = re.findall(self.core_filename_regex, filename)
 
