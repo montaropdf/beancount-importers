@@ -208,6 +208,8 @@ class Importer(importer.ImporterProtocol):
         self.logger.info("File to analyse: %s", str(file))
         self.logger.debug("Header file: %s", str(file.head()))
 
+        matching_result = self.inputFile.isTimesheetFileName(file.name)
+        
         matching_result = re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned(_.+)*\.csv", path.basename(file.name))
 
         self.logger.debug("Match long filename version: %s", str(matching_result))
