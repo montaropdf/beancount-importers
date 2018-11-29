@@ -191,7 +191,7 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Entering Function")
         self.logger.info("File account: %s", self.account_liability)
         self.logger.debug("Leaving Function")
-        return self.account_assets
+        return self.account_liability
 
     def file_date(self, file):
         # Extract the statement date from the filename.
