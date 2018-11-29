@@ -181,7 +181,11 @@ class Importer(importer.ImporterProtocol):
                 meta['no_extrait'] = row['no_extrait']
                 meta['no_transaction'] = row['no_transaction']
                 meta['date_valeur'] = row['date_valeur']
-                if self.__isFieldPresent(row['BIC'])  != None and len(row['BIC']) != '':
+                if self.__isFieldPresent(row['BIC']):
                     meta['BIC'] = row['BIC']
-                if row['rue'] != None and len(row['BIC']) != '':
-                entries.append(self.__txn(meta, date, row['compte_cible'], row['nom_cible'], row['rue'], row['cp_loc'], row['montant'], row['currency']))
+                if self.__isFieldPresent(row['rue']):
+                    meta['rue'] = row['rue']
+                if self.__isFieldPresent(row['cp_loc']):
+                    meta['cp_loc'] = row['cp_loc']
+                    
+                entries.append(self.__txn(meta, date, row['compte_cible'], row['nom_cible'], row['montant'], row['currency']))
