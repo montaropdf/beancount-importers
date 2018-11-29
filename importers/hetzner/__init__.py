@@ -227,8 +227,8 @@ class Importer(importer.ImporterProtocol):
             if srv_id != None and srv_id != '':
                 servers_txn[srv_id] = {'total': 0, 'txn': []}
             else:
-                if re.match('Server #\d{6}', row['description']):
-                    srv_id = re.findall('Server #(\d{6})', row['description'])[0]
+                if re.match(self.srv_id_reference_regex, row['description']):
+                    srv_id = re.findall(self.srv_id_reference_regex, row['description'])[0]
 
             if srv_id in servers_txn:
                 servers_txn[srv_id]['total'] += (float(row['price_no_vat']) * float(row['qty']))
