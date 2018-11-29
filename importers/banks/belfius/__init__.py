@@ -201,3 +201,6 @@ class Importer(importer.ImporterProtocol):
                 date = datetime.datetime.strptime(row['date_compta'], '%d/%m/%Y').date()
 
                 entries.append(self.__get_Transaction(meta, date, row['compte_cible'], row['nom_cible'], row['montant'], row['currency'], row['comm']))
+            else:
+                print "Compte récepteur inconnu: {}".format(row['compte'])
+                print "Transaction: {}".format(str(row))
