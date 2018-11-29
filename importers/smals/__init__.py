@@ -18,6 +18,73 @@ from beancount.core import inventory
 from beancount.ingest import importer
 from beancount.ingest import regression
 
+class TimesheetCsvFileDefinition():
+    """A class that define the input file and provides all the facilities to read it."""
+    def __init__(self, logger):
+        self.logger = logger
+
+        self.logger.debug("Entering Function")
+
+        self.iso_date_regex = "(\d{4})-(0\d|1[0-2])-([0-2]\d|3[01])"
+        self.core_filename_regex = "smals-report-" + self.iso_date_regex + "-cleaned"
+        self.extension_regex = "\.csv"
+        # self.date_prefix_regex = self.iso_date_regex
+        self.tag_suffix_regex = "(_.+)*"
+
+
+        matching_result = re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned(_.+)*\.csv", path.basename(file.name))
+
+        self.logger.debug("Match long filename version: %s", str(matching_result))
+        
+        matching_result = ((re.match(r"smals-report-\d\d\d\d\d\d-cleaned\.csv", path.basename(file.name))
+                            or re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned(_.+)*\.csv", path.basename(file.name)))
+                           and re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head()))
+
+
+
+        
+        self.logger.debug("core_filename_regex: %s", self.core_filename_regex)
+
+        self.csvDialect = csv.excel()
+        self.csvDialect.delimiter = ','
+        self.fieldname_list = ['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id']
+
+        self.logger.info("Object initialisation done.")
+
+    def get_Reader(self, input_filename):
+        """Return a csv.DictReader object"""
+        self.logger.debug("Entering Function")
+
+        reader = csv.DictReader(open(input_filename), fieldnames=self.fieldname_list, dialect=self.csvDialect)
+
+        self.logger.debug("Leaving Function")
+
+        return reader
+
+    def isInvoiceFileName(self, filename):
+        """Check if the filename have the format of an invoice from Hetzner."""
+        self.logger.debug("Entering Function")
+
+        self.logger.debug("Filename to analyse %s", filename)
+        
+        self.logger.debug("Leaving Function")
+        return ((re.match(r"{}{}{}".format(self.core_filename_regex, self.tag_suffix_regex, self.extension_regex), path.basename(filename))
+                            or re.match(r"{}_{}{}{}".format(self.date_prefix_regex, self.core_filename_regex, self.tag_suffix_regex, self.extension_regex), path.basename(filename))))
+
+    def get_DateInFileName(self, filename):
+        self.logger.debug("Entering Function")
+        self.logger.debug("Filename to analyse %s", filename)
+
+        dateinfile = re.findall(self.core_filename_regex, filename)[0]
+        self.logger.debug("Date element found %s", dateinfile)
+        dateinfile = "-".join(dateinfile)
+
+        self.logger.debug("Date in file %s", dateinfile)
+        self.logger.debug("Leaving Function")
+
+        return dateinfile
+
+
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
 
