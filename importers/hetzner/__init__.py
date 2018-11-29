@@ -56,6 +56,14 @@ class InvoiceCsvFileDefinition():
         return ((re.match(r"{}{}".format(self.core_filename_regex, self.extension_regex), path.basename(filename))
                             or re.match(r"{}_{}{}{}".format(self.date_prefix_regex, self.core_filename_regex, self.tag_suffix_regex, self.extension_regex), path.basename(filename))))
 
+    def get_DateInFileName(self, filename):
+
+        if re.match(r"{}{}".format(self.core_filename_regex, self.extension_regex), path.basename(filename)):
+            dateinfile = re.findall('Server #(\d{6})', filename)
+
+
+            datetime.datetime.strptime(self.core_filename_regex,
+                                          'Hetzner-%Y-%m-%d-R[0-9]{10}.csv').date()
 
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
