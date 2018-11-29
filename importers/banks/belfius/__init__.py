@@ -52,7 +52,7 @@ class AccountTransactionCsvFileDefinition():
 
         return reader
 
-    def isInvoiceFileName(self, filename):
+    def isAccountFileName(self, filename):
         """Check if the filename have the format of an invoice from Hetzner."""
         self.logger.debug("Entering Function")
 
