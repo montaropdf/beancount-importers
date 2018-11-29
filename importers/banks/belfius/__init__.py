@@ -137,7 +137,7 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Entering Function")
         self.logger.info("File account: %s", FIXME)
         self.logger.debug("Leaving Function")
-        return self.account_employer_root
+        return FIXME
 
     def file_date(self, file):
         # Extract the statement date from the filename.
