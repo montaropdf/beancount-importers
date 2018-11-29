@@ -71,12 +71,6 @@ class InvoiceCsvFileDefinition():
         self.logger.debug("Leaving Function")
 
         return dateinfile
-        
-        # if re.match(r"{}{}".format(self.core_filename_regex, self.extension_regex), path.basename(filename)):
-
-
-            # datetime.datetime.strptime(self.core_filename_regex,
-            #                               'Hetzner-%Y-%m-%d-R[0-9]{10}.csv').date()
 
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
@@ -172,9 +166,6 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Entering Function")
         self.logger.info("File to analyse: %s", str(file))
         self.logger.debug("Header file: %s", str(file.head()))
-
-        # matching_result = ((re.match(r"{}{}".format(self.inputFile.core_filename_regex, self.inputFile.extension_regex), path.basename(file.name))
-        #                     or re.match(r"{}_{}{}{}".format(self.inputFile.date_prefix_regex, self.inputFile.core_filename_regex, self.inputFile.tag_suffix_regex, self.inputFile.extension_regex), path.basename(file.name))))
 
         matching_result = self.inputFile.isInvoiceFileName(file.name)
         self.logger.info("Identification result: %s", str(matching_result))
