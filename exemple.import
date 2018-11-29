@@ -10,31 +10,31 @@ from beancount.ingest import extract
 
 
 
-"Assets:BE:Belfius:CompteEpargne:Base"
-"Assets:BE:Belfius:CompteEpargne:InternetFidelite"
-"Assets:BE:Belfius:CompteEpargne:InternetFidelitePlus"
-"Assets:BE:Belfius:CompteEpargne:Pension"
-"Assets:BE:Belfius:CompteEpargne:Pension2"
-"Assets:BE:Belfius:Investissement:Bla"
-"Assets:BE:Belfius:Investissement:Bla2"
+# "Assets:BE:Belfius:CompteEpargne:Base"
+# "Assets:BE:Belfius:CompteEpargne:InternetFidelite"
+# "Assets:BE:Belfius:CompteEpargne:InternetFidelitePlus"
+# "Assets:BE:Belfius:CompteEpargne:Pension"
+# "Assets:BE:Belfius:CompteEpargne:Pension2"
+# "Assets:BE:Belfius:Investissement:Bla"
+# "Assets:BE:Belfius:Investissement:Bla2"
 
-"Liabilities:BE:Belfius:CarteDeCredit:MasterCardGold"
-"Liabilities:BE:Paypal"
-"Liabilities:BE:CSE:Ballieul:Appartement"
-"Liabilities:DE:Hetzner:Revecloud"
-"Liabilities:UK:GoDaddy:Revecloud"
+# "Liabilities:BE:Belfius:CarteDeCredit:MasterCardGold"
+# "Liabilities:BE:Paypal"
+# "Liabilities:BE:CSE:Ballieul:Appartement"
+# "Liabilities:DE:Hetzner:Revecloud"
+# "Liabilities:UK:GoDaddy:Revecloud"
 
-"Expenses:BE:Shop"
-"Expenses:BE:Food"
-"Expenses:BE:Mutuelle"
-"Expenses:BE:Syndicat"
-"Expenses:BE:Assurance:AXA"
+# "Expenses:BE:Shop"
+# "Expenses:BE:Food"
+# "Expenses:BE:Mutuelle"
+# "Expenses:BE:Syndicat"
+# "Expenses:BE:Assurance:AXA"
 
-"Income:BE:Mutuelle"
-"Income:BE:Assurance:DKV"
-"Income:BE:Assurance:AXA"
-"Income:Aubay:Salaire"
-"Income:Aubay:FPaE"
+# "Income:BE:Mutuelle"
+# "Income:BE:Assurance:DKV"
+# "Income:BE:Assurance:AXA"
+# "Income:Aubay:Salaire"
+# "Income:Aubay:FPaE"
 
 
 
