@@ -176,4 +176,7 @@ class Importer(importer.ImporterProtocol):
             if row['compte'] in self.assets_account_map.keys():
                 meta['no_extrait'] = row['no_extrait']
                 meta['no_transaction'] = row['no_transaction']
+                meta['date_valeur'] = row['date_valeur']
+                if row['BIC'] != None and len(row['BIC']) != '':
+                    meta['BIC'] = row['BIC']
                 entries.append(self.__txn(meta, date, row['compte_cible'], row['nom_cible'], row['rue'], row['cp_loc'], row['montant'], row['currency']))
