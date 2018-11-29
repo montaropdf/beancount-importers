@@ -10,7 +10,7 @@ from beancount.ingest import extract
 from importers.hetzner.policy import HetznerPolicy
 from utils.utils import PostingPolicyEnum
 
-policy = hetzner.policy.HetznerPolicy()
+policy = HetznerPolicy()
 
 # policy.posting_policy = PostingPolicyEnum.SINGLE
 # policy.posting_policy = PostingPolicyEnum.SINGLE_INCLUDE_VAT
