@@ -173,3 +173,7 @@ class Importer(importer.ImporterProtocol):
             if not header_reached:
                 continue
             
+            if row['compte'] in self.assets_account_map.keys():
+                meta['no_extrait'] = row['no_extrait']
+                meta['no_transaction'] = row['no_transaction']
+                entries.append(self.__txn(meta, date, row['compte_cible'], row['nom_cible'], row['rue'], row['cp_loc'], row['montant'], row['currency']))
