@@ -91,16 +91,9 @@ class Importer(importer.ImporterProtocol):
     def __init__(self, assets_account_map,
                  incomes_account_map,
                  expenses_account_map,
-                 liabilities_account_map,
-                 account_customer_worked_day,
-                 account_employer_root,
-                 account_employer_overtime,
-                 account_employer_vacation,
-                 account_employer_worked_day,
-                 account_sickness,
-                 account_vacation):
+                 liabilities_account_map):
 
-        self.logger = logging.Logger("smals", logging.DEBUG)
+        self.logger = logging.Logger("belfius", logging.DEBUG)
 
         fh = logging.FileHandler('smals-importer.log')
         fmtr = logging.Formatter('%(asctime)s - %(levelname)s - %(lineno)d - %(funcName)s | %(message)s')
