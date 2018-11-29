@@ -221,3 +221,6 @@ class Importer(importer.ImporterProtocol):
 
         meta = data.new_metadata(file.name, index)
         entries.append(self.__get_Balance(meta, date_balance, balance))
+
+        self.logger.debug("Leaving Function")
+        return entries
