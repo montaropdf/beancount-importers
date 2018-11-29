@@ -28,7 +28,7 @@ class AccountTransactionCsvFileDefinition():
         
         self.iso_date_regex = "(\d{4})-(0\d|1[0-2])-([0-2]\d|3[01])"
         self.time_regex = "([01]\d|2[0-4])-([0-5]\d)-([0-5])"
-        self.account_regex = "[A-Z][A-Z]( \d{4}){3}"
+        self.account_regex = "[A-Z][A-Z]\d\d( \d{4}){3}"
         self.core_filename_regex = self.account_regex + " " + self.iso_date_regex + " " + self.time_regex + "[^_]*"
         self.extension_regex = "\.csv"
         self.tag_suffix_regex = "(_.+)*"
