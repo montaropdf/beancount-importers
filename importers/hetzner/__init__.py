@@ -7,7 +7,6 @@ import csv
 import datetime
 import re
 import logging
-# import decimal
 from os import path
 
 from beancount.core import data
