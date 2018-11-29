@@ -65,7 +65,7 @@ class AccountTransactionCsvFileDefinition():
         self.logger.debug("Entering Function")
         self.logger.debug("Filename to analyse %s", filename)
 
-        dateinfile = (re.findall(self.iso_date_regex, filename)[0])[:3]
+        dateinfile = re.findall(self.iso_date_regex, filename)[0]
 
         self.logger.debug("Date element found %s", dateinfile)
         dateinfile = "-".join(dateinfile)
