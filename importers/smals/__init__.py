@@ -38,7 +38,7 @@ class TimesheetCsvFileDefinition():
         
         matching_result = ((re.match(r"smals-report-\d\d\d\d\d\d-cleaned\.csv", path.basename(file.name))
                             or re.match(r"\d\d\d\d-\d\d-\d\d_smals-report-\d\d\d\d\d\d-cleaned(_.+)*\.csv", path.basename(file.name)))
-                           and re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head()))
+                           and )
 
 
 
@@ -61,16 +61,24 @@ class TimesheetCsvFileDefinition():
 
         return reader
 
-    def isInvoiceFileName(self, filename):
+    def isTimesheetFileName(self, filename):
         """Check if the filename have the format of an invoice from Hetzner."""
         self.logger.debug("Entering Function")
 
         self.logger.debug("Filename to analyse %s", filename)
+
+        matching_result = re.match(r"{}{}{}".format(self.core_filename_regex, self.tag_suffix_regex, self.extension_regex), path.basename(filename))
+
+        
+        
         
         self.logger.debug("Leaving Function")
-        return ((re.match(r"{}{}{}".format(self.core_filename_regex, self.tag_suffix_regex, self.extension_regex), path.basename(filename))
+        return ((
                             or re.match(r"{}_{}{}{}".format(self.date_prefix_regex, self.core_filename_regex, self.tag_suffix_regex, self.extension_regex), path.basename(filename))))
 
+re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head())
+
+    
     def get_DateInFileName(self, filename):
         self.logger.debug("Entering Function")
         self.logger.debug("Filename to analyse %s", filename)
