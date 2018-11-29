@@ -28,7 +28,7 @@ class AccountTransactionCsvFileDefinition():
         
         self.iso_date_regex = "(\d{4})-(0\d|1[0-2])-([0-2]\d|3[01])"
         self.time_regex = "([01]\d|2[0-4])-([0-5]\d)-([0-5])"
-        self.account_regex = "[A-Z][A-Z]\d\d( \d{4}){3}"
+        self.account_regex = "([A-Z][A-Z]\d\d( \d{4}){3})"
         self.core_filename_regex = self.account_regex + " " + self.iso_date_regex + " " + self.time_regex + "[^_]*"
         self.extension_regex = "\.csv"
         self.tag_suffix_regex = "(_.+)*"
@@ -85,6 +85,18 @@ class AccountTransactionCsvFileDefinition():
 
         return cleanFileName
 
+    def get_AccountInFileName(filename):
+        
+        self.logger.debug("Entering Function")
+        self.logger.debug("Filename to analyse %s", filename)
+
+        account = re.findall(self.account_regex, filename)[0]
+        
+        self.logger.debug("Leaving Function")
+
+        return account
+
+    
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
 
@@ -160,6 +172,7 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Entering Function")
         self.logger.info("Extracting transactions from file: %s", str(file))
 
+        balance_account = self.inputFile.get_AccountInFileName(file.name)
         entries = []
         index = 0
         header_reached = False
@@ -207,4 +220,4 @@ class Importer(importer.ImporterProtocol):
                 print "Transaction: {}".format(str(row))
 
         meta = data.new_metadata(file.name, index)
-        entries.append(self.__get_Balance(meta, date))
+        entries.append(self.__get_Balance(meta, date_balance, balance))
