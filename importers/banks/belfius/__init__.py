@@ -172,7 +172,7 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Entering Function")
         self.logger.info("Extracting transactions from file: %s", str(file))
 
-        balance_account = self.inputFile.get_AccountInFileName(file.name)
+        balance_account = self.assets_account_map[self.inputFile.get_AccountInFileName(file.name)]
         entries = []
         index = 0
         header_reached = False
