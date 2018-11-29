@@ -105,3 +105,52 @@ class Importer(importer.ImporterProtocol):
         self.incomes_account_map = incomes_account_map
         self.expenses_account_map = expenses_account_map
         self.liabilities_account_map = liabilities_account_map
+
+    def identify(self, file):
+        # Match if the filename is as downloaded and the header has the unique
+        # fields combination we're looking for.
+
+        self.logger.debug("Entering Function")
+        self.logger.info("File to analyse: %s", str(file))
+        self.logger.debug("Header file: %s", str(file.head()))
+
+        matching_result = self.inputFile.isTimesheetFileName(file.name)
+
+        if matching_result:
+            matching_result = re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head())
+
+        self.logger.info("Identification result: %s", str(matching_result))
+        self.logger.debug("Leaving Function")
+        return (matching_result)
+
+    def file_name(self, file):
+        self.logger.debug("Entering Function")
+        self.logger.info("File name to be used: %s", 'smals-ts-report.{}'.format(path.basename(file.name)))
+        self.logger.debug("Leaving Function")
+        return 'smals-ts-report.{}'.format(path.basename(file.name))
+
+    def file_account(self, _):
+        self.logger.debug("Entering Function")
+        self.logger.info("File account: %s", self.account_employer_root)
+        self.logger.debug("Leaving Function")
+        return self.account_employer_root
+
+    def file_date(self, file):
+        # Extract the statement date from the filename.
+        self.logger.debug("Entering Function")
+
+        filedate = None
+        if self.inputFile.isTimesheetFileName(file.name):
+            filedate = self.inputFile.get_DateInFileName(file.name)
+
+        self.logger.info("File date used: %s", str(filedate))
+        self.logger.debug("Leaving Function")
+        return filedate
+
+    def extract(self, file):
+        # Open the CSV file and create directives.
+        self.logger.debug("Entering Function")
+        self.logger.info("Extracting transactions from file: %s", str(file))
+
+        entries = []
+        index = 0
