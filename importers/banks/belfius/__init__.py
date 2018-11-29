@@ -181,6 +181,7 @@ class Importer(importer.ImporterProtocol):
                 meta['no_extrait'] = row['no_extrait']
                 meta['no_transaction'] = row['no_transaction']
                 meta['date_valeur'] = row['date_valeur']
+
                 if self.__isFieldPresent(row['BIC']):
                     meta['BIC'] = row['BIC']
                 if self.__isFieldPresent(row['rue']):
