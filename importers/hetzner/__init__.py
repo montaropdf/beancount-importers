@@ -16,7 +16,7 @@ from beancount.core import amount
 from beancount.core import position
 from beancount.ingest import importer
 
-from utils import toAmount, VatBelgiumEnum, PostingPolicyEnum
+from utils.utils import toAmount, VatBelgiumEnum, PostingPolicyEnum
 from importers.hetzner.policy import HetznerPolicy
 
 class InvoiceCsvFileDefinition():
@@ -152,9 +152,10 @@ class Importer(importer.ImporterProtocol):
         self.logger.info("File to analyse: %s", str(file))
         self.logger.debug("Header file: %s", str(file.head()))
 
-        matching_result = ((re.match(r"{}{}".format(self.inputFile.core_filename_regex, self.inputFile.extension_regex), path.basename(file.name))
-                            or re.match(r"{}_{}{}{}".format(self.inputFile.date_prefix_regex, self.inputFile.core_filename_regex, self.inputFile.tag_suffix_regex, self.inputFile.extension_regex), path.basename(file.name))))
+        # matching_result = ((re.match(r"{}{}".format(self.inputFile.core_filename_regex, self.inputFile.extension_regex), path.basename(file.name))
+        #                     or re.match(r"{}_{}{}{}".format(self.inputFile.date_prefix_regex, self.inputFile.core_filename_regex, self.inputFile.tag_suffix_regex, self.inputFile.extension_regex), path.basename(file.name))))
 
+        matching_result = self.inputFile.isInvoiceFileName(file.name)
         self.logger.info("Identification result: %s", str(matching_result))
 
         if matching_result:
