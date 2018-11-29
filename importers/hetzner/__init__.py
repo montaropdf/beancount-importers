@@ -131,6 +131,7 @@ class Importer(importer.ImporterProtocol):
                 minus_total_amount = -total_amount
             else:
                 minus_total_amount = -total
+
             total_amount = toAmount("{:.2f}".format(total_amount), 'EUR')
             minus_total_amount = toAmount("{:.2f}".format(minus_total_amount), 'EUR')
             postings.append(self.__get_posting(self.account_liability, total_amount))
