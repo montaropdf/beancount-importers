@@ -187,5 +187,7 @@ class Importer(importer.ImporterProtocol):
                     meta['rue'] = row['rue']
                 if self.__isFieldPresent(row['cp_loc']):
                     meta['cp_loc'] = row['cp_loc']
+                if self.__isFieldPresent(row['ctry_code']):
+                    meta['ctry_code'] = row['ctry_code']
                     
                 entries.append(self.__get_Transaction(meta, date, row['compte_cible'], row['nom_cible'], row['montant'], row['currency'], row['comm']))
