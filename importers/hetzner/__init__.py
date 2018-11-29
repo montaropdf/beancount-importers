@@ -64,9 +64,9 @@ class InvoiceCsvFileDefinition():
         self.logger.debug("Entering Function")
         self.logger.debug("Filename to analyse %s", filename)
 
-        dateinfile = list(re.findall(self.core_filename_regex, filename)[0])
+        dateinfile = re.findall(self.core_filename_regex, filename)[0]
         self.logger.debug("Date element found %s", dateinfile)
-        dateinfile = "-".join(re.findall(self.iso_date_regex, filename))
+        dateinfile = "-".join(dateinfile)
 
         self.logger.debug("Date in file %s", dateinfile)
         self.logger.debug("Leaving Function")
