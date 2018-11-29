@@ -158,3 +158,7 @@ class Importer(importer.ImporterProtocol):
 
         entries = []
         index = 0
+
+        for index, row in enumerate(self.inputFile.get_Reader(file.name)):
+            self.logger.info("Fields: %s", str(row))
+            
