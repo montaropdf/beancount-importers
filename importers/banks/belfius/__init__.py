@@ -190,5 +190,7 @@ class Importer(importer.ImporterProtocol):
                     meta['cp_loc'] = row['cp_loc']
                 if self.__isFieldPresent(row['ctry_code']):
                     meta['ctry_code'] = row['ctry_code']
-                    
+
+                date = datetime.datetime.strptime(row['date_compta'], '%d/%m/%Y').date()
+
                 entries.append(self.__get_Transaction(meta, date, row['compte_cible'], row['nom_cible'], row['montant'], row['currency'], row['comm']))
