@@ -237,7 +237,7 @@ class Importer(importer.ImporterProtocol):
         if self.inputFile.isTimesheetFileName(file.name):
             filedate = self.inputFile.get_DateInFileName(file.name)
 
-            self.logger.info("File date used: %s", str(filedate))
+        self.logger.info("File date used: %s", str(filedate))
         self.logger.debug("Leaving Function")
         return filedate
 
