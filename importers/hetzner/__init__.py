@@ -53,8 +53,8 @@ class InvoiceCsvFileDefinition():
     def isInvoiceFileName(self, filename):
         """Check if the filename have the format of an invoice from Hetzner."""
 
-        return ((re.match(r"{}{}".format(self.inputFile.core_filename_regex, self.inputFile.extension_regex), path.basename(file.name))
-                            or re.match(r"{}_{}{}{}".format(self.inputFile.date_prefix_regex, self.inputFile.core_filename_regex, self.inputFile.tag_suffix_regex, self.inputFile.extension_regex), path.basename(file.name))))
+        return ((re.match(r"{}{}".format(self.core_filename_regex, self.extension_regex), path.basename(filename))
+                            or re.match(r"{}_{}{}{}".format(self.date_prefix_regex, self.core_filename_regex, self.tag_suffix_regex, self.extension_regex), path.basename(filename))))
 
 
 class Importer(importer.ImporterProtocol):
