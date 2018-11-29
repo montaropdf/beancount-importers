@@ -175,7 +175,8 @@ class Importer(importer.ImporterProtocol):
         try:
             balance_account = self.assets_account_map[self.inputFile.get_AccountInFileName(file.name)]
         except KeyError:
-            return None
+            print("No account found in Assets map for: {}".format(self.inputFile.get_AccountInFileName(file.name)))
+            balance_account = None
 
         entries = []
         index = 0
