@@ -171,6 +171,6 @@ class Importer(importer.ImporterProtocol):
                 header_reached = True
                 continue
 
-            if !header_reached:
+            if not header_reached:
                 continue
             
