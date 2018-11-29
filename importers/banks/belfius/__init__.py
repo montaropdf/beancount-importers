@@ -132,8 +132,8 @@ class Importer(importer.ImporterProtocol):
 
         matching_result = self.inputFile.isTimesheetFileName(file.name)
 
-        if matching_result:
-            matching_result = re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head())
+        # if matching_result:
+        #     matching_result = re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head())
 
         self.logger.info("Identification result: %s", str(matching_result))
         self.logger.debug("Leaving Function")
@@ -207,7 +207,8 @@ class Importer(importer.ImporterProtocol):
                 account = self.assets_account_map[row['compte']]
                 meta['no_extrait'] = row['no_extrait']
                 meta['no_transaction'] = row['no_transaction']
-                meta['date_valeur'] = row['date_valeur']
+                date_valeur = datetime.date.strptime(row['date_valeur'], '%d/%m/%Y')
+                meta['date_valeur'] = date_valeur.isoformat()
 
                 if self.__isFieldPresent(row['BIC']):
                     meta['BIC'] = row['BIC']
