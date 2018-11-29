@@ -74,3 +74,13 @@ class AccountTransactionCsvFileDefinition():
         self.logger.debug("Leaving Function")
 
         return dateinfile
+
+    def get_SanitizedFileName(self, filename):
+        self.logger.debug("Entering Function")
+        self.logger.debug("Filename to analyse %s", filename)
+
+        cleanFileName = filename.replace(' ', '-')
+        
+        self.logger.debug("Leaving Function")
+
+        return cleanFileName
