@@ -54,7 +54,7 @@ class InvoiceCsvFileDefinition():
         """Check if the filename have the format of an invoice from Hetzner."""
         self.logger.debug("Entering Function")
 
-        self.logger.debug("Filename to analyse")
+        self.logger.debug("Filename to analyse %s", filename)
         
         self.logger.debug("Leaving Function")
         return ((re.match(r"{}{}{}".format(self.core_filename_regex, self.tag_suffix_regex, self.extension_regex), path.basename(filename))
