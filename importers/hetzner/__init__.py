@@ -189,7 +189,7 @@ class Importer(importer.ImporterProtocol):
 
     def file_account(self, _):
         self.logger.debug("Entering Function")
-        self.logger.info("File account: %s", self.account_assets)
+        self.logger.info("File account: %s", self.account_liability)
         self.logger.debug("Leaving Function")
         return self.account_assets
 
