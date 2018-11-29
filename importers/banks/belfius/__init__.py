@@ -100,3 +100,8 @@ class Importer(importer.ImporterProtocol):
 
         fh.setFormatter(fmtr)
         self.logger.addHandler(fh)
+
+        self.assets_account_map = assets_account_map
+        self.incomes_account_map = incomes_account_map
+        self.expenses_account_map = expenses_account_map
+        self.liabilities_account_map = liabilities_account_map
