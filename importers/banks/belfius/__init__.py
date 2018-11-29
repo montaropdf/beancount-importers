@@ -37,7 +37,7 @@ class AccountTransactionCsvFileDefinition():
 
         self.csvDialect = csv.excel()
         self.csvDialect.delimiter = ';'
-        self.fieldname_list = ['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id']
+        self.fieldname_list = ['compte','date_compta', 'no_extrait', 'no_transaction', 'compte_cible', 'nom_cible', 'rue', 'cp_loc', 'transaction', 'date_val', 'montant', 'currency', 'BIC', 'ctry_code', 'comm']
 # Compte;Date de comptabilisation;Numéro d'extrait;Numéro de transaction;Compte contrepartie;Nom contrepartie contient;Rue et numéro;Code postal et localité;Transaction;Date valeur;Montant;Devise;BIC;Code pays;Communications
         
         self.logger.info("Object initialisation done.")
@@ -158,7 +158,10 @@ class Importer(importer.ImporterProtocol):
 
         entries = []
         index = 0
+        header_reached = False
 
         for index, row in enumerate(self.inputFile.get_Reader(file.name)):
             self.logger.info("Fields: %s", str(row))
+
+            if row[]
             
