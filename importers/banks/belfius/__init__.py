@@ -24,7 +24,7 @@ class AccountTransactionCsvFileDefinition():
 
         self.logger.debug("Entering Function")
 
-        BE27 0639 8251 6873 2018-07-08 14-31-01 2_accounting_bank_belfius_report.csv
+        # BE27 0639 8251 6873 2018-07-08 14-31-01 2_accounting_bank_belfius_report.csv
         
         self.iso_date_regex = "(\d{4})-(0\d|1[0-2])-([0-2]\d|3[01])"
         self.time_regex = "([01]\d|2[0-4])-([0-5]\d)-([0-5])"
