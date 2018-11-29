@@ -35,7 +35,6 @@ class TimesheetCsvFileDefinition():
 
         self.csvDialect = csv.excel()
         self.csvDialect.delimiter = ','
-        # self.fieldname_list = ['product','description', 'date_start', 'date_end', 'qty', 'unit_price', 'price_no_vat', 'srv_id']
 
         self.logger.info("Object initialisation done.")
 
