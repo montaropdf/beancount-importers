@@ -125,9 +125,13 @@ class Importer(importer.ImporterProtocol):
 
     def file_name(self, file):
         self.logger.debug("Entering Function")
-        self.logger.info("File name to be used: %s", self.inputFile.get_SanitizedFileName(path.basename(file.name)))
+
+        cleanedFilename = self.inputFile.get_SanitizedFileName(path.basename(file.name))
+        
+        self.logger.info("File name to be used: %s", cleanedFilename)
         self.logger.debug("Leaving Function")
-        return 'smals-ts-report.{}'.format(path.basename(file.name))
+
+        return cleanedFilename
 
     def file_account(self, _):
         self.logger.debug("Entering Function")
