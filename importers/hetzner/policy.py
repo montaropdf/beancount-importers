@@ -4,7 +4,7 @@ __license__ = "GNU GPLv2"
 
 from utils.utils import VatBelgiumEnum, PostingPolicyEnum
 
-class HetznerPolicy(utils.Policy):
+class HetznerPolicy(utils.utils.Policy):
     """A Policy class to set the rules for producing a transaction from Hetzner Invoice."""
     def __init__(self,
                  posting_policy=PostingPolicyEnum.MULTI,
