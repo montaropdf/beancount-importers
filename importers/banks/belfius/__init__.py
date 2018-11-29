@@ -32,7 +32,6 @@ class AccountTransactionCsvFileDefinition():
         self.core_filename_regex = self.account_regex + " " + self.iso_date_regex + " " + self.time_regex + "[^_]*"
         self.extension_regex = "\.csv"
         self.tag_suffix_regex = "(_.+)*"
-        # self.srv_id_reference_regex = 'Server #(\d{6})'
         
         self.logger.debug("core_filename_regex: %s", self.core_filename_regex)
 
