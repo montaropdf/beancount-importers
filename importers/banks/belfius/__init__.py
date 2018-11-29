@@ -225,8 +225,9 @@ class Importer(importer.ImporterProtocol):
                 print "Compte récepteur inconnu: {}".format(row['compte'])
                 print "Transaction: {}".format(str(row))
 
-        meta = data.new_metadata(file.name, index)
-        entries.append(self.__get_Balance(meta, date_balance, balance))
+        if balance_account != None:
+            meta = data.new_metadata(file.name, index)
+            entries.append(self.__get_Balance(meta, date_balance, balance))
 
         self.logger.debug("Leaving Function")
         return entries
