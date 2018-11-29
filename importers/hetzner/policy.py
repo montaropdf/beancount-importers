@@ -2,9 +2,9 @@
 __copyright__ = "Copyright (C) 2018  Roland Everaert"
 __license__ = "GNU GPLv2"
 
-from utils.utils import VatBelgiumEnum, PostingPolicyEnum
+from utils.utils import VatBelgiumEnum, PostingPolicyEnum, Policy
 
-class HetznerPolicy(utils.utils.Policy):
+class HetznerPolicy(Policy):
     """A Policy class to set the rules for producing a transaction from Hetzner Invoice."""
     def __init__(self,
                  posting_policy=PostingPolicyEnum.MULTI,
