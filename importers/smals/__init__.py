@@ -69,16 +69,10 @@ class TimesheetCsvFileDefinition():
 
         matching_result = re.match(r"{}{}{}".format(self.core_filename_regex, self.tag_suffix_regex, self.extension_regex), path.basename(filename))
 
-        
-        
-        
         self.logger.debug("Leaving Function")
-        return ((
-                            or re.match(r"{}_{}{}{}".format(self.date_prefix_regex, self.core_filename_regex, self.tag_suffix_regex, self.extension_regex), path.basename(filename))))
 
-re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head())
+        return matching_result
 
-    
     def get_DateInFileName(self, filename):
         self.logger.debug("Entering Function")
         self.logger.debug("Filename to analyse %s", filename)
