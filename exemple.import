@@ -8,7 +8,7 @@ from importers import smals
 from importers import hetzner
 from beancount.ingest import extract
 from importers.hetzner.policy import HetznerPolicy
-from utils import PostingPolicyEnum
+from utils.utils import PostingPolicyEnum
 
 policy = hetzner.policy.HetznerPolicy()
 
