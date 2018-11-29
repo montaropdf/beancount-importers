@@ -188,4 +188,4 @@ class Importer(importer.ImporterProtocol):
                 if self.__isFieldPresent(row['cp_loc']):
                     meta['cp_loc'] = row['cp_loc']
                     
-                entries.append(self.__txn(meta, date, row['compte_cible'], row['nom_cible'], row['montant'], row['currency']))
+                entries.append(self.__get_Transaction(meta, date, row['compte_cible'], row['nom_cible'], row['montant'], row['currency']))
