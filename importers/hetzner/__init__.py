@@ -169,6 +169,7 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Header file: %s", str(file.head()))
 
         matching_result = self.inputFile.isInvoiceFileName(file.name)
+
         self.logger.info("Identification result: %s", str(matching_result))
 
         if matching_result:
@@ -234,7 +235,6 @@ class Importer(importer.ImporterProtocol):
                     amt = toAmount('-' + row['price_no_vat'], 'EUR')
                     self.logger.debug('Amount: %s', str(amt))
                     servers_txn[srv_id]['txn'].append(self.__get_posting(self.account_assets, amt, None))
-
 
         self.logger.debug('Data in servers_txn: %s', str(servers_txn))
 
