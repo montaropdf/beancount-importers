@@ -95,7 +95,7 @@ class Importer(importer.ImporterProtocol):
 
         self.logger = logging.Logger("belfius", logging.DEBUG)
 
-        fh = logging.FileHandler('smals-importer.log')
+        fh = logging.FileHandler('belfius-importer.log')
         fmtr = logging.Formatter('%(asctime)s - %(levelname)s - %(lineno)d - %(funcName)s | %(message)s')
 
         fh.setFormatter(fmtr)
