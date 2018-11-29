@@ -167,5 +167,10 @@ class Importer(importer.ImporterProtocol):
         for index, row in enumerate(self.inputFile.get_Reader(file.name)):
             self.logger.info("Fields: %s", str(row))
 
-            if row['compte'] = "Compte" and row['date_compta'] = "Date de comptabilisation"
+            if row['compte'] = "Compte" and row['date_compta'] = "Date de comptabilisation":
+                header_reached = True
+                continue
+
+            if !header_reached:
+                continue
             
