@@ -88,11 +88,10 @@ class AccountTransactionCsvFileDefinition():
 class Importer(importer.ImporterProtocol):
     """An importer for the Timesheet Report CSV files provided by one of my customer."""
 
-    def __init__(self, commodity_overtime, commodity_vacation_day, commodity_workday, standard_work_period,
-                 employer,
-                 customer,
-                 account_working_day,
-                 account_customer_overtime,
+    def __init__(self, assets_account_map,
+                 incomes_account_map,
+                 expenses_account_map,
+                 liabilities_account_map,
                  account_customer_worked_day,
                  account_employer_root,
                  account_employer_overtime,
