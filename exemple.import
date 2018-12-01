@@ -5,7 +5,19 @@
 # This is a clone of the config exemple from Martin Blais, with some
 # adaptation for my own usage.
 from importers import smals
+from importers import hetzner
 from beancount.ingest import extract
+from importers.hetzner.policy import HetznerPolicy
+from utils.utils import PostingPolicyEnum
+
+policy = HetznerPolicy()
+
+# policy.posting_policy = PostingPolicyEnum.SINGLE
+# policy.posting_policy = PostingPolicyEnum.SINGLE_INCLUDE_VAT
+# policy.posting_policy = PostingPolicyEnum.MULTI
+# policy.posting_policy = PostingPolicyEnum.MULTI_NO_VAT
+policy.posting_policy = PostingPolicyEnum.SINGLE_NO_VAT
+
 
 # Setting this variable provides a list of importer instances.
 CONFIG = [
@@ -21,6 +33,9 @@ CONFIG = [
                    "Assets:Employer:JourTravail",
                    "Assets:Employer:Sickness",
                    "Expenses:Conge"),
+    hetzner.Importer("Liabilities:Hetzner",
+                     "Assets:Bank:Checking",
+                     policy),
 ]
 
 # Override the header on extracted text (if desired).
