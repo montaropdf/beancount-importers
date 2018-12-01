@@ -132,8 +132,8 @@ class Importer(importer.ImporterProtocol):
 
         matching_result = self.inputFile.isTimesheetFileName(file.name)
 
-        # if matching_result:
-        #     matching_result = re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head())
+        if matching_result:
+            matching_result = re.match("DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2", file.head())
 
         self.logger.info("Identification result: %s", str(matching_result))
         self.logger.debug("Leaving Function")
@@ -207,8 +207,7 @@ class Importer(importer.ImporterProtocol):
                 account = self.assets_account_map[row['compte']]
                 meta['no_extrait'] = row['no_extrait']
                 meta['no_transaction'] = row['no_transaction']
-                date_valeur = datetime.date.strptime(row['date_valeur'], '%d/%m/%Y')
-                meta['date_valeur'] = date_valeur.isoformat()
+                meta['date_valeur'] = row['date_valeur']
 
                 if self.__isFieldPresent(row['BIC']):
                     meta['BIC'] = row['BIC']
@@ -221,6 +220,7 @@ class Importer(importer.ImporterProtocol):
 
                 date = datetime.datetime.strptime(row['date_compta'], '%d/%m/%Y').date()
 
+<<<<<<< HEAD
                 entries.append(self.__get_Transaction(meta, date, account, row['compte_cible'], row['nom_cible'], row['montant'], row['currency'], row['comm']))
             except KeyError:
                 print "Compte récepteur inconnu: {}".format(row['compte'])
@@ -232,3 +232,6 @@ class Importer(importer.ImporterProtocol):
 
         self.logger.debug("Leaving Function")
         return entries
+=======
+                entries.append(self.__get_Transaction(meta, date, row['compte_cible'], row['nom_cible'], row['montant'], row['currency'], row['comm']))
+>>>>>>> parent of 2ca4783... importers/banks/belfius/__init__.py
