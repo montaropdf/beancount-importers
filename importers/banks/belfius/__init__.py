@@ -221,6 +221,7 @@ class Importer(importer.ImporterProtocol):
                 date = datetime.datetime.strptime(row['date_compta'], '%d/%m/%Y').date()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 entries.append(self.__get_Transaction(meta, date, account, row['compte_cible'], row['nom_cible'], row['montant'], row['currency'], row['comm']))
             except KeyError:
                 print "Compte récepteur inconnu: {}".format(row['compte'])
@@ -232,6 +233,9 @@ class Importer(importer.ImporterProtocol):
 
         self.logger.debug("Leaving Function")
         return entries
+=======
+                entries.append(self.__get_Transaction(meta, date, row['compte_cible'], row['nom_cible'], row['montant'], row['currency'], row['comm']))
+>>>>>>> parent of 2ca4783... importers/banks/belfius/__init__.py
 =======
                 entries.append(self.__get_Transaction(meta, date, row['compte_cible'], row['nom_cible'], row['montant'], row['currency'], row['comm']))
 >>>>>>> parent of 2ca4783... importers/banks/belfius/__init__.py
