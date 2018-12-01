@@ -5,40 +5,7 @@
 # This is a clone of the config exemple from Martin Blais, with some
 # adaptation for my own usage.
 from importers import smals
-from importers.banks import belfius
 from beancount.ingest import extract
-
-
-
-# "Assets:BE:Belfius:CompteEpargne:Base"
-# "Assets:BE:Belfius:CompteEpargne:InternetFidelite"
-# "Assets:BE:Belfius:CompteEpargne:InternetFidelitePlus"
-# "Assets:BE:Belfius:CompteEpargne:Pension"
-# "Assets:BE:Belfius:CompteEpargne:Pension2"
-# "Assets:BE:Belfius:Investissement:Bla"
-# "Assets:BE:Belfius:Investissement:Bla2"
-
-# "Liabilities:BE:Belfius:CarteDeCredit:MasterCardGold"
-# "Liabilities:BE:Paypal"
-# "Liabilities:BE:CSE:Ballieul:Appartement"
-# "Liabilities:DE:Hetzner:Revecloud"
-# "Liabilities:UK:GoDaddy:Revecloud"
-
-# "Expenses:BE:Shop"
-# "Expenses:BE:Food"
-# "Expenses:BE:Mutuelle"
-# "Expenses:BE:Syndicat"
-# "Expenses:BE:Assurance:AXA"
-
-# "Income:BE:Mutuelle"
-# "Income:BE:Assurance:DKV"
-# "Income:BE:Assurance:AXA"
-# "Income:Aubay:Salaire"
-# "Income:Aubay:FPaE"
-
-
-
-belfius_assets = {"BE27 0639 8251 6873": "Assets:BE:Belfius:CompteAVue"}
 
 # Setting this variable provides a list of importer instances.
 CONFIG = [
@@ -54,9 +21,6 @@ CONFIG = [
                    "Assets:Employer:JourTravail",
                    "Assets:Employer:Sickness",
                    "Expenses:Conge"),
-    belfius.Importer(belfius_assets)
-
-
 ]
 
 # Override the header on extracted text (if desired).
