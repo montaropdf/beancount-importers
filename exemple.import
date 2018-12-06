@@ -33,9 +33,9 @@ CONFIG = [
                    "Assets:Employer:JourTravail",
                    "Assets:Employer:Sickness",
                    "Expenses:Conge"),
-    hetzner.Importer("Liabilities:Hetzner",
-                     "Assets:Bank:Checking",
-                     policy),
+    # hetzner.Importer("Liabilities:Hetzner",
+    #                  "Assets:Bank:Checking",
+    #                  policy),
 ]
 
 # Override the header on extracted text (if desired).
