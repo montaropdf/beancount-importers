@@ -18,6 +18,8 @@ from beancount.core import inventory
 from beancount.ingest import importer
 from beancount.ingest import regression
 
+from utils import toAmount
+
 class TimesheetCsvFileDefinition():
     """A class that define the input file and provides all the facilities to read it."""
     def __init__(self, logger):
