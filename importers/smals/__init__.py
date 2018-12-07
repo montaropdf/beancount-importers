@@ -18,7 +18,7 @@ from beancount.core import inventory
 from beancount.ingest import importer
 from beancount.ingest import regression
 
-import utils
+from utils.utils import toAmount
 
 class TimesheetCsvFileDefinition():
     """A class that define the input file and provides all the facilities to read it."""
@@ -285,7 +285,7 @@ class Importer(importer.ImporterProtocol):
                                         date,
                                         self.account_employer_overtime,
                                         self.account_customer_overtime,
-                                        utils.toAmount(units_overtime,
+                                        toAmount(units_overtime,
                                                  self.commodity_overtime),
                                         self.customer)
                 self.logger.info('Overtime recorded at date: %s', date)
@@ -296,7 +296,7 @@ class Importer(importer.ImporterProtocol):
                                         date,
                                         self.account_employer_worked_day,
                                         self.account_customer_worked_day,
-                                        utils.toAmount(workday_counter,
+                                        toAmount(workday_counter,
                                                  self.commodity_workday),
                                         self.customer)
                 self.logger.info('Number of worked day recorded at date: %s', workday_counter)
@@ -336,11 +336,11 @@ class Importer(importer.ImporterProtocol):
                 if dtype3 == "CAO":
                     self.logger.info('Half a day was a vacation, record it.')
                     txn = self.__txn_vacation(meta, date, "Demi-jour de congé",
-                                              utils.toAmount(0.5,
+                                              toAmount(0.5,
                                                        self.commodity_vacation_day),
-                                              utils.toAmount(wk_period,
+                                              toAmount(wk_period,
                                                        self.commodity_overtime),
-                                              utils.toAmount(wk_period_full,
+                                              toAmount(wk_period_full,
                                                        self.commodity_overtime)
                     )
                     self.logger.info('Vacation date: %s', date)
@@ -351,7 +351,7 @@ class Importer(importer.ImporterProtocol):
                                             date,
                                             self.account_sickness,
                                             self.account_working_day,
-                                            utils.toAmount(0.5,
+                                            toAmount(0.5,
                                                      self.commodity_workday),
                                             self.employer,
                                             "Incapacité de travail"
@@ -383,7 +383,7 @@ class Importer(importer.ImporterProtocol):
                                             date,
                                             self.account_sickness,
                                             self.account_working_day,
-                                            utils.toAmount(u,
+                                            toAmount(u,
                                                      self.commodity_workday),
                                             self.employer,
                                             "Incapacité de travail"
@@ -394,11 +394,11 @@ class Importer(importer.ImporterProtocol):
                 if dtype3 == "CAO":
                     self.logger.info('Vacation day detected, record it.')
                     txn = self.__txn_vacation(meta, date, "Congé",
-                                              utils.toAmount(1,
+                                              toAmount(1,
                                                        self.commodity_vacation_day),
-                                              utils.toAmount(self.standard_work_period,
+                                              toAmount(self.standard_work_period,
                                                        self.commodity_overtime),
-                                              utils.toAmount(self.standard_work_period,
+                                              toAmount(self.standard_work_period,
                                                        self.commodity_overtime)
                     )
                     self.logger.info('Vacation date: %s', date)
@@ -407,11 +407,11 @@ class Importer(importer.ImporterProtocol):
                     if  dtype4 == "CAO":
                         wk_period = int(wk_period / 2)
                         txn = self.__txn_vacation(meta, date, "Demi-jour de congé",
-                                                  utils.toAmount(0.5,
+                                                  toAmount(0.5,
                                                            self.commodity_vacation_day),
-                                                  utils.toAmount(wk_period,
+                                                  toAmount(wk_period,
                                                            self.commodity_overtime),
-                                                  utils.toAmount(wk_period_full,
+                                                  toAmount(wk_period_full,
                                                            self.commodity_overtime)
 )
                         self.logger.info('Vacation date: %s', date)
@@ -428,7 +428,7 @@ class Importer(importer.ImporterProtocol):
                                 date,
                                 self.account_employer_overtime,
                                 self.account_customer_overtime,
-                                utils.toAmount(units_overtime,
+                                toAmount(units_overtime,
                                          self.commodity_overtime),
                                 self.customer)
         self.logger.info('Overtime recorded at date: %s', date)
@@ -438,7 +438,7 @@ class Importer(importer.ImporterProtocol):
                                 date,
                                 self.account_employer_worked_day,
                                 self.account_customer_worked_day,
-                                utils.toAmount(workday_counter,
+                                toAmount(workday_counter,
                                          self.commodity_workday),
                                 self.customer)
         self.logger.info('Number of worked days recorded at date: %s', workday_counter)
