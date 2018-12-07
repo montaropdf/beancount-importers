@@ -326,7 +326,7 @@ class Importer(importer.ImporterProtocol):
                 self.logger.debug('Worked time: %s', str(wk_time))
 
                 if dtype3 in ["CAO", "MAL"]:
-                    wk_period = int(wk_period / 2)
+                    wk_period = int(wk_period_full / 2)
                 else:
                     wk_period = wk_period_full
                     
