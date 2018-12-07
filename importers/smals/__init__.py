@@ -25,7 +25,7 @@ class TimesheetCsvFileDefinition():
 
         self.logger.debug("Entering Function")
 
-        self.iso_date_regex = "(\d{4})-(0\d|1[0-2])-([0-2]\d|3[01])"
+        # self.iso_date_regex = "(\d{4})-(0\d|1[0-2])-([0-2]\d|3[01])"
         self.year_month_regex = "\d{4}(0\d|1[0-2])"
         self.core_filename_regex = "smals-report-" + self.year_month_regex + "-cleaned"
         self.extension_regex = "\.csv"
