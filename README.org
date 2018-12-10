@@ -73,7 +73,7 @@ DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2
   - MAL, sickness period
   - PRE, worked period
   - CAO, vacation period
-- TIMESPENT2
+- TIMESPENT2, this field is ignored
 
 ** Utils package
    :PROPERTIES:
