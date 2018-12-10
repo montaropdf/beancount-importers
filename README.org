@@ -75,6 +75,11 @@ Field définition:
   - CAO, vacation period
 - TIMESPENT2, this field is ignored
 
+*** Transaction creation
+    :PROPERTIES:
+    :ID:       804e5372-1d7b-482c-b7eb-9cb443898094
+    :END:
+
 ** Utils package
    :PROPERTIES:
    :ID:       2533b708-4245-4e0b-a523-5db1787fff18
