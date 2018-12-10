@@ -52,6 +52,7 @@ The fields header must be:
 DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2
 #+END_EXAMPLE
 
+Field définition:
 - DATE: the date of the day in the month
 - DAYTYPE: the type of date, may be one of:
   - WK-PT, week-end day
