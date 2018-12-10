@@ -6,7 +6,7 @@ from beancount.core import amount
 from enum import Enum, IntEnum, unique, auto
 import decimal
 
-class Policy():
+class Policy:
     """A Generic policy class."""
     def validate():
         """A validator of the data held by the object."""
