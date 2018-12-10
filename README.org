@@ -112,6 +112,8 @@ Field définition:
      :PROPERTIES:
      :ID:       c1845304-a63e-481e-8626-b6a7868c34a3
      :END:
+     For every line where DAYTYPE3 is CAO and both DAYTYPE2 and DAYTYPE4 are empty, a transaction for a whole day of vacation is recorded.
+
 **** Sickness day transactions
      :PROPERTIES:
      :ID:       34f6c379-4889-45f2-84a6-3e50303c8251
