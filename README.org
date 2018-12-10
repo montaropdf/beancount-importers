@@ -95,7 +95,7 @@ Field définition:
 
      In case only half a day has been worked, the standard time is divided by 2 and any worked time is checked and computed against that new value. A half a day of work appears if DAYTYPE2 is PRE and DAYTYPE3 is MAL or CAO.
 
-     If DAYTYPE2 is empty and DAYTYPE3 is one of JFR or COLFE, the row is completely ignored
+     If DAYTYPE2 is empty and DAYTYPE3 is one of JFR or COLFE, the row is completely ignored.
 
 ** Utils package
    :PROPERTIES:
