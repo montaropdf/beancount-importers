@@ -192,7 +192,7 @@ class Importer(importer.ImporterProtocol):
 
         if type(time_as_str_or_tuple) == str:
             self.logger.debug("Is it in [H]H:MM format: %s", re.fullmatch("^[0-9]{1,2}:[0-5][0-9]$", time_as_str_or_tuple))
-            if re.fullmatch("^[0-9]{1,2}:[0-5][0-9]$", time_as_str_or_tuple) != None:
+            if re.fullmatch("^[0-9]{1,2}:[0-5][0-9]$", time_as_str_or_tuple) is not None:
                 time_as_tuple = (int(time_as_str_or_tuple.split(':')[0]), int(time_as_str_or_tuple.split(':')[1]))
             else:
                 raise ValueError("Parameter was not a string  of the form [H]H:MM: {}".format(time_as_str_or_tuple))
