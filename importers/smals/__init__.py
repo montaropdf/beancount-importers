@@ -173,16 +173,6 @@ class Importer(importer.ImporterProtocol):
         
         return txn
 
-    # def __iof2Amount(self, value, commodity):
-    #     """Convert a value as a int to an Amount object."""
-    #     self.logger.debug("Entering Function")
-    #     atr = decimal.Decimal(value)
-    #     atr = amount.Amount(atr, commodity)
-    #     self.logger.debug("Amount to return: %s", atr)
-    #     self.logger.debug("Leaving Function")
-
-    #     return atr
-
     def __str_time_to_minutes(self, time_as_str_or_tuple):
         """Convert a time period expressed as a string into a number of minutes as an int."""
         self.logger.debug("Entering Function")
