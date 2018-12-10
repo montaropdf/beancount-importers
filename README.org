@@ -58,13 +58,22 @@ DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2
   - minus sign (-), non-worked day other than sickness, vacation or legal Holiday
   - 07:36, the standard working period in day for the customer's employee. This value is simply ignored.
 - STD, this field is ignored
-- DAYTYPE2,  May be one of:
+- DAYTYPE2, the type of period for half day or the complete day. May be one of:
   - JFR, COLFE, legal holiday
   - MAL, sickness period
   - PRE, worked period
   - CAO, vacation period
-
-
+- TIMESPENT, the time spent for the period. This value is only used if the value of =DAYTYPE2= is =PRE=
+- DAYTYPE3, the type of period for the second half of the day, May be one of:
+  - MAL, sickness period
+  - PRE, worked period
+  - CAO, vacation period
+- TIMEREC, the time spent for the period. This value is only used if the value of =DAYTYPE3= is =PRE=
+- DAYTYPE4, the type of period for the second half of the day, May be one of:
+  - MAL, sickness period
+  - PRE, worked period
+  - CAO, vacation period
+- TIMESPENT2
 
 ** Utils package
    :PROPERTIES:
