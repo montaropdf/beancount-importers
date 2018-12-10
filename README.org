@@ -81,8 +81,9 @@ Field définition:
     :END:
     There are 3 types of transactions created by the importer:
     - Overtime transactions
-    - Worked day transactions
+    - Worked day in a month transactions
     - Vacations or overtime compensation as vacation transactions
+    - Sickness day transactions
 
     The following sections describe each of them.
 **** Overtime transactions
@@ -97,6 +98,16 @@ Field définition:
 
      If DAYTYPE2 is empty and DAYTYPE3 is one of JFR or COLFE, the row is completely ignored.
 
+     The transaction is written when a new month occur or if the program hit the end of file.
+**** Worked day in a month transactions
+     :PROPERTIES:
+     :ID:       2f43e79b-c23b-4620-9a5e-2caecaab5704
+     :END:
+     There is only one such transaction for each month present in the input file.
+
+     Each row where DAYTYPE2 is PRE increase the counter of worked day by one, even if only half a day as been worked.
+
+     The transaction is written when a new month occur or if the program hit the end of file.
 ** Utils package
    :PROPERTIES:
    :ID:       2533b708-4245-4e0b-a523-5db1787fff18
