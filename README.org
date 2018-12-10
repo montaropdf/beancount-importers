@@ -79,7 +79,7 @@ Field définition:
     :PROPERTIES:
     :ID:       804e5372-1d7b-482c-b7eb-9cb443898094
     :END:
-    There are 3 types of transactions created by the importer:
+    There are 4 types of transactions created by the importer:
     - Overtime transactions
     - Worked day in a month transactions
     - Vacations or overtime compensation as vacation transactions
@@ -114,12 +114,18 @@ Field définition:
      :END:
      For every line where DAYTYPE3's value is CAO and both DAYTYPE2 and DAYTYPE4 are empty, a transaction for a whole day of vacation is recorded.
 
-     If 
+     If DAYTPE2 contains PRE or DAYTYPE4 contains MAL, a transaction for only half a day of vacation will be recorded.
 
+     The recorded transactions contain the postings where a vacation day is consumed as well as the postings for some overtimes being converted to a day (or half a day) of vacation.
 **** Sickness day transactions
      :PROPERTIES:
      :ID:       34f6c379-4889-45f2-84a6-3e50303c8251
      :END:
+     For a sickness transaction to be recorded, The field DAYTYPE3 must contains the value MAL.
+
+     A whole day of sickness will be recorded if DAYTYPE3's value is MAL and both DAYTPE2 and DAYTYPE4 are empty.
+
+     If DAYTYPE3 = MAL and DAYTYPE4 = CAO, then only a half day of sickness will be recorded.
 
 ** Utils package
    :PROPERTIES:
