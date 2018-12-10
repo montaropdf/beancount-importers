@@ -46,7 +46,7 @@
     :PROPERTIES:
     :ID:       c4e91f8d-a14f-4034-8246-48f1c573834f
     :END:
-The input file is a CSV file, using semi-colon (;) as field separator. It contains the time spent at work in addition to sickness, legal holidays and vacation periods.
+The input file is a CSV file, using semi-colon (;) as field separator. It contains the time spent at work in addition to sickness, legal holidays and vacation periods. One row, is one day in a month.
 
 The fields header must be:
 #+BEGIN_EXAMPLE
@@ -89,9 +89,13 @@ Field définition:
      :PROPERTIES:
      :ID:       e471fc36-cc88-4a6a-870f-be1fdd1e8df8
      :END:
-     There is only one such transaction for each month in the input file. Any time exeeding the standard time provided as parameter to the =__init__()= method is considered overtime and is accumulated in a counter. Similarly, for any day where the worked period is below the standard time, the difference is substracted from the overtime counter for the current month.
+     There is only one such transaction for each month present in the input file.
 
-     In case only half a day has been worked, the standard time is divided by 2.
+     For each day, any time, in TIMESPENT, exceeding the standard time, provided as parameter to the =__init__()= method, is considered overtime and is accumulated in a counter for that month. Similarly, for any day where the worked period, in TIMESPENT, is below the standard time, the difference is substracted from the overtime counter for the current month.
+
+     In case only half a day has been worked, the standard time is divided by 2. A half a day of work appear if DAYTYPE2 or (exclusive) DAYTYPE3 is MAL or CAO.
+
+     If DAYTYPE2 is one of JFR or COLFE, the row is completely igno
 
 ** Utils package
    :PROPERTIES:
