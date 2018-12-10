@@ -1,4 +1,4 @@
-# -*- eval: (git-auto-commit-mode 1); fringe-mode: 60 -*-
+# -*- eval: (git-auto-commit-mode 1) -*-
 #+TITLE: Personal importers for the Beancount accounting software
 
 * Introduction
