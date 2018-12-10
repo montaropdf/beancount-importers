@@ -85,7 +85,7 @@ Field définition:
     - Vacations or overtime compensation as vacation transactions
     - Sickness day transactions
 
-    The following sections describe each of them.
+    The following sections describe each of them. The recording or accumulation of values to a transaction is determined by the fields DAYTYPE2, DAYTYPE3 and DAYTYPE4. Any combination of value other the ones cited in the following sections will lead to an error message and the content of the line processed to be ignored.
 **** Overtime transactions
      :PROPERTIES:
      :ID:       e471fc36-cc88-4a6a-870f-be1fdd1e8df8
@@ -108,7 +108,7 @@ Field définition:
      Each row where DAYTYPE2 is PRE increase the counter of worked day by one, even if only half a day as been worked.
 
      The transaction is written when a new month occur or if the program hit the end of file.
-**** Vacations or overtime compensation as vacation transactions
+**** Vacations or overtime compensation as vacation day transactions
      :PROPERTIES:
      :ID:       c1845304-a63e-481e-8626-b6a7868c34a3
      :END:
