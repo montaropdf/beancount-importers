@@ -93,7 +93,7 @@ Field définition:
 
      For each day, any time, in TIMESPENT, exceeding the standard time, provided as parameter to the =__init__()= method, is considered overtime and is accumulated in a counter for that month. Similarly, for any day where the worked period, in TIMESPENT, is below the standard time, the difference is substracted from the overtime counter for the current month.
 
-     In case only half a day has been worked, the standard time is divided by 2 and any worked time is checked and computed against that new value. A half a day of work appears if DAYTYPE2 or (exclusive) DAYTYPE3 is MAL or CAO and the other field is PRE.
+     In case only half a day has been worked, the standard time is divided by 2 and any worked time is checked and computed against that new value. A half a day of work appears if DAYTYPE2 is PRE and DAYTYPE3 is MAL or CAO.
 
      If DAYTYPE2 is empty and DAYTYPE3 is one of JFR or COLFE, the row is completely ignored
 
