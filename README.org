@@ -79,7 +79,7 @@ Field définition:
     :PROPERTIES:
     :ID:       804e5372-1d7b-482c-b7eb-9cb443898094
     :END:
-    There X types of transactions created by the importer:
+    There are 3 types of transactions created by the importer:
     - Overtime transactions
     - Worked day transactions
     - Vacations or overtime compensation as vacation transactions
@@ -89,7 +89,7 @@ Field définition:
      :PROPERTIES:
      :ID:       e471fc36-cc88-4a6a-870f-be1fdd1e8df8
      :END:
-     There is only one such transaction for any month in the input file. Any time exeeding the standard time provided as parameter to the =__init__()= method is considered overtime and is accumulated in a counter. Similarly, for any day where the worked period is below the standard time, the difference is substracted from the overtime counter for the current month.
+     There is only one such transaction for each month in the input file. Any time exeeding the standard time provided as parameter to the =__init__()= method is considered overtime and is accumulated in a counter. Similarly, for any day where the worked period is below the standard time, the difference is substracted from the overtime counter for the current month.
 
      In case only half a day has been worked, the standard time is divided by 2.
 
