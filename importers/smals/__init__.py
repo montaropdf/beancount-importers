@@ -368,7 +368,7 @@ class Importer(importer.ImporterProtocol):
                 units_overtime += overtime
                 self.logger.info('Cumulative overtime for the month: %g', units_overtime)
             else:
-                # If it is a work day, but I was sick or it was a legal holiday, skip it.
+                # If it is a work day, but it was a legal holiday, skip it.
                 if dtype3 in ["JFR", "COLFE"] and dtype4 == '':
                     self.logger.info('Non-worked day detected, skip it.')
                     continue
