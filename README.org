@@ -36,7 +36,7 @@
     :PROPERTIES:
     :ID:       dd9d908f-98f7-4616-8bee-5413928ca3da
     :END:
-The package is meant to be used with the tool provided by the beancount project to create transactions that can be used to record an accounting of my overtime, sickness, vacation and number of worked day in a month.
+The package is meant to be used with the tools provided by the beancount project, to create transactions that can be used to record an accounting of my overtime, sickness, vacation and number of worked day in a month.
 
 This package is located in =importers/smals=, it is composed of one file, =__init.py__=.
 
