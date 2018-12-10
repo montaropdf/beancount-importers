@@ -108,7 +108,6 @@ Field définition:
      Each row where DAYTYPE2 is PRE increase the counter of worked day by one, even if only half a day as been worked.
 
      The transaction is written when a new month occur or if the program hit the end of file.
-
 **** Vacations or overtime compensation as vacation transactions
      :PROPERTIES:
      :ID:       c1845304-a63e-481e-8626-b6a7868c34a3
