@@ -70,7 +70,7 @@ DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2
   - CAO, vacation period
 - TIMEREC, the time spent for the period. This value is only used if the value of =DAYTYPE3= is =PRE=
 - DAYTYPE4, the type of period for the second half of the day, May be one of:
-  - An Empty field, sickness period
+  - An Empty field
   - CAO, vacation period
 - TIMESPENT2, this field is ignored
 
