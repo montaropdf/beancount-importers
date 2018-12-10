@@ -75,7 +75,7 @@ Field définition:
   - An Empty field
   - CAO, vacation period
 - TIMESPENT2, this field is ignored
-*** Transaction creation
+*** Transactions creation
     :PROPERTIES:
     :ID:       804e5372-1d7b-482c-b7eb-9cb443898094
     :END:
