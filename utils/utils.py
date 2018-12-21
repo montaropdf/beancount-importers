@@ -8,7 +8,7 @@ import decimal
 
 class Policy:
     """A Generic policy class."""
-    def validate():
+    def validate(self):
         """A validator of the data held by the object."""
         pass
 
