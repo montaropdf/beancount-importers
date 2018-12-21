@@ -20,7 +20,7 @@ from beancount.ingest import regression
 
 from utils.utils import toAmount
 
-class TimesheetCsvFileDefinition():
+class TimesheetCsvFileDefinition:
     """A class that define the input file and provides all the facilities to read it."""
     def __init__(self, logger):
         self.logger = logger
