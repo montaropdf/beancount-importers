@@ -20,8 +20,7 @@ from beancount.ingest import regression
 
 from utils.utils import toAmount
 
-
-class TimesheetCsvFileDefinition():
+class TimesheetCsvFileDefinition:
     """A class that define the input file and provides all the facilities to read it."""
 
     def __init__(self, logger):
@@ -195,16 +194,6 @@ class Importer(importer.ImporterProtocol):
         self.logger.debug("Leaving Function")
 
         return txn
-
-    # def __iof2Amount(self, value, commodity):
-    #     """Convert a value as a int to an Amount object."""
-    #     self.logger.debug("Entering Function")
-    #     atr = decimal.Decimal(value)
-    #     atr = amount.Amount(atr, commodity)
-    #     self.logger.debug("Amount to return: %s", atr)
-    #     self.logger.debug("Leaving Function")
-
-    #     return atr
 
     def __str_time_to_minutes(self, time_as_str_or_tuple):
         """Convert a time period expressed as a string into a number of minutes as an int."""
@@ -402,7 +391,7 @@ class Importer(importer.ImporterProtocol):
                 self.logger.info(
                     'Cumulative overtime for the month: %g', units_overtime)
             else:
-                # If it is a work day, but I was sick or it was a legal holiday, skip it.
+                # If it is a work day, but it was a legal holiday, skip it.
                 if dtype3 in ["JFR", "COLFE"] and dtype4 == '':
                     self.logger.info('Non-worked day detected, skip it.')
                     continue

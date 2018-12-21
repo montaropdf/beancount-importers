@@ -2,7 +2,7 @@
 # -*- eval: (git-auto-commit-mode 1) -*-
 """Example import configuration."""
 
-# This is a clone of the config exemple from Martin Blais, with some
+# This is a clone of the config example from Martin Blais, with some
 # adaptation for my own usage.
 from importers import smals
 from importers import hetzner

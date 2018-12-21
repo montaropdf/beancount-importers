@@ -24,3 +24,110 @@
      #+BEGIN_SRC sh
        bean-extract exemple.import input/smals-report-201812-cleaned.csv
      #+END_SRC
+* Description
+  :PROPERTIES:
+  :ID:       241502ca-b0d5-4581-a3e2-a44cb49a937f
+  :END:
+** Smals Timesheet Importer package
+   :PROPERTIES:
+   :ID:       a1e30148-cf0c-47e0-98fc-486e2f0b7f79
+   :END:
+*** Introduction
+    :PROPERTIES:
+    :ID:       dd9d908f-98f7-4616-8bee-5413928ca3da
+    :END:
+    The package is meant to be used with the tools provided by the beancount project, to create transactions that can be used to record an accounting of my overtime, sickness, vacation and number of worked day in a month.
+
+    This package is located in =importers/smals=, it is composed of one file, =__init.py__=.
+
+    The main class is =Importer(importer.ImporterProtocol)=, it is respinsible for extracting the data and create the beancount tranactions.
+    =TimesheetCsvFileDefinition()= is a helper class that is used by the importer to check the file name format in addition to the data format.
+*** File format
+    :PROPERTIES:
+    :ID:       c4e91f8d-a14f-4034-8246-48f1c573834f
+    :END:
+The input file is a CSV file, using semi-colon (;) as field separator. It contains the time spent at work in addition to sickness, legal holidays and vacation periods. One row, is one day in a month.
+
+The fields header must be:
+#+BEGIN_EXAMPLE
+DATE;DAYTYPE;STD;DAYTYPE2;TIMESPENT;DAYTYPE3;TIMEREC;DAYTYPE4;TIMESPENT2
+#+END_EXAMPLE
+
+Field définition:
+- DATE: the date of the day in the month
+- DAYTYPE: the type of date, may be one of:
+  - WK-PT, week-end day
+  - minus sign (-), non-worked day other than sickness, vacation or legal Holiday
+  - 07:36, the standard working period in day for the customer's employee. This value is simply ignored.
+- STD, this field is ignored
+- DAYTYPE2, the type of period for half day or the complete day. May be one of:
+  - JFR, COLFE, legal holiday
+  - MAL, sickness period
+  - PRE, worked period
+  - CAO, vacation period
+- TIMESPENT, the time spent for the period. This value is only used if the value of =DAYTYPE2= is =PRE=
+- DAYTYPE3, the type of period for the second half of the day, May be one of:
+  - MAL, sickness period
+  - PRE, worked period
+  - CAO, vacation period
+- TIMEREC, the time spent for the period. This value is only used if the value of =DAYTYPE3= is =PRE=
+- DAYTYPE4, the type of period for the second half of the day, May be one of:
+  - An Empty field
+  - CAO, vacation period
+- TIMESPENT2, this field is ignored
+*** Transactions creation
+    :PROPERTIES:
+    :ID:       804e5372-1d7b-482c-b7eb-9cb443898094
+    :END:
+    There are 4 types of transactions created by the importer:
+    - Overtime transactions
+    - Worked day in a month transactions
+    - Vacations or overtime compensation as vacation transactions
+    - Sickness day transactions
+
+    The following sections describe each of them. The recording or accumulation of values to a transaction is determined by the fields DAYTYPE2, DAYTYPE3 and DAYTYPE4. Any combination of values other than the ones cited in the following sections will lead to a warning message in the log and the content of the line processed, to be ignored.
+**** Overtime transactions
+     :PROPERTIES:
+     :ID:       e471fc36-cc88-4a6a-870f-be1fdd1e8df8
+     :END:
+     There is only one such transaction for each month present in the input file.
+
+     For each day, any time, in TIMESPENT, exceeding the standard time, provided as parameter to the =__init__()= method, is considered overtime and is accumulated in a counter for that month. Similarly, for any day where the worked period, in TIMESPENT, is below the standard time, the difference is substracted from the overtime counter for the current month.
+
+     In case only half a day has been worked, the standard time is divided by 2 and any worked time is checked and computed against that new value. A half a day of work appears if DAYTYPE2 is PRE and DAYTYPE3 is MAL or CAO.
+
+     If DAYTYPE2 is empty and DAYTYPE3 is one of JFR or COLFE, the row is completely ignored.
+
+     The transaction is written when a new month occur or if the program hit the end of file.
+**** Worked day in a month transactions
+     :PROPERTIES:
+     :ID:       2f43e79b-c23b-4620-9a5e-2caecaab5704
+     :END:
+     There is only one such transaction for each month present in the input file.
+
+     Each row where DAYTYPE2 is PRE increase the counter of worked day by one, even if only half a day as been worked.
+
+     The transaction is written when a new month occur or if the program hit the end of file.
+**** Vacations or overtime compensation as vacation day transactions
+     :PROPERTIES:
+     :ID:       c1845304-a63e-481e-8626-b6a7868c34a3
+     :END:
+     For every line where DAYTYPE3's value is CAO and both DAYTYPE2 and DAYTYPE4 are empty, a transaction for a whole day of vacation is recorded.
+
+     If DAYTPE2 contains PRE or DAYTYPE4 contains MAL, a transaction for only half a day of vacation will be recorded.
+
+     The recorded transactions contain the postings where a vacation day is consumed as well as the postings for some overtimes being converted to a day (or half a day) of vacation.
+**** Sickness day transactions
+     :PROPERTIES:
+     :ID:       34f6c379-4889-45f2-84a6-3e50303c8251
+     :END:
+     For a sickness transaction to be recorded, The field DAYTYPE3 must contains the value MAL.
+
+     A whole day of sickness will be recorded if DAYTYPE3's value is MAL and both DAYTPE2 and DAYTYPE4 are empty.
+
+     If DAYTYPE3 = MAL and DAYTYPE4 = CAO, then only a half day of sickness will be recorded.
+
+** Utils package
+   :PROPERTIES:
+   :ID:       2533b708-4245-4e0b-a523-5db1787fff18
+   :END:

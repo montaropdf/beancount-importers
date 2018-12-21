@@ -7,9 +7,9 @@ from enum import Enum, IntEnum, unique, auto
 import decimal
 
 
-class Policy():
+class Policy:
     """A Generic policy class."""
-    def validate():
+    def validate(self):
         """A validator of the data held by the object."""
         pass
 
