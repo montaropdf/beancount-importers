@@ -472,10 +472,8 @@ class Importer(importer.ImporterProtocol):
             'Number of worked days recorded at date: %s', workday_counter)
         entries.append(txn)
 
-
         self.logger.debug('Total Worked time: %s', str(total_time))
 
-        
         self.logger.debug("Leaving Function")
         return entries
 
