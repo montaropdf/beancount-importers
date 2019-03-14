@@ -273,6 +273,7 @@ class Importer(importer.ImporterProtocol):
         cur_month = 0
         cur_year = 0
         workday_counter = 0
+        total_time = 0
 
         self.logger.debug(
             'Standard working time period in minutes: %d', self.standard_work_period)
@@ -344,6 +345,7 @@ class Importer(importer.ImporterProtocol):
                 self.logger.info('Work day detected.')
 
                 wk_time = self.__str_time_to_minutes(row['TIMESPENT'])
+                total_time = self.__str_time_to_minutes(row['TIMESPENT'])
                 wk_period_full = self.standard_work_period
 
                 self.logger.debug('Worked time: %s', str(wk_time))
