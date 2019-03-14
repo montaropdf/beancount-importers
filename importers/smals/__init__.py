@@ -345,7 +345,7 @@ class Importer(importer.ImporterProtocol):
                 self.logger.info('Work day detected.')
 
                 wk_time = self.__str_time_to_minutes(row['TIMESPENT'])
-                total_time = self.__str_time_to_minutes(row['TIMESPENT'])
+                total_time += self.__str_time_to_minutes(row['TIMESPENT'])
                 wk_period_full = self.standard_work_period
 
                 self.logger.debug('Worked time: %s', str(wk_time))
