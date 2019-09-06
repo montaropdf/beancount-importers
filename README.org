@@ -22,7 +22,8 @@
   1. Open a terminal on the directory where the code is stored on the disk.
   2. To call the extractor, use the following command:
      #+BEGIN_SRC sh
-       bean-extract exemple.import input/smals-report-201812-cleaned.csv
+       cd /path/to/beancount-imports
+       pipenv run bean-extract exemple.import input/smals-report-201812-cleaned.csv
      #+END_SRC
 * Description
   :PROPERTIES:
