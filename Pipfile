@@ -5,9 +5,11 @@ verify_ssl = true
 
 [dev-packages]
 beancount = "*"
+fava = "*"
 
 [packages]
 beancount = "*"
+fava = "*"
 
 [requires]
 python_version = "3.7"
