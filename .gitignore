@@ -107,3 +107,11 @@ venv.bak/
 *~
 Pipfile.lock
 .envrc
+
+# Personal Environment
+comptabilite.d/
+inbox/
+outbox/
+comptabilite.d/**
+inbox/**
+outbox/**
