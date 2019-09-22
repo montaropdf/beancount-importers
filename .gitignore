@@ -106,12 +106,6 @@ venv.bak/
 # Emacs backup file
 *~
 Pipfile.lock
-.envrc
 
-# Personal Environment
-comptabilite.d/
-inbox/
-outbox/
-comptabilite.d/**
-inbox/**
-outbox/**
+# direnv
+.envrc
